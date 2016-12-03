@@ -1,0 +1,70 @@
+<div class="container-fluid" ng-controller="BoardController">
+	<h1 class="text-center">{{boardData.name}}</h1>
+	<h4 class="text-center">{{boardData.description}}</h4><hr/>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">Create a new thread</div>
+				<div class="panel-body">
+					<form>
+						<div class="form-group">
+							<label for="fil">File</label>
+							<input type="file" file-model="myFile"/>
+						</div>
+						<div class="form-group">
+							<label for="title">Title</label>
+							<input type="text" id="title" name="title" ng-model="title" class="form-control" placeholder="Title for your thread">
+						</div>
+						<div class="form-group" ng-class="messageEmpty === true ? 'has-error' : ''">
+							<label for="message">Message</label>
+							<textarea name="message" id="message" ng-model="message" class="form-control" placeholder="Message for your thread"></textarea>
+						</div>
+						<div class="form-group">
+							<button type="submit" ng-click="createThread()" class="btn btn-primary">Submit</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" ng-show="threads.length > 0">
+		<div class="col-md-12" ng-repeat="thread in threads">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<a href="#/thread/{{thread.msg_id}}/" ng-bind-html="thread.title"></a>
+					<h6>Id: {{thread.msg_id}} &middot; Posted: {{ thread.posted }} &middot; Anonymous</h6>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-3" ng-show="thread.img_url != ''">
+							<div class="embed-responsive embed-responsive-16by9" ng-if="thread.fileType.type == 'video'">
+								<video controls>
+									<source ng-src="{{thread.img_url}}" type="video/{{thread.fileType.extension}}">
+								</video>
+							</div>
+							<div class="img-responsive embed-responsive embed-responsive-16by9" ng-if="thread.fileType.type == 'image'">
+								<img ng-src="{{((thread.img_url !== 'undefined') ? thread.img_url : 'assets/img/empty.png')}}" class="img-responsive">
+							</div>
+						</div>
+						<div class="col-md-9">
+							<p ng-bind-html="thread.content | nl2br | bbcode"></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" ng-hide="threads.length > 0">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<p>There is no threads on this board.</p>
+				</div>
+				<div class="panel-body">
+					<p>Maybe you should start a new thread on this board?</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

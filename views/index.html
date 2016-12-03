@@ -1,0 +1,29 @@
+<div class="container" ng-controller="BoardListController">
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<h2>Boards</h2>
+			<h4>Here is some boards you can start with.</h4>
+			<hr/>
+		</div>
+		<div class="col-md-6">
+			<div class="list-group">
+				<a ng-repeat="board in firstList" href="#/board/{{board.prefix}}" class="list-group-item">
+				<span class="label pull-right" 
+				ng-class="board.tag === 'NSFW' ? 'label-danger' : 'label-success'" 
+				title="{{board.tag === 'NSFW' ? 'Not Safe For Work' : 'Safe For Work'}}">{{board.tag}}</span>
+				{{board.name}}
+				</a>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="list-group">
+				<a ng-repeat="board in secondList" href="#/board/{{board.prefix}}" class="list-group-item">
+				<span class="label pull-right" 
+				ng-class="board.tag === 'NSFW' ? 'label-danger' : 'label-success'" 
+				title="{{board.tag === 'NSFW' ? 'Not Safe For Work' : 'Safe For Work'}}">{{board.tag}}</span>
+				{{board.name}}
+				</a>
+			</div>
+		</div>
+	</div>
+</div>

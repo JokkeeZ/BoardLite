@@ -1,0 +1,84 @@
+html, body {
+	height: 100%;
+	background-color: #22282e;
+	color: #FDFDFD;
+}
+
+.panel-body {
+	background-color: #57616b;
+	color: #FDFDFD;
+}
+
+.panel {
+	border-color: black;
+	color: #FDFDFD;
+}
+
+.panel-heading {
+	background-color: #262627 !important;
+	border-color: #262627 !important;
+	color: #FDFDFD !important;
+}
+
+input[type="text"] {
+	background-color: #262627 !important;
+	border-color: black !important;
+}
+
+textarea {
+	background-color: #262627 !important;
+	border-color: black !important;
+}
+
+.list-group-item {
+	border-color: black;
+	background-color: #57616b;
+	color: #FDFDFD !important;
+}
+
+.list-group-item:hover {
+	background-color: #262627 !important;
+	color: #FDFDFD !important;
+}
+
+.hover-text {
+	color: black !important;
+	background-color: black !important;
+}
+
+.hover-text:hover {
+	color: #FDFDFD !important;
+	background-color: #57616b !important;
+}
+
+pre {
+	color: #FDFDFD !important;
+	background-color: #57616b !important;
+	border-color: #57616b !important;
+}
+
+/**
+ * FOR GRAY NAVBAR
+ *
+	.navbar {
+		background-color: #57616b !important;
+	}
+	
+	.navbar-collapse {
+		border-color: #262627 !important;
+	}
+	
+	.nav > li > a:hover {
+		background-color: #262627 !important;
+	}
+	
+	.nav > li > a:active {
+		background-color: #262627 !important;
+	}
+	
+	.nav > li > a:visited {
+		background-color: #262627 !important;
+	}
+ *
+ *
+**/

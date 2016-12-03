@@ -1,0 +1,77 @@
+<div class="container-fluid" ng-controller="ThreadController">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">Add new reply</div>
+				<div class="panel-body">
+					<form>
+						<div class="form-group">
+							<label for="fil">File</label>
+							<input type="file" file-model="myFile" class="form-control-static">
+						</div>
+						<div class="form-group" ng-class="messageEmpty === true ? 'has-error' : ''">
+							<label for="message">Message</label>
+							<textarea name="message" id="message" ng-model="message" class="form-control" placeholder="Your reply message.."></textarea>
+						</div>
+						<div class="form-group">
+							<button type="submit" ng-click="postReply()" class="btn btn-primary">Submit</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading" id="msg_{{startPost.msg_id}}">
+					<a href="javascript:void(0)">{{startPost.title}}</a>
+					<h6>Id: <a ng-click="answer(startPost.msg_id)" style="cursor:pointer">{{ startPost.msg_id }}</a> &middot; Posted: {{ startPost.posted }} &middot; Anonymous</h6>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-3" ng-hide="startPost.fileType == 'no_file'">
+							<div class="embed-responsive embed-responsive-16by9" ng-if="startPost.fileType == 'video'">
+								<video controls>
+									<source ng-src="{{startPost.img_url}}" type="video/mp4">
+								</video>
+							</div>
+							<div class="img-responsive" ng-if="startPost.fileType == 'image'">
+								<img ng-src="{{((startPost.img_url !== 'undefined') ? startPost.img_url : 'assets/img/empty.png')}}" class="img-responsive">
+							</div>
+						</div>
+						<div ng-class="startPost.fileType.type === 'no_file' ? 'col-md-12' : 'col-md-9'">
+							<p ng-bind-html="startPost.content | nl2br | bbcode"></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" ng-show="replys.length > 0">
+		<div class="col-md-12" ng-repeat="reply in replys">
+			<div class="panel panel-default" id="msg_{{reply.msg_id}}">
+				<div class="panel-heading">
+					<h6>Id: <a ng-click="answer(reply.msg_id)" style="cursor:pointer">{{ reply.msg_id }}</a> &middot; Posted: {{ reply.posted }} &middot; Anonymous</h6>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-3" ng-hide="reply.fileType == 'no_file'">
+							<div class="embed-responsive embed-responsive-16by9" ng-if="reply.fileType == 'video'">
+								<video controls>
+									<source ng-src="{{reply.img_url}}" type="video/mp4">
+								</video>
+							</div>
+							<div class="img-responsive" ng-if="reply.fileType == 'image'">
+								<img ng-src="{{((reply.img_url !== 'undefined') ? reply.img_url : 'assets/img/empty.png')}}" class="img-responsive">
+							</div>
+						</div>
+						<div ng-class="reply.fileType.type === 'no_file' ? 'col-md-12' : 'col-md-9'">
+							<p ng-bind-html="reply.content | nl2br | bbcode"></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
