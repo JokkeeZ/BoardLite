@@ -14,7 +14,7 @@ app.controller('ThreadController', function($scope, ajaxRequest, $routeParams, $
 			$scope.startPost.fileType = fileType.type;
 			$scope.startPost.fileExtension = fileType.extension;
 			
-			console.log('Startpost loaded: ' + data.length);
+			console.log('Startpost loaded');
 		}
 	});
 
