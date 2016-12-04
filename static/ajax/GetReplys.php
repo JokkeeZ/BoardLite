@@ -1,13 +1,12 @@
 <?php require '../global.php';
 
-$request = BoardCore::getRequestController();
-$thread = BoardCore::getThreadController();
+$request->isCorrectReferer() or die;
 
 // Load dem $_GET's
 $request->loadGetRequest();
 
 // $_GET['id'] is set and contains value?
-$request->issetAndNotEmpty('GET', 'id') or die();
+$request->issetAndNotEmpty('GET', 'id') or die;
 
 // Ok, lets get some replies.
 $data = $thread->getReplys($request->get['id']);

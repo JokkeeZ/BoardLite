@@ -25,7 +25,7 @@
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading" id="msg_{{startPost.msg_id}}">
-					<a href="javascript:void(0)">{{startPost.title}}</a>
+					<a href="javascript:void(0)" ng-bind-html="startPost.title"></a>
 					<h6>Id: <a ng-click="answer(startPost.msg_id)" style="cursor:pointer">{{ startPost.msg_id }}</a> &middot; Posted: {{ startPost.posted }} &middot; Anonymous</h6>
 				</div>
 				<div class="panel-body">

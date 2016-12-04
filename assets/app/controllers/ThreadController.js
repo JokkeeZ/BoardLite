@@ -5,7 +5,7 @@ app.controller('ThreadController', function($scope, ajaxRequest, $routeParams, $
 			$scope.startPost.content = $sce.trustAsHtml(data.data.content);
 			$scope.startPost.title = $sce.trustAsHtml(data.data.title);
 
-			if ($scope.startPost.title == 'undefined') {
+			if ($scope.startPost.title == 'undefined' || $scope.startPost.title == '' || $scope.startPost.title == null) {
 				$scope.startPost.title = $sce.trustAsHtml(data.data.content.toString().substring(0, 5));
 			}
 			

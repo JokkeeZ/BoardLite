@@ -14,7 +14,7 @@ app.directive('fileModel', function($parse) {
 	}
 });
 
-app.factory('ajaxRequest', function($http) {
+app.factory('ajaxRequest', function($http, $rootScope) {
 	return {
 		getAppConfig: function() {
 			return $http.get('static/ajax/GetAppConfig.php');
@@ -34,12 +34,25 @@ app.factory('ajaxRequest', function($http) {
 		getThreadStartPost: function(threadId) {
 			return $http.get('static/ajax/GetThreadStartPost.php?id=' + threadId);
 		},
+		createToken: function() {
+			var formData = new FormData();
+			formData.append('token_creation', true);
+			return $http.post('static/ajax/CreateToken.php', formData, {
+				transformRequest: angular.identity,
+				headers: {
+					'Content-Type': undefined,
+					'Process-Data': false,
+					'X-Requested-With': 'XMLHttpRequest'
+				}
+			});
+		},
 		createThread: function(file, title, message, prefix) {
 			var formData = new FormData();
 			formData.append('file', file);
 			formData.append('title', title);
 			formData.append('message', message);
 			formData.append('prefix', prefix);
+			formData.append('token', $rootScope.token);
 			return $http.post('static/ajax/CreateThread.php', formData, {
 				transformRequest: angular.identity,
 				headers: {
@@ -54,6 +67,7 @@ app.factory('ajaxRequest', function($http) {
 			formData.append("file", file);
 			formData.append("message", message);
 			formData.append("thread_id", threadId);
+			formData.append('token', $rootScope.token);
 			return $http.post('static/ajax/AddReply.php', formData, {
 				transformRequest: angular.identity,
 				headers: {
@@ -75,34 +89,16 @@ app.filter('nl2br', function($sce) {
 
 app.filter('bbcode', function($sce) {
 	return function(msg) {
-		var msg = (msg + '').replace('[code]', '<pre>')
-							.replace('[/code]', '</pre>')
-							.replace('[b]', '<b>')
-							.replace('[/b]', '</b>')
-							.replace('[i]', '<i>')
-							.replace('[/i]', '</i>')
-							.replace('[spoiler]', '<span class="hover-text">')
-							.replace('[/spoiler]', '</span>');
-		
-		var splitted = (msg + '').split('<br>');
-		for (var i = 0; i < splitted.length; i++) {
-			var line = splitted[i].toString();
-			
-			if (line.indexOf('&gt;') != -1) {
-				var idx = line.indexOf('&gt;');
-				if (line.charAt(idx + 1) != '&') {
-					splitted[i] = line.replace(line.substring(idx, line.length), '<span class="text-success">'+line.substring(idx, line.length) +'</span>');
-				}
-			}
-			else if (line.indexOf('&lt;') != -1) {
-				var idx = line.indexOf('&lt;');
-				if (line.charAt(idx + 1) != '&') {
-					splitted[i] = line.replace(line.substring(idx, line.length), '<span class="text-primary">'+line.substring(idx, line.length) +'</span>');
-				}
-			}
-		}
-		
-		msg = splitted.join('<br>');
+		var msg = (msg + '')
+			.replace('[code]', '<pre>')
+			.replace('[/code]', '</pre>')
+			.replace('[b]', '<b>')
+			.replace('[/b]', '</b>')
+			.replace('[i]', '<i>')
+			.replace('[/i]', '</i>')
+			.replace('[spoiler]', '<span class="hover-text">')
+			.replace('[/spoiler]', '</span>');
+
 		return $sce.trustAsHtml(msg);
 	}
 });

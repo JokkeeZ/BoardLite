@@ -40,8 +40,6 @@ class BoardController {
 	 * @return $mixed array
 	 */
 	public function getBoards() {
-		return BoardCore::getDatabase()
-			->query('SELECT * FROM boards')
-			->fetchAll(PDO::FETCH_ASSOC);
+		return BoardCore::getDatabase()->query('SELECT * FROM boards')->fetchAll(PDO::FETCH_ASSOC);
 	}
 }

@@ -1,21 +1,19 @@
 <?php require '../global.php';
 
-$request = BoardCore::getRequestController();
-$file = BoardCore::getFileController();
-$thread = BoardCore::getThreadController();
-
 // Is request coming from this website?
-$request->isCorrectReferer() or die();
+$request->isCorrectReferer() or die;
 
 // Is request XMLHttpRequest?
-$request->isXMLHttpRequest() or die();
+$request->isXMLHttpRequest() or die;
 
 // Let's filter $_POST values, *sigh* script kids.
 $request->loadPostRequest();
 
+$request->verifyToken() or die;
+
 // Does $_POST contain values we need?
-$request->issetAndNotEmpty('POST', 'message') or die();
-$request->issetAndNotEmpty('POST', 'thread_id') or die();
+$request->issetAndNotEmpty('POST', 'message') or die;
+$request->issetAndNotEmpty('POST', 'thread_id') or die;
 
 // Did file get uploaded if there was any?
 $uploaded = $file->upload();

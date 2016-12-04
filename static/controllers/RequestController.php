@@ -97,8 +97,7 @@ class RequestController {
 	 * @return boolean
 	 */
 	public function isXMLHttpRequest() {
-		return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
-			$_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest';
+		return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest';
 	}
 	
 	/**
@@ -109,8 +108,15 @@ class RequestController {
 	 */
 	public function isCorrectReferer() {
 		global $_CONFIG;
-		return isset($_SERVER['HTTP_REFERER']) &&
-			$_SERVER['HTTP_REFERER'] == $_CONFIG['app_url'];
+		return isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] == $_CONFIG['app_url'];
 	}
-
+	
+	/**
+	 * Verifies that csrf token received with request matches with session token.
+	 * 
+	 * @return boolean
+	 */
+	public function verifyToken() {
+		return $this->issetAndNotEmpty('POST', 'token') && hash_equals($_SESSION['token'], $this->post['token']);
+	}
 }

@@ -75,4 +75,15 @@ class BoardCore {
 		self::$threadController = new ThreadController();
 		self::$requestController = new RequestController();
 	}
+	
+	/**
+	 * Creates new random 32 bytes long token and saves it to session.
+	 * @return string $_SESSION['token']
+	 */
+	public static function createToken() {
+		if (empty($_SESSION['token'])) {
+			$_SESSION['token'] = bin2hex(random_bytes(32));
+		}
+		return $_SESSION['token'];
+	}
 }
