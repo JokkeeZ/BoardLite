@@ -25,6 +25,7 @@ class Database extends PDO {
 		} 
 		catch (PDOException $e) {
 			//DO SOMETHING WITH THIS EXCEPTION, MAYBE LOG IT IN THE FILE..
+			//echo $e->getMessage();
 		}
 	}
 }

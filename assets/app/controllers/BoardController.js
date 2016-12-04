@@ -31,6 +31,7 @@ app.controller('BoardController', function($scope, $routeParams, ajaxRequest, $w
 				data.data[i].title = $sce.trustAsHtml(data.data[i].content.toString().substring(0, 5) + '..');
 			}
 		}
+		console.log('Threads loaded: ' + data.data.length);
 		$scope.threads = data.data;
 	});
 
@@ -46,6 +47,7 @@ app.controller('BoardController', function($scope, $routeParams, ajaxRequest, $w
 		
 		ajaxRequest.createThread($scope.myFile, $scope.title, $scope.message, $routeParams.prefix).success(function(data) {
 			if (data.success) {
+				console.log('Thread created with id: ' + data.data);
 				$window.location.href = '#/thread/' + data.data + '/';
 				$scope.messageEmpty = false;
 			}

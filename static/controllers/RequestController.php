@@ -83,13 +83,13 @@ class RequestController {
 	}
 
 	/**
-	 * Escapes string and converts HTML into bit more secure.
+	 * Converts HTML into bit more secure format.
 	 * @param string $value
 	 * 
 	 * @return string
 	 */
 	public function filterRequest($value) {
-		return mysql_real_escape_string(htmlspecialchars($value));
+		return htmlspecialchars(strip_tags($value));
 	}
 
 	/**

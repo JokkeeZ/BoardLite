@@ -13,6 +13,8 @@ app.controller('ThreadController', function($scope, ajaxRequest, $routeParams, $
 			var fileType = extensionProvider.getFileType(url);
 			$scope.startPost.fileType = fileType.type;
 			$scope.startPost.fileExtension = fileType.extension;
+			
+			console.log('Startpost loaded: ' + data.length);
 		}
 	});
 
@@ -37,6 +39,8 @@ app.controller('ThreadController', function($scope, ajaxRequest, $routeParams, $
 			var fileType = extensionProvider.getFileType(url);
 			data.data[i].fileType = fileType.type;
 			data.data[i].fileExtension = fileType.extension;
+			
+			console.log('Replies loaded: ' + data.data.length);
 		}
 
 		$scope.replys = data.data;
@@ -54,6 +58,7 @@ app.controller('ThreadController', function($scope, ajaxRequest, $routeParams, $
 		
 		ajaxRequest.addReply($scope.myFile, $scope.message, $routeParams.id).then(function(data) {
 			if (data.data.success) {
+				console.log('Reply sended');
 				$window.location.reload(true);
 			}
 		});
