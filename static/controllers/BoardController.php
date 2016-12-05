@@ -1,11 +1,11 @@
-<?php defined('APP') or die();
+<?php defined('APP') or die;
 
 /**
  * Class used mainly for getting and updating global message ID and boards.
  * 
  * @author JokkeeZ
  * @version 1.0
- * @copyright Copyright © 2016 JokkeeZ
+ * @copyright Copyright Â© 2016 JokkeeZ
  */
 class BoardController {
 	

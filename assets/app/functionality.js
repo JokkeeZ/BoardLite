@@ -14,6 +14,14 @@ app.directive('fileModel', function($parse) {
 	}
 });
 
+app.run(function($rootScope, ajaxRequest) {
+	$rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
+		ajaxRequest.getLanguage().success(function(response) {
+			$rootScope.lang = response.BoardLite_Texts;
+		});
+	});
+})
+
 app.factory('ajaxRequest', function($http, $rootScope) {
 	return {
 		getAppConfig: function() {
@@ -33,6 +41,9 @@ app.factory('ajaxRequest', function($http, $rootScope) {
 		},
 		getThreadStartPost: function(threadId) {
 			return $http.get('static/ajax/GetThreadStartPost.php?id=' + threadId);
+		},
+		getLanguage: function() {
+			return $http.get('static/ajax/GetLanguage.php');
 		},
 		createToken: function() {
 			var formData = new FormData();

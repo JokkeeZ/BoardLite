@@ -5,23 +5,23 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="panel panel-default">
-				<div class="panel-heading">Create a new thread</div>
+				<div class="panel-heading" ng-bind="lang.Create_Thread"></div>
 				<div class="panel-body">
 					<form>
 						<div class="form-group">
-							<label for="fil">File</label>
+							<label for="fil" ng-bind="lang.File"></label>
 							<input type="file" file-model="myFile"/>
 						</div>
 						<div class="form-group">
-							<label for="title">Title</label>
-							<input type="text" id="title" name="title" ng-model="title" class="form-control" placeholder="Title for your thread">
+							<label for="title" ng-bind="lang.Title"></label>
+							<input type="text" id="title" name="title" ng-model="title" class="form-control" placeholder="{{lang.Title_for_thread}}">
 						</div>
 						<div class="form-group" ng-class="messageEmpty === true ? 'has-error' : ''">
-							<label for="message">Message</label>
-							<textarea name="message" id="message" ng-model="message" class="form-control" placeholder="Message for your thread"></textarea>
+							<label for="message" ng-bind="lang.Message"></label>
+							<textarea name="message" id="message" ng-model="message" class="form-control" placeholder="{{lang.Message_for_thread}}"></textarea>
 						</div>
 						<div class="form-group">
-							<button type="submit" ng-click="createThread()" class="btn btn-primary">Submit</button>
+							<button type="submit" ng-click="createThread()" class="btn btn-primary" ng-bind="lang.Send"></button>
 						</div>
 					</form>
 				</div>
@@ -33,7 +33,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<a href="#/thread/{{thread.msg_id}}/" ng-bind-html="thread.title"></a>
-					<h6>Id: {{thread.msg_id}} &middot; Posted: {{ thread.posted }} &middot; Anonymous</h6>
+					<h6>{{lang.Id}}: {{thread.msg_id}} &middot; {{lang.Posted}}: {{ thread.posted }} &middot; {{lang.Anonymous}}</h6>
 				</div>
 				<div class="panel-body">
 					<div class="row">
@@ -59,10 +59,10 @@
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<p>There is no threads on this board.</p>
+					<p ng-bind="lang.No_threads_on_board"></p>
 				</div>
 				<div class="panel-body">
-					<p>Maybe you should start a new thread on this board?</p>
+					<p ng-bind="lang.No_threads_create_maybe"></p>
 				</div>
 			</div>
 		</div>

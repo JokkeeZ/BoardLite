@@ -1,11 +1,11 @@
-<?php defined('APP') or die();
+<?php defined('APP') or die;
 
 /**
  * Class used for uploading files into server, received via thread creation/reply adding request.
  * 
  * @author JokkeeZ
  * @version 1.0
- * @copyright Copyright © 2016 JokkeeZ
+ * @copyright Copyright Â© 2016 JokkeeZ
  */
 class FileController {
 	

@@ -1,0 +1,37 @@
+{
+	"BoardLite_Lang":
+	{
+		"Version": 0.1,
+		"Name": "Template language",
+		"Author": "Author name"
+	},
+
+	"BoardLite_Texts":
+	{
+		"Boards": "",
+		"Boards_desc": "",
+		"Back_index": "",
+		"Rules": "",
+		"Rules_desc": "",
+		"Rules_desc_small": "",
+		"Create_thread": "",
+		"File": "",
+		"Title": "",
+		"Message": "",
+		"Title_for_thread": "",
+		"Message_for_thread": "",
+		"Send": "",
+		"Id": "",
+		"Posted": "",
+		"Anonymous": "",
+		"Add_reply": "",
+		"Message_for_reply": "",
+		"Not_found_title": "",
+		"Not_found_desc": "",
+		"Not_found_desc_small": "",
+		"No_threads_on_board": "",
+		"No_threads_create_maybe": "",
+		"SFW": "",
+		"NSFW": ""
+	}
+}

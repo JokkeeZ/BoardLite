@@ -1,0 +1,37 @@
+{
+	"BoardLite_Lang":
+	{
+		"Version": 0.1,
+		"Name": "English",
+		"Author": "JokkeeZ"
+	},
+	
+	"BoardLite_Texts":
+	{
+		"Boards": "Boards",
+		"Boards_desc": "Here is some boards you can start with.",
+		"Back_index": "Back to index",
+		"Rules": "Rules",
+		"Rules_desc": "Rules for using this website.",
+		"Rules_desc_small": "By using this website (the \"site\"), you agree that you'll follow these rules, and understand them.",
+		"Create_thread": "Create a new thread",
+		"File": "File",
+		"Title": "Title",
+		"Message": "Message",
+		"Title_for_thread": "Title for your thread",
+		"Message_for_thread": "Message for your thread",
+		"Send": "Send",
+		"Id": "Id",
+		"Posted": "Posted",
+		"Anonymous": "Anonymous",
+		"Add_reply": "Add new reply",
+		"Message_for_reply": "Your reply message",
+		"Not_found_title": "Oh snap! 404 not found!",
+		"Not_found_desc": "Requested page not found!",
+		"Not_found_desc_small": "You can go back to index from navigationbar.",
+		"No_threads_on_board": "This board doesn't have any threads yet.",
+		"No_threads_create_maybe": "Maybe you should create a new thread on this board?",
+		"SFW": "Safe For Work",
+		"NSFW": "Not Safe For Work"
+	}
+}

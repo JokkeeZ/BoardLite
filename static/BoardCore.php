@@ -14,6 +14,7 @@ class BoardCore {
 	private static $fileController;
 	private static $threadController;
 	private static $requestController;
+	private static $languageController;
 	private static $database;
 	
 	/**
@@ -57,6 +58,14 @@ class BoardCore {
 	}
 	
 	/**
+	 * Get's a instance of LanguageController class.
+	 * @return An instance of Database.
+	 */
+	public static function getLanguageController() {
+		return self::$languageController;
+	}
+	
+	/**
 	 * Initializes an new instances of controller classes.
 	 * @return void
 	 */
@@ -74,6 +83,7 @@ class BoardCore {
 		self::$fileController = new FileController();
 		self::$threadController = new ThreadController();
 		self::$requestController = new RequestController();
+		self::$languageController = new LanguageController();
 	}
 	
 	/**

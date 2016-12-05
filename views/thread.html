@@ -2,19 +2,19 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="panel panel-default">
-				<div class="panel-heading">Add new reply</div>
+				<div class="panel-heading" ng-bind="lang.Add_reply"></div>
 				<div class="panel-body">
 					<form>
 						<div class="form-group">
-							<label for="fil">File</label>
+							<label for="fil" ng-bind="lang.File"></label>
 							<input type="file" file-model="myFile" class="form-control-static">
 						</div>
 						<div class="form-group" ng-class="messageEmpty === true ? 'has-error' : ''">
-							<label for="message">Message</label>
-							<textarea name="message" id="message" ng-model="message" class="form-control" placeholder="Your reply message.."></textarea>
+							<label for="message" ng-bind="lang.Message"></label>
+							<textarea name="message" id="message" ng-model="message" class="form-control" placeholder="{{lang.Message_for_reply}}"></textarea>
 						</div>
 						<div class="form-group">
-							<button type="submit" ng-click="postReply()" class="btn btn-primary">Submit</button>
+							<button type="submit" ng-click="postReply()" class="btn btn-primary" ng-bind="lang.Send"></button>
 						</div>
 					</form>
 				</div>
@@ -26,7 +26,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading" id="msg_{{startPost.msg_id}}">
 					<a href="javascript:void(0)" ng-bind-html="startPost.title"></a>
-					<h6>Id: <a ng-click="answer(startPost.msg_id)" style="cursor:pointer">{{ startPost.msg_id }}</a> &middot; Posted: {{ startPost.posted }} &middot; Anonymous</h6>
+					<h6>{{lang.Id}}: <a ng-click="answer(startPost.msg_id)" style="cursor:pointer">{{ startPost.msg_id }}</a> &middot; {{lang.Posted}}: {{ startPost.posted }} &middot; {{lang.Anonymous}}</h6>
 				</div>
 				<div class="panel-body">
 					<div class="row">
@@ -52,7 +52,7 @@
 		<div class="col-md-12" ng-repeat="reply in replys">
 			<div class="panel panel-default" id="msg_{{reply.msg_id}}">
 				<div class="panel-heading">
-					<h6>Id: <a ng-click="answer(reply.msg_id)" style="cursor:pointer">{{ reply.msg_id }}</a> &middot; Posted: {{ reply.posted }} &middot; Anonymous</h6>
+					<h6>{{lang.Id}}: <a ng-click="answer(reply.msg_id)" style="cursor:pointer">{{ reply.msg_id }}</a> &middot; {{lang.Posted}}: {{ reply.posted }} &middot; {{lang.Anonymous}}</h6>
 				</div>
 				<div class="panel-body">
 					<div class="row">

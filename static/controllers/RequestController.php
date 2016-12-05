@@ -1,4 +1,4 @@
-<?php defined('APP') or die();
+<?php defined('APP') or die;
 
 /**
  * Provides functionality for filtering requests incase there is some script kiddies,
@@ -10,7 +10,7 @@
  * 
  * @author JokkeeZ
  * @version 1.0
- * @copyright Copyright © 2016 JokkeeZ
+ * @copyright Copyright Â© 2016 JokkeeZ
  */
 class RequestController {
 	
