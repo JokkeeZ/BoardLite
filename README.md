@@ -12,7 +12,7 @@ BoardLite is imageboard application crafted with AngularJS and PHP 7.0.
 1. Clone/Download this repository
 2. Upload files to your webhost/localhost
 3. Import board_lite.sql to phpMyAdmin or similar
-4. Fill values form static/config/Configuration.php
+4. Fill values from static/config/Configuration.php
   - If you are using MySQL, no need for editing ``` $_CONFIG['db_conn_str'] ``` value.
 5. Create some rules in static/config/Rules.php if you want.
 6. I think you are good to go!
