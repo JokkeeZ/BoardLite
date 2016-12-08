@@ -26,7 +26,7 @@ $_CONFIG['db_name'] = 'board_lite';
 /**
  * If you're using MySQL, you don't need to change this.
  */
-$_CONFIG['db_conn_str'] = 'mysql:host=%s;dbname=%s;charset=UTF-8';
+$_CONFIG['db_conn_str'] = 'mysql:host=%s;dbname=%s';
 
 /**
  * Application name, used for website title, navigation bar brand and in future maybe something.
