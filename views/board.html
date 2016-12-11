@@ -1,11 +1,11 @@
 <div class="container-fluid" ng-controller="BoardController">
-	<h1 class="text-center">{{boardData.name}}</h1>
-	<h4 class="text-center">{{boardData.description}}</h4><hr/>
+	<h1 class="text-center" ng-bind="boardData.name"></h1>
+	<h4 class="text-center" ng-bind="boardData.description"></h4><hr/>
 
 	<div class="row">
 		<div class="col-md-12">
 			<div class="panel panel-default">
-				<div class="panel-heading" ng-bind="lang.Create_Thread"></div>
+				<div class="panel-heading" ng-bind="lang.Create_thread"></div>
 				<div class="panel-body">
 					<form>
 						<div class="form-group">

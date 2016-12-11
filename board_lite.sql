@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2016 at 06:29 PM
+-- Generation Time: Dec 11, 2016 at 08:09 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -94,6 +94,20 @@ CREATE TABLE `threads` (
   `ip` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `name` varchar(60) NOT NULL,
+  `pass` varchar(60) NOT NULL,
+  `ip` varchar(15) NOT NULL,
+  `rank` enum('0','1','2') NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 --
 -- Indexes for dumped tables
 --
@@ -120,6 +134,13 @@ ALTER TABLE `threads`
   ADD UNIQUE KEY `msg_id` (`msg_id`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -127,7 +148,7 @@ ALTER TABLE `threads`
 -- AUTO_INCREMENT for table `boards`
 --
 ALTER TABLE `boards`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `replys`
 --
@@ -137,6 +158,11 @@ ALTER TABLE `replys`
 -- AUTO_INCREMENT for table `threads`
 --
 ALTER TABLE `threads`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

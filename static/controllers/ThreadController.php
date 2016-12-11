@@ -2,7 +2,7 @@
 
 /**
  * Provides access for inserting, updating and selecting thread content from database.
- * 
+ *
  * @author JokkeeZ
  * @version 1.0
  * @copyright Copyright © 2016 JokkeeZ
@@ -11,7 +11,7 @@ class ThreadController {
 
 	/**
 	 * Creates a new thread into database with given values.
-	 * 
+	 *
 	 * @param mixed $title
 	 * @param string $message
 	 * @param string $prefix
@@ -46,7 +46,7 @@ class ThreadController {
 
 	/**
 	 * Creates a new reply into database with given values.
-	 * 
+	 *
 	 * @param string $content
 	 * @param number $threadId
 	 * @param string $img
@@ -82,9 +82,9 @@ class ThreadController {
 
 	/**
 	 * Get's thread start post by given thread id.
-	 * 
+	 *
 	 * @param number $threadId
-	 * 
+	 *
 	 * @return boolean or data feched into array.
 	 */
 	public function getStartPost($threadId) {

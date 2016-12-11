@@ -2,7 +2,7 @@
 
 /**
  * Class used for uploading files into server, received via thread creation/reply adding request.
- * 
+ *
  * @author JokkeeZ
  * @version 1.0
  * @copyright Copyright © 2016 JokkeeZ
@@ -11,7 +11,7 @@ class FileController {
 	
 	/**
 	 * Uploads received file into server.
-	 * 
+	 *
 	 * @return boolean
 	 */
 	public function upload() {

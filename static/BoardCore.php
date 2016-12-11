@@ -6,7 +6,7 @@
  * 
  * @author JokkeeZ
  * @version 1.0
- * @copyright Copyright © 2016 JokkeeZ
+ * @copyright Copyright Â© 2016 JokkeeZ
  */
 class BoardCore {
 
@@ -15,6 +15,7 @@ class BoardCore {
 	private static $threadController;
 	private static $requestController;
 	private static $languageController;
+	private static $authenticationController;
 	private static $database;
 	
 	/**
@@ -65,6 +66,10 @@ class BoardCore {
 		return self::$languageController;
 	}
 	
+	public static function getAuthenticationController() {
+		return self::$authenticationController;
+	}
+	
 	/**
 	 * Initializes an new instances of controller classes.
 	 * @return void
@@ -84,6 +89,7 @@ class BoardCore {
 		self::$threadController = new ThreadController();
 		self::$requestController = new RequestController();
 		self::$languageController = new LanguageController();
+		self::$authenticationController = new AuthenticationController();
 	}
 	
 	/**

@@ -1,14 +1,15 @@
 {
 	"BoardLite_Lang":
 	{
-		"Version": 0.1,
+		"Version": 0.2,
 		"Name": "Suomi",
 		"Author": "JokkeeZ"
 	},
 
 	"BoardLite_Texts":
 	{
-		"Boards": "Langat",
+		"Boards": "Laudat",
+		"Threads": "Langat",
 		"Boards_desc": "Tässä on lautoja, joilla pääset alkuun.",
 		"Back_index": "Etusivulle",
 		"Rules": "Säännöt",
@@ -31,7 +32,31 @@
 		"Not_found_desc_small": "Voit palata etusivulle navigointipalkista.",
 		"No_threads_on_board": "Tässä laudassa ei ole vielä yhtään lankaa.",
 		"No_threads_create_maybe": "Ehkä sinun tulisi luoda uusi lanka tälle laudalle?",
-		"SFW": "Turvallinen töihin",
-		"NSFW": "Ei turvallinen töihin"
+		"SFW": "Turvallinen työajalla",
+		"NSFW": "Ei turvallinen työajalla",
+		"Register": "Rekisteröinti",
+		"Login": "Kirjautuminen",
+		"Logout": "Kirjaudu ulos",
+		"Already_have_an_account": "Onko sinulla jo käyttäjätunnus?",
+		"Register_success": "Rekisteröinti onnistui! Voit nyt kirjautua sisälle.",
+		"Register_error": "Jotain meni pieleen käyttäjäsi rekisteröinnissä, kokeile myöhemmin uudelleen.",
+		"Login_success": "Kirjautuminen onnistui!",
+		"Login_error": "Väärä käyttäjänimi tai salasana! Kokeile uudelleen.",
+		"Username": "Käyttäjänimi",
+		"Password": "Salasana",
+		"Adminpanel": "Hallintapaneeli",
+		"Name": "Nimi",
+		"Prefix": "Tunniste",
+		"Description": "Kuvaus",
+		"Delete": "Poista",
+		"Edit": "Muokkaa",
+		"Create": "Luo",
+		"DeleteOrEdit": "Poista / Muokkaa",
+
+		"Manage_Boards": "Hallinnoi lautoja",
+		"Create_Boards": "Luo lautoja",
+		"Name_for_board": "Nimi laudalle",
+		"Prefix_for_board": "Tunniste laudalle",
+		"Desc_for_board": "Kuvaus laudalle"
 	}
 }

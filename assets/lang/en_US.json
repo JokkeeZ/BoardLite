@@ -1,7 +1,7 @@
 {
 	"BoardLite_Lang":
 	{
-		"Version": 0.1,
+		"Version": 0.2,
 		"Name": "English",
 		"Author": "JokkeeZ"
 	},
@@ -9,6 +9,7 @@
 	"BoardLite_Texts":
 	{
 		"Boards": "Boards",
+		"Threads": "Threads",
 		"Boards_desc": "Here is some boards you can start with.",
 		"Back_index": "Back to index",
 		"Rules": "Rules",
@@ -32,6 +33,30 @@
 		"No_threads_on_board": "This board doesn't have any threads yet.",
 		"No_threads_create_maybe": "Maybe you should create a new thread on this board?",
 		"SFW": "Safe For Work",
-		"NSFW": "Not Safe For Work"
+		"NSFW": "Not Safe For Work",
+		"Register": "Register",
+		"Login": "Login",
+		"Logout": "Logout",
+		"Already_have_an_account": "Already have an account?",
+		"Register_success": "Register success! You can login now.",
+		"Register_error": "Something went wrong with registering your account, try again later.",
+		"Login_success": "Login success!",
+		"Login_error": "Invalid username or password! Try again.",
+		"Username": "Username",
+		"Password": "Password",
+		"Adminpanel": "Adminpanel",
+		"Name": "Name",
+		"Prefix": "Prefix",
+		"Description": "Description",
+		"Delete": "Delete",
+		"Edit": "Edit",
+		"Create": "Create",
+		"DeleteOrEdit": "Delete / Edit",
+
+		"Manage_Boards": "Manage Boards",
+		"Create_Boards": "Create Boards",
+		"Name_for_board": "Name for board",
+		"Prefix_for_board": "Prefix for board",
+		"Desc_for_board": "Description for board"
 	}
 }

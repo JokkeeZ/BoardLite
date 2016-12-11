@@ -1,7 +1,7 @@
 {
 	"BoardLite_Lang":
 	{
-		"Version": 0.1,
+		"Version": 0.0,
 		"Name": "Template language",
 		"Author": "Author name"
 	},
@@ -9,6 +9,7 @@
 	"BoardLite_Texts":
 	{
 		"Boards": "",
+		"Threads": "",
 		"Boards_desc": "",
 		"Back_index": "",
 		"Rules": "",
@@ -32,6 +33,30 @@
 		"No_threads_on_board": "",
 		"No_threads_create_maybe": "",
 		"SFW": "",
-		"NSFW": ""
+		"NSFW": "",
+		"Register": "",
+		"Login": "",
+		"Logout": "",
+		"Already_have_an_account": "",
+		"Register_success": "",
+		"Register_error": "",
+		"Login_success": "",
+		"Login_error": "",
+		"Username": "",
+		"Password": "",
+		"Adminpanel": "",
+		"Name": "",
+		"Prefix": "",
+		"Description": "",
+		"Delete": "",
+		"Edit": "",
+		"Create": "",
+		"DeleteOrEdit": "",
+
+		"Manage_Boards": "",
+		"Create_Boards": "",
+		"Name_for_board": "",
+		"Prefix_for_board": "",
+		"Desc_for_board": ""
 	}
 }

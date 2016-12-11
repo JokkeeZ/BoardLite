@@ -13,6 +13,7 @@ require 'controllers/FileController.php';
 require 'controllers/ThreadController.php';
 require 'controllers/RequestController.php';
 require 'controllers/LanguageController.php';
+require 'controllers/AuthenticationController.php';
 require 'config/Rules.php';
 require 'BoardCore.php';
 
@@ -29,3 +30,5 @@ $thread = BoardCore::getThreadController();
 $file = BoardCore::getFileController();
 
 $lang = BoardCore::getLanguageController();
+
+$auth = BoardCore::getAuthenticationController();

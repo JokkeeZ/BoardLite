@@ -1,9 +1,8 @@
 app.controller('BoardListController', function($scope, ajaxRequest) {
 	$scope.firstList = [];
 	$scope.secondList = [];
-	
+
 	ajaxRequest.getBoards().success(function(data) {
-		console.log('Boards loaded: ' + data.length);
 		var split = Math.ceil(data.length / 2);
 		for (var i = 0; i < split; i++) {
 			$scope.firstList.push(data[i]);

@@ -5,12 +5,13 @@
  * 
  * @author JokkeeZ
  * @version 1.0
- * @copyright Copyright © 2016 JokkeeZ
+ * @copyright Copyright Â© 2016 JokkeeZ
  */
 class Database extends PDO {
 	
 	/**
 	 * Initializes a new instance of Database with given values.
+	 * 
 	 * @param string $connString
 	 * @param string $host
 	 * @param string $name

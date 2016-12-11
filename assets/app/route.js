@@ -16,6 +16,18 @@ app.config(function($routeProvider) {
 		templateUrl: 'views/rules.html',
 		controller: 'RuleController'
 	})
+	.when('/register', {
+		templateUrl: 'views/register.html',
+		controller: 'RegisterController'
+	})
+	.when('/login', {
+		templateUrl: 'views/login.html',
+		controller: 'LoginController'
+	})
+	.when('/adminpanel', {
+		templateUrl: 'views/admin/adminpanel.html',
+		controller: 'AdminController'
+	})
 	.otherwise({
 		templateUrl: 'views/404.html'
 	});

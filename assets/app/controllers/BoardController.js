@@ -41,8 +41,6 @@ app.controller('BoardController', function($scope, $routeParams, ajaxRequest, $w
 			$scope.messageEmpty = true;
 			angular.element(document.querySelector('#message')).focus();
 			return;
-		} else {
-			$scope.messageEmpty = false;
 		}
 		
 		ajaxRequest.createThread($scope.myFile, $scope.title, $scope.message, $routeParams.prefix).success(function(data) {

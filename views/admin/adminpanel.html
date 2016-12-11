@@ -1,0 +1,58 @@
+<div class="container" ng-controller="AdminController">
+	<div class="row">
+		<div class="col-md-12">
+			<h2 ng-bind="lang.Manage_Boards"></h2><hr/>
+			
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th ng-bind="lang.Id"></th>
+						<th ng-bind="lang.Name"></th>
+						<th ng-bind="lang.Prefix"></th>
+						<th ng-bind="lang.Description"></th>
+						<th ng-bind="lang.DeleteOrEdit"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="board in boards track by $index">
+						<td ng-bind="board.id"></td>
+						<td ng-bind="board.name"></td>
+						<td ng-bind="board.prefix"></td>
+						<td ng-bind="board.description"></td>
+						<td>
+							<button type="button" class="btn btn-primary btn-xs" ng-click="deleteBoard(board.id)" ng-bind="lang.Delete"></button>
+							<button type="button" class="btn btn-primary btn-xs btn-disabled" disabled ng-bind="lang.Edit"></button>	
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-12">
+			<h2 ng-bind="lang.Create_Boards"></h2><hr/>
+			<form>
+				<div class="form-group" ng-class="nameEmpty === true ? 'has-error' : ''">
+					<label for="name" ng-bind="lang.Name"></label>
+					<input type="text" class="form-control" ng-model="name" placeholder="{{ lang.Name_for_board }}">
+				</div>
+				<div class="form-group" ng-class="prefixEmpty === true ? 'has-error' : ''">
+					<label for="name" ng-bind="lang.Prefix"></label>
+					<input type="text" class="form-control" ng-model="prefix" placeholder="{{ lang.Prefix_for_board }}">
+				</div>
+				<div class="form-group" ng-class="descEmpty === true ? 'has-error' : ''">
+					<label for="name" ng-bind="lang.Description"></label>
+					<input type="text" class="form-control" ng-model="desc" placeholder="{{ lang.Desc_for_board }}">
+				</div>
+				<div class="form-group" ng-class="tagEmpty === true ? 'has-error' : ''">
+					<label for="name">Tag</label>
+					<select ng-model="tag" class="form-control">
+						<option value="NSFW" ng-bind="lang.NSFW"></option>
+						<option value="SFW" ng-bind="lang.SFW"></option>
+					</select>
+				</div>
+				<div class="form-group">
+					<button type="button" class="btn btn-primary" ng-click="createBoard()" ng-bind="lang.Create"></button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

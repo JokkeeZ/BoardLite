@@ -5,7 +5,7 @@ app.directive('fileModel', function($parse) {
 			var model = $parse(attrs.fileModel);
 			var modelSetter = model.assign;
 
-			element.bind('change', function(){
+			element.bind('change', function() {
 				scope.$apply(function(){
 					modelSetter(scope, element[0].files[0]);
 				});
@@ -14,13 +14,50 @@ app.directive('fileModel', function($parse) {
 	}
 });
 
-app.run(function($rootScope, ajaxRequest) {
+app.run(function($rootScope, ajaxRequest, User, $window) {
 	$rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
+		if (current.$$route.controller == 'AdminController') {
+			if (User.isLoggedIn() != true || User.isAdmin() != true) {
+				$window.location.href = "#/";
+			}
+		}
+		
 		ajaxRequest.getLanguage().success(function(response) {
 			$rootScope.lang = response.BoardLite_Texts;
 		});
 	});
-})
+});
+
+app.factory('User', function($cookies, ajaxRequest) {
+	return {
+		get: function() {
+			return $cookies.getObject('user');
+		},
+		set: function(obj) {
+			$cookies.putObject('user', obj);
+		},
+		isAdmin: function() {
+			if (this.isLoggedIn()) {
+				var rank = this.get().rank;
+				return rank == 1 || rank == 2;
+			}
+			return false;
+		},
+		isLoggedIn: function() {
+			var usr = this.get();
+			return usr !== undefined;
+		},
+		destroy: function() {
+			$cookies.remove('user');
+
+			ajaxRequest.logoutUser().success(function(response) {
+				if (response.status) {
+					console.debug('Session destroyed');	
+				}
+			});
+		}
+	}
+});
 
 app.factory('ajaxRequest', function($http, $rootScope) {
 	return {
@@ -31,16 +68,16 @@ app.factory('ajaxRequest', function($http, $rootScope) {
 			return $http.get('static/ajax/GetRules.php');
 		},
 		getBoards: function() {
-			return $http.get('static/ajax/GetBoards.php');
+			return $http.get('static/ajax/boards/GetBoards.php');
 		},
 		getThreads: function(prefix) {
-			return $http.get('static/ajax/GetThreads.php?prefix=' + prefix);
+			return $http.get('static/ajax/threads/GetThreads.php?prefix=' + prefix);
 		},
 		getThreadReplys: function(threadId) {
-			return $http.get('static/ajax/GetReplys.php?id=' + threadId);
+			return $http.get('static/ajax/threads/GetReplys.php?id=' + threadId);
 		},
 		getThreadStartPost: function(threadId) {
-			return $http.get('static/ajax/GetThreadStartPost.php?id=' + threadId);
+			return $http.get('static/ajax/threads/GetThreadStartPost.php?id=' + threadId);
 		},
 		getLanguage: function() {
 			return $http.get('static/ajax/GetLanguage.php');
@@ -48,14 +85,33 @@ app.factory('ajaxRequest', function($http, $rootScope) {
 		createToken: function() {
 			var formData = new FormData();
 			formData.append('token_creation', true);
-			return $http.post('static/ajax/CreateToken.php', formData, {
-				transformRequest: angular.identity,
-				headers: {
-					'Content-Type': undefined,
-					'Process-Data': false,
-					'X-Requested-With': 'XMLHttpRequest'
-				}
-			});
+			return this.createPostRequest('static/ajax/CreateToken.php', formData);
+		},
+		deleteBoard: function(id) {
+			var formData = new FormData();
+			formData.append('id', id);
+			formData.append('token', $rootScope.token);
+			return this.createPostRequest('static/ajax/boards/DeleteBoard.php', formData);
+		},
+		createUser: function(name, pass) {
+			var formData = new FormData();
+			formData.append('name', name);
+			formData.append('pass', pass);
+			formData.append('token', $rootScope.token);
+			return this.createPostRequest('static/ajax/auth/CreateUser.php', formData);
+		},
+		loginUser: function(name, pass) {
+			var formData = new FormData();
+			formData.append('name', name);
+			formData.append('pass', pass);
+			formData.append('token', $rootScope.token);
+			return this.createPostRequest('static/ajax/auth/LoginUser.php', formData);
+		},
+		logoutUser: function() {
+			var formData = new FormData();
+			formData.append('session_close', true);
+			formData.append('token', $rootScope.token);
+			return this.createPostRequest('static/ajax/auth/LogoutUser.php', formData);
 		},
 		createThread: function(file, title, message, prefix) {
 			var formData = new FormData();
@@ -64,14 +120,16 @@ app.factory('ajaxRequest', function($http, $rootScope) {
 			formData.append('message', message);
 			formData.append('prefix', prefix);
 			formData.append('token', $rootScope.token);
-			return $http.post('static/ajax/CreateThread.php', formData, {
-				transformRequest: angular.identity,
-				headers: {
-					'Content-Type': undefined,
-					'Process-Data': false,
-					'X-Requested-With': 'XMLHttpRequest'
-				}
-			});
+			return this.createPostRequest('static/ajax/threads/CreateThread.php', formData);
+		},
+		createBoard: function(name, desc, prefix, tag) {
+			var formData = new FormData();
+			formData.append('name', name);
+			formData.append('desc', desc);
+			formData.append('prefix', prefix);
+			formData.append('tag', tag);
+			formData.append('token', $rootScope.token);
+			return this.createPostRequest('static/ajax/boards/CreateBoard.php', formData);
 		},
 		addReply: function(file, message, threadId) {
 			var formData = new FormData();
@@ -79,7 +137,10 @@ app.factory('ajaxRequest', function($http, $rootScope) {
 			formData.append("message", message);
 			formData.append("thread_id", threadId);
 			formData.append('token', $rootScope.token);
-			return $http.post('static/ajax/AddReply.php', formData, {
+			return this.createPostRequest('static/ajax/threads/AddReply.php', formData);
+		},
+		createPostRequest: function(url, formData) {
+			return $http.post(url, formData, {
 				transformRequest: angular.identity,
 				headers: {
 					'Content-Type': undefined,
@@ -126,7 +187,7 @@ app.factory('extensionProvider', function() {
 			else if (ext == 'jpg' || ext == 'jpeg' || ext == 'png' || ext == 'bmp' || ext == 'gif') {
 				return { type: 'image', extension: ext };
 			}
-			
+
 			return { type: 'no_file', extension: '' };
 		}
 	}
