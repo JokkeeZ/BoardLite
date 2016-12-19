@@ -1,0 +1,9 @@
+.hover-text {
+    color: black;
+    background-color: black;
+}
+
+.hover-text:hover {
+    background-color: black !important;
+    color: #FDFDFD !important;
+}

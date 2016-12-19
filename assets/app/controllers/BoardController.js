@@ -1,38 +1,36 @@
-app.controller('BoardController', function($scope, $routeParams, ajaxRequest, $window, extensionProvider, $sce) {
-	$scope.prefix = $routeParams.prefix;
+// TODO: Incase admin changes prefix on adminpanel threads in that board are not loaded, so in future load and create threads by board id.
+app.controller('BoardController', function($scope, $routeParams, ajaxRequest, $window, extensionProvider, $sce, User) {
+	//$scope.prefix = $routeParams.prefix;
+	$scope.isAdmin = User.isAdmin();
 	ajaxRequest.getBoards().success(function(data) {
 		var exists = false;
-		for (var i = 0; i < data.length; i++) {
-			if (data[i].prefix == $routeParams.prefix) {
+		angular.forEach(data, function(o) {
+			if (o.prefix == $routeParams.prefix) {
 				exists = true;
-				$scope.boardData = data[i];
-				break;
+				$scope.boardData = o;
 			}
-		}
+		});
 
 		if (!exists) {
 			$window.location.href = '#/404';
 		}
 	});
 
-	ajaxRequest.getThreads($routeParams.prefix).success(function(data) {
-		if (!data.success) {
+	ajaxRequest.getThreads($routeParams.prefix).success(function(response) {
+		if (!response.success) {
 			return;
 		}
-		
-		for (var i = 0; i < data.data.length; i++) {
-			var url = data.data[i].img_url.toString();
-			var fileType = extensionProvider.getFileType(url);
-			data.data[i].fileType = fileType;
 
-			data.data[i].title = $sce.trustAsHtml(data.data[i].title);
+		angular.forEach(response.data, function(item, idx) {
+			response.data[idx].fileType = extensionProvider.getFileType(item.img_url);
 
-			if (data.data[i].title.toString().length <= 1 || data.data[i].title.toString() == 'undefined') {
-				data.data[i].title = $sce.trustAsHtml(data.data[i].content.toString().substring(0, 5) + '..');
+			response.data[idx].title = $sce.trustAsHtml(item.title);
+			if (item.title.length <= 1 || item.title == 'undefined') {
+				response.data[idx].title = $sce.trustAsHtml(item.content.toString().substring(0, 5) + '..');
 			}
-		}
-		console.log('Threads loaded: ' + data.data.length);
-		$scope.threads = data.data;
+		});
+
+		$scope.threads = response.data;
 	});
 
 	$scope.createThread = function() {
@@ -49,6 +47,7 @@ app.controller('BoardController', function($scope, $routeParams, ajaxRequest, $w
 				$window.location.href = '#/thread/' + data.data + '/';
 				$scope.messageEmpty = false;
 			}
+			console.log(data);
 		});
 	};
 });

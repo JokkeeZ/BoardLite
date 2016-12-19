@@ -58,6 +58,7 @@
 		"Update_Error": "Something went wrong while updating",
 		"Go_Back": "Go back",
 		"Tag": "Tag",
+		"Do_You_Want_Delete_Thread_Confirm": "Do you really want to delete this thread?",
 
 		"Manage_Boards": "Manage Boards",
 		"Create_Boards": "Create Boards",

@@ -19,7 +19,7 @@ class BoardCore {
 	private static $database;
 	
 	/**
-	 * Get's a instance of BoardController class.
+	 * Get's an instance of BoardController class.
 	 * @return An instance of BoardController.
 	 */
 	public static function getBoardController() {
@@ -27,7 +27,7 @@ class BoardCore {
 	}
 
 	/**
-	 * Get's a instance of FileController class.
+	 * Get's an instance of FileController class.
 	 * @return An instance of FileController.
 	 */
 	public static function getFileController() {
@@ -35,7 +35,7 @@ class BoardCore {
 	}
 
 	/**
-	 * Get's a instance of ThreadController class.
+	 * Get's an instance of ThreadController class.
 	 * @return An instance of ThreadController.
 	 */
 	public static function getThreadController() {
@@ -43,7 +43,7 @@ class BoardCore {
 	}
 
 	/**
-	 * Get's a instance of RequestController class.
+	 * Get's an instance of RequestController class.
 	 * @return An instance of RequestController.
 	 */
 	public static function getRequestController() {
@@ -51,7 +51,7 @@ class BoardCore {
 	}
 
 	/**
-	 * Get's a instance of Database class.
+	 * Get's an instance of Database class.
 	 * @return An instance of Database.
 	 */
 	public static function getDatabase() {
@@ -59,13 +59,17 @@ class BoardCore {
 	}
 	
 	/**
-	 * Get's a instance of LanguageController class.
+	 * Get's an instance of LanguageController class.
 	 * @return An instance of Database.
 	 */
 	public static function getLanguageController() {
 		return self::$languageController;
 	}
-	
+
+    /**
+     * Get's an instance of AuthenticationController class.
+     * @return An instance of AuthenticationController.
+     */
 	public static function getAuthenticationController() {
 		return self::$authenticationController;
 	}

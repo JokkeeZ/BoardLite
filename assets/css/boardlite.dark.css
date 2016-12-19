@@ -51,16 +51,6 @@ textarea {
 	color: #FDFDFD !important;
 }
 
-.hover-text {
-	color: black !important;
-	background-color: black !important;
-}
-
-.hover-text:hover {
-	color: #FDFDFD !important;
-	background-color: #57616b !important;
-}
-
 pre {
 	color: #FDFDFD !important;
 	background-color: #57616b !important;

@@ -88,18 +88,16 @@ class ThreadController {
 	 * @return boolean or data feched into array.
 	 */
 	public function getStartPost($threadId) {
-		if (!is_numeric($threadId)) {
+		if (!is_numeric($threadId))
 			return false;
-		}
 
 		$stmt = BoardCore::getDatabase()
 			->prepare('SELECT id, title, content, posted, prefix, msg_id, img_url FROM threads WHERE msg_id = :id LIMIT 1');
 		
 		$stmt->execute([':id' => $threadId]);
 
-		if ($stmt) {
+		if ($stmt->rowCount() > 0)
 			return $stmt->fetch(PDO::FETCH_ASSOC);
-		}
 
 		return false;
 	}
@@ -112,9 +110,8 @@ class ThreadController {
 	 * @return boolean or data fetched into array.
 	 */
 	public function getReplys($threadId) {
-		if (!is_numeric($threadId)) {
+		if (!is_numeric($threadId))
 			return false;
-		}
 
 		$stmt = BoardCore::getDatabase()
 			->prepare('SELECT id, thread_id, content, posted, msg_id, img_url FROM replys 
@@ -147,4 +144,11 @@ class ThreadController {
 
 		return false;
 	}
+
+	public function deleteThread($id) {
+        $stmt = BoardCore::getDatabase()
+            ->prepare('DELETE FROM threads WHERE msg_id = :id LIMIT 1;DELETE FROM replys WHERE thread_id = :id;');
+
+        return $stmt->execute([':id' => $id]);
+    }
 }

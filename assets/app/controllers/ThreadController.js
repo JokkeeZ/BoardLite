@@ -1,4 +1,7 @@
-app.controller('ThreadController', function($scope, ajaxRequest, $routeParams, $sce, extensionProvider, $window) {
+app.controller('ThreadController', function($scope, ajaxRequest, $routeParams, $sce, extensionProvider, $window, User) {
+
+    $scope.isAdmin = User.isAdmin();
+
 	ajaxRequest.getThreadStartPost($routeParams.id).success(function(data) {
 		if (data.success) {
 			$scope.startPost = data.data;
@@ -15,6 +18,8 @@ app.controller('ThreadController', function($scope, ajaxRequest, $routeParams, $
 			$scope.startPost.fileExtension = fileType.extension;
 			
 			console.log('Startpost loaded');
+		} else {
+			$window.location.href = '#/404';
 		}
 	});
 

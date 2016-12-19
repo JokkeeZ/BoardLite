@@ -7,7 +7,7 @@
 					<form>
 						<div class="form-group">
 							<label for="fil" ng-bind="lang.File"></label>
-							<input type="file" file-model="myFile" class="form-control-static">
+							<input type="file" id="fil" file-model="myFile" class="form-control-static">
 						</div>
 						<div class="form-group" ng-class="messageEmpty === true ? 'has-error' : ''">
 							<label for="message" ng-bind="lang.Message"></label>
@@ -26,6 +26,9 @@
 			<div class="panel panel-default">
 				<div class="panel-heading" id="msg_{{startPost.msg_id}}">
 					<a href="javascript:void(0)" ng-bind-html="startPost.title"></a>
+					<p class="pull-right" ng-show="isAdmin">
+						<button class="btn btn-danger btn-xs" admin-delete-thread="{{startPost.msg_id}}">Delete thread</button>
+					</p>
 					<h6>{{lang.Id}}: <a ng-click="answer(startPost.msg_id)" style="cursor:pointer">{{ startPost.msg_id }}</a> &middot; {{lang.Posted}}: {{ startPost.posted }} &middot; {{lang.Anonymous}}</h6>
 				</div>
 				<div class="panel-body">

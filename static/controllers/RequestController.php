@@ -4,10 +4,6 @@
  * Provides functionality for filtering requests incase there is some script kiddies,
  * verifies for referer coming only from given url and also verifies that request is XMLHttpRequest if needed.
  * 
- * PROBABLY NOT THE SAFEST POSSIBLE WAY, SO USE THIS AT YOUR OWN RISK.
- * DON'T TAKE ANY LOGIN/REGISTER DATA WITH THIS, Atleast I don't suggest.
- * CAN BE USED AS BASE FOR SECURE STUFF, maybe..
- * 
  * @author JokkeeZ
  * @version 1.0
  * @copyright Copyright © 2016 JokkeeZ
@@ -45,7 +41,7 @@ class RequestController {
 	}
 
 	/**
-	 * Check's if array' value is isset and not empty accessed by,
+	 * Check's if array value isset and not empty accessed by,
 	 * POST and GET. POST for $post array, and GET for $get array. 
 	 * 
 	 * @param string $type POST/GET
@@ -64,7 +60,7 @@ class RequestController {
 	}
 
 	/**
-	 * Check's if array' value is isset accessed by,
+	 * Check's if array value isset accessed by,
 	 * POST and GET. POST for $post array, and GET for $get array.
 	 *
 	 * @param string $type POST/GET

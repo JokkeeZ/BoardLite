@@ -10,7 +10,7 @@
 					<form>
 						<div class="form-group">
 							<label for="fil" ng-bind="lang.File"></label>
-							<input type="file" file-model="myFile"/>
+							<input type="file" id="fil" file-model="myFile"/>
 						</div>
 						<div class="form-group">
 							<label for="title" ng-bind="lang.Title"></label>
@@ -33,6 +33,9 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<a href="#/thread/{{thread.msg_id}}/" ng-bind-html="thread.title"></a>
+					<p class="pull-right" ng-show="isAdmin">
+						<button class="btn btn-danger btn-xs" admin-delete-thread="{{thread.msg_id}}">Delete thread</button>
+					</p>
 					<h6>{{lang.Id}}: {{thread.msg_id}} &middot; {{lang.Posted}}: {{ thread.posted }} &middot; {{lang.Anonymous}}</h6>
 				</div>
 				<div class="panel-body">

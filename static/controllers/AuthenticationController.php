@@ -85,16 +85,4 @@ class AuthenticationController {
 		$stmt->execute([':name' => $name]);
 		return $stmt->rowCount() > 0;
 	}
-	
-	/**
-	 * Destroys session and clears $_SESSION array.
-	 *
-	 * @return void
-	 */
-	private function logout() {
-		$success = session_destroy();
-		$_SESSION = [];
-		
-		return $success;
-	}
 }

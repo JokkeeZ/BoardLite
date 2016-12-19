@@ -11,7 +11,8 @@ class FileController {
 	
 	/**
 	 * Uploads received file into server.
-	 *
+	 * TODO: EXIF removing from file (.JPG)
+     *
 	 * @return boolean
 	 */
 	public function upload() {
@@ -20,9 +21,13 @@ class FileController {
 		if (empty($_FILES['file']['name'])) return false;
 
 		// Let's create path for file.
-		$file = '../../uploads/' . basename($_FILES['file']['name']);
+		$file = $_SERVER['DOCUMENT_ROOT'] . '/uploads/' . basename($_FILES['file']['name']);
 		
 		// File already exists, so we can use already existing file without re-uploading it?
+        //
+        // ISSUE: If another file, let's say cat picture exists with name asd.png and user is uploading
+        // car picture with same name... yeah you can figure out.. It's bad.
+        // TODO: Maybe store files with random name? Only re-using same image is bit hard then.
 		if (file_exists($file)) return true;
 		
 		// File is bigger than allowed file size in PHP ini config.
@@ -34,12 +39,12 @@ class FileController {
 
 	private function getMaximumFileUploadSize() {
 		return min(
-			$this->convertSizetoBytes(ini_get('post_max_size')), 
-			$this->convertSizetoBytes(ini_get('upload_max_filesize'))
+			$this->convertSizeToBytes(ini_get('post_max_size')),
+			$this->convertSizeToBytes(ini_get('upload_max_filesize'))
 		);
 	}
 	
-	private function convertSizetoBytes($size) {
+	private function convertSizeToBytes($size) {
 		if (is_numeric($size)) {
 			return $size;
 		}

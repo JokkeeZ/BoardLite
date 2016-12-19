@@ -14,6 +14,26 @@ app.directive('fileModel', function($parse) {
 	}
 });
 
+app.directive('adminDeleteThread', function(ajaxRequest, $window, $rootScope) {
+	return {
+		restrict: 'A',
+		link: function(scope, element, attrs) {
+			element.bind('click', function() {
+				var threadId = attrs.adminDeleteThread;
+
+				var confirmation = confirm($rootScope.lang.Do_You_Want_Delete_Thread_Confirm);
+				if (confirmation) {
+                    ajaxRequest.deleteThread(threadId).then(function(response) {
+                        if (response.data.status) {
+                            $window.location.reload(true);
+                        }
+                    });
+				}
+			});
+		}
+	}
+});
+
 app.run(function($rootScope, ajaxRequest, User, $window) {
 	$rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
 		if (current.$$route.adminOnly) {
@@ -131,6 +151,12 @@ app.factory('ajaxRequest', function($http, $rootScope) {
 			formData.append('prefix', prefix);
 			formData.append('token', $rootScope.token);
 			return this.createPostRequest('static/ajax/threads/CreateThread.php', formData);
+		},
+		deleteThread: function(id) {
+			var formData = new FormData();
+			formData.append('id', id);
+			formData.append('token', $rootScope.token);
+			return this.createPostRequest('static/ajax/threads/DeleteThread.php', formData);
 		},
 		createBoard: function(name, desc, prefix, tag) {
 			var formData = new FormData();
