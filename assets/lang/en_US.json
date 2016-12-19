@@ -1,7 +1,7 @@
 {
 	"BoardLite_Lang":
 	{
-		"Version": 0.2,
+		"Version": 0.3,
 		"Name": "English",
 		"Author": "JokkeeZ"
 	},
@@ -52,6 +52,12 @@
 		"Edit": "Edit",
 		"Create": "Create",
 		"DeleteOrEdit": "Delete / Edit",
+		"Edit_Board": "Edit board",
+		"Update": "Update",
+		"Update_Success": "Successfully updated!",
+		"Update_Error": "Something went wrong while updating",
+		"Go_Back": "Go back",
+		"Tag": "Tag",
 
 		"Manage_Boards": "Manage Boards",
 		"Create_Boards": "Create Boards",

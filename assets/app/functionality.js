@@ -16,7 +16,7 @@ app.directive('fileModel', function($parse) {
 
 app.run(function($rootScope, ajaxRequest, User, $window) {
 	$rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
-		if (current.$$route.controller == 'AdminController') {
+		if (current.$$route.adminOnly) {
 			if (User.isLoggedIn() != true || User.isAdmin() != true) {
 				$window.location.href = "#/";
 			}
@@ -92,6 +92,16 @@ app.factory('ajaxRequest', function($http, $rootScope) {
 			formData.append('id', id);
 			formData.append('token', $rootScope.token);
 			return this.createPostRequest('static/ajax/boards/DeleteBoard.php', formData);
+		},
+		updateBoard: function(id, name, desc, prefix, tag) {
+			var formData = new FormData();
+			formData.append('id', id);
+			formData.append('name', name);
+			formData.append('desc', desc);
+			formData.append('prefix', prefix);
+			formData.append('tag', tag);
+			formData.append('token', $rootScope.token);
+			return this.createPostRequest('static/ajax/boards/UpdateBoard.php', formData);
 		},
 		createUser: function(name, pass) {
 			var formData = new FormData();

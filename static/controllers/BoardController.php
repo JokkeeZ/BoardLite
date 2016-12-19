@@ -46,7 +46,7 @@ class BoardController {
 	}
 	
 	/**
-	 * Deletes board with given id.
+	 * Deletes board with specific id.
 	 *
 	 * @param int $id
 	 * @return boolean
@@ -90,4 +90,27 @@ class BoardController {
 		$stmt->execute([':prefix' => $prefix]);
 		return $stmt->rowCount() > 0;
 	}
+
+    /**
+     * Updates board with specific id and given values.
+     *
+     * @param int $id
+     * @param string $name
+     * @param string $desc
+     * @param mixed $prefix
+     * @param string $tag
+     * @return boolean
+     */
+	public function updateBoard($id, $name, $desc, $prefix, $tag) {
+        $stmt = BoardCore::getDatabase()
+            ->prepare('UPDATE boards SET name = :name, description = :desc, prefix = :prefix, tag = :tag WHERE id = :id');
+
+        return $stmt->execute([
+            ':id' => $id,
+            ':name' => $name,
+            ':desc' => $desc,
+            ':prefix' => $prefix,
+            ':tag' => $tag
+        ]);
+    }
 }

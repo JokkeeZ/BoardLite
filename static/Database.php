@@ -22,7 +22,7 @@ class Database extends PDO {
 		try {
 			parent::__construct(sprintf($connString, $host, $name), $user, $pass);
 			$this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		} 
+		}
 		catch (PDOException $e) {
 			//DO SOMETHING WITH THIS EXCEPTION, MAYBE LOG IT IN THE FILE..?
 			//echo $e->getMessage();

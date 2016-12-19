@@ -52,6 +52,12 @@
 		"Edit": "",
 		"Create": "",
 		"DeleteOrEdit": "",
+		"Edit_Board": "",
+		"Update": "",
+		"Update_Success": "",
+		"Update_Error": "",
+		"Go_Back": "",
+		"Tag": "",
 
 		"Manage_Boards": "",
 		"Create_Boards": "",

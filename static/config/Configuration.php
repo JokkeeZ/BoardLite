@@ -46,9 +46,9 @@ $_CONFIG['app_url'] = 'http://localhost/';
  * 2. Add that 'lang-lang' here, without .json ending.
  * 3. Good to go.
  */
-$_CONFIG['app_lang'] = 'fi_FI';
+$_CONFIG['app_lang'] = 'en_US';
 
 /**
  * Set's cost for user password hash, created in registration.
  */
-$_CONFIG['app_hash_cost'] = 10;
+$_CONFIG['app_hash_cost'] = 10; 

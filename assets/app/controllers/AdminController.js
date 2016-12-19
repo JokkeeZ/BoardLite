@@ -5,11 +5,13 @@ app.controller('AdminController', function($scope, User, ajaxRequest) {
 	
 	$scope.deleteBoard = function(id) {
 		ajaxRequest.deleteBoard(id).success(function(response) {
-			for (var i = 0; i < $scope.boards.length; i++) {
-				if ($scope.boards[i].id == id) {
-					$scope.boards.splice(i);
-					break;
-				}
+			if (response.status) {
+                for (var i = 0; i < $scope.boards.length; i++) {
+                    if ($scope.boards[i].id == id) {
+                        $scope.boards.splice(i);
+                        break;
+                    }
+                }
 			}
 		});
 	};

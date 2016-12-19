@@ -1,7 +1,7 @@
 {
 	"BoardLite_Lang":
 	{
-		"Version": 0.2,
+		"Version": 0.3,
 		"Name": "Suomi",
 		"Author": "JokkeeZ"
 	},
@@ -52,6 +52,12 @@
 		"Edit": "Muokkaa",
 		"Create": "Luo",
 		"DeleteOrEdit": "Poista / Muokkaa",
+		"Edit_Board": "Muokkaa lautaa",
+		"Update": "Päivitä",
+		"Update_Success": "Päivitetty onnistuneesti!",
+		"Update_Error": "Jotain meni päivityksessä pieleen",
+		"Go_Back": "Palaa takaisin",
+		"Tag": "Tagi",
 
 		"Manage_Boards": "Hallinnoi lautoja",
 		"Create_Boards": "Luo lautoja",

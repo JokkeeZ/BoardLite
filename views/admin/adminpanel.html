@@ -10,6 +10,7 @@
 						<th ng-bind="lang.Name"></th>
 						<th ng-bind="lang.Prefix"></th>
 						<th ng-bind="lang.Description"></th>
+						<th ng-bind="lang.Tag"></th>
 						<th ng-bind="lang.DeleteOrEdit"></th>
 					</tr>
 				</thead>
@@ -19,9 +20,10 @@
 						<td ng-bind="board.name"></td>
 						<td ng-bind="board.prefix"></td>
 						<td ng-bind="board.description"></td>
+						<td ng-bind="board.tag"></td>
 						<td>
-							<button type="button" class="btn btn-primary btn-xs" ng-click="deleteBoard(board.id)" ng-bind="lang.Delete"></button>
-							<button type="button" class="btn btn-primary btn-xs btn-disabled" disabled ng-bind="lang.Edit"></button>	
+							<button type="button" class="btn btn-danger btn-xs" ng-click="deleteBoard(board.id)" ng-bind="lang.Delete"></button>
+							<a href="#/adminpanel/edit/{{board.id}}/" class="btn btn-success btn-xs" ng-bind="lang.Edit"></a>
 						</td>
 					</tr>
 				</tbody>
@@ -32,19 +34,19 @@
 			<form>
 				<div class="form-group" ng-class="nameEmpty === true ? 'has-error' : ''">
 					<label for="name" ng-bind="lang.Name"></label>
-					<input type="text" class="form-control" ng-model="name" placeholder="{{ lang.Name_for_board }}">
+					<input type="text" class="form-control" id="name" ng-model="name" placeholder="{{ lang.Name_for_board }}">
 				</div>
 				<div class="form-group" ng-class="prefixEmpty === true ? 'has-error' : ''">
-					<label for="name" ng-bind="lang.Prefix"></label>
-					<input type="text" class="form-control" ng-model="prefix" placeholder="{{ lang.Prefix_for_board }}">
+					<label for="prefix" ng-bind="lang.Prefix"></label>
+					<input type="text" class="form-control" id="prefix" ng-model="prefix" placeholder="{{ lang.Prefix_for_board }}">
 				</div>
 				<div class="form-group" ng-class="descEmpty === true ? 'has-error' : ''">
-					<label for="name" ng-bind="lang.Description"></label>
-					<input type="text" class="form-control" ng-model="desc" placeholder="{{ lang.Desc_for_board }}">
+					<label for="desc" ng-bind="lang.Description"></label>
+					<input type="text" class="form-control" id="desc" ng-model="desc" placeholder="{{ lang.Desc_for_board }}">
 				</div>
 				<div class="form-group" ng-class="tagEmpty === true ? 'has-error' : ''">
-					<label for="name">Tag</label>
-					<select ng-model="tag" class="form-control">
+					<label for="tag">Tag</label>
+					<select ng-model="tag" id="tag" class="form-control">
 						<option value="NSFW" ng-bind="lang.NSFW"></option>
 						<option value="SFW" ng-bind="lang.SFW"></option>
 					</select>
