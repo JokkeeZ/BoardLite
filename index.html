@@ -26,7 +26,7 @@
 		<nav class="navbar navbar-inverse" ng-controller="NavbarController">
 			<div class="container-fluid">
 				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-collapse-navbar">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" ng-click="isCollapsed = !isCollapsed">
 						<span class="sr-only">Toggle navigation</span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
@@ -35,7 +35,7 @@
 					<a class="navbar-brand" href="#/" ng-bind="appName"></a>
 				</div>
 
-				<div class="collapse navbar-collapse" id="bs-collapse-navbar">
+				<div class="collapse navbar-collapse" ng-class="isCollapsed ? 'collapse' : 'in'">
 					<ul class="nav navbar-nav">
 						<li><a href="#/" ng-bind="lang.Back_index"></a></li>
 						<li><a href="#/rules" ng-bind="lang.Rules"></a></li>
@@ -59,17 +59,19 @@
 		<script src="assets/libs/angular-cookies.min.js"></script>
 
 		<!-- Custom AngularJS Application files. -->
-		<script src="assets/app/application.js"></script>
-		<script src="assets/app/route.js"></script>
-		<script src="assets/app/functionality.js"></script>
-		<script src="assets/app/controllers/NavbarController.js"></script>
-		<script src="assets/app/controllers/BoardController.js"></script>
-		<script src="assets/app/controllers/BoardListController.js"></script>
-		<script src="assets/app/controllers/ThreadController.js"></script>
-		<script src="assets/app/controllers/RuleController.js"></script>
-		<script src="assets/app/controllers/RegisterController.js"></script>
-		<script src="assets/app/controllers/LoginController.js"></script>
-		<script src="assets/app/controllers/AdminController.js"></script>
-		<script src="assets/app/controllers/BoardEditController.js"></script>
+		<script src="app/application.js"></script>
+		<script src="app/route.js"></script>
+		<script src="app/functionality.js"></script>
+		<script src="app/directives/FileModelDirective.js"></script>
+		<script src="app/directives/AdminDeleteThreadDirective.js"></script>
+		<script src="app/controllers/NavbarController.js"></script>
+		<script src="app/controllers/BoardController.js"></script>
+		<script src="app/controllers/BoardListController.js"></script>
+		<script src="app/controllers/ThreadController.js"></script>
+		<script src="app/controllers/RuleController.js"></script>
+		<script src="app/controllers/RegisterController.js"></script>
+		<script src="app/controllers/LoginController.js"></script>
+		<script src="app/controllers/AdminController.js"></script>
+		<script src="app/controllers/BoardEditController.js"></script>
 	</body>
 </html>

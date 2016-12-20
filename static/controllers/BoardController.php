@@ -4,10 +4,10 @@
  * Class used mainly for getting and updating global message ID and boards.
  *
  * @author JokkeeZ
- * @version 1.0
+ * @version 1.1
  * @copyright Copyright © 2016 JokkeeZ
  */
-class BoardController {
+class BoardController extends Controller {
 	
 	/**
 	 * Updates message count by adding number 1 to it.
@@ -16,7 +16,7 @@ class BoardController {
 	 * @return void
 	 */
 	public function updateMessageCount() {
-		BoardCore::getDatabase()
+		$this->getDatabase()
 			->prepare('UPDATE data SET message_count = message_count + 1')
 			->execute();
 	}
@@ -27,8 +27,8 @@ class BoardController {
 	 *
 	 * @return int
 	 */
-	public function getMessageCount() {
-		return BoardCore::getDatabase()
+	public function getMessageCount():int {
+		return $this->getDatabase()
 			->query('SELECT message_count FROM data')
 			->fetch(PDO::FETCH_ASSOC)['message_count'];
 	}
@@ -39,8 +39,8 @@ class BoardController {
 	 *
 	 * @return $mixed array
 	 */
-	public function getBoards() {
-		$stmt = BoardCore::getDatabase()->prepare('SELECT * FROM boards');
+	public function getBoards():array {
+		$stmt = $this->getDatabase()->prepare('SELECT * FROM boards');
 		$stmt->execute();
 		return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
@@ -51,8 +51,8 @@ class BoardController {
 	 * @param int $id
 	 * @return boolean
 	 */
-	public function deleteBoard($id) {
-		$stmt = BoardCore::getDatabase()->prepare('DELETE FROM boards WHERE id = :id LIMIT 1');
+	public function deleteBoard($id):bool {
+		$stmt = $this->getDatabase()->prepare('DELETE FROM boards WHERE id = :id LIMIT 1');
 		return $stmt->execute([':id' => $id]);
 	}
 	
@@ -65,13 +65,12 @@ class BoardController {
 	 * @param string $tag
 	 * @return boolean
 	 */
-	public function createBoard($name, $desc, $prefix, $tag) {
-		
+	public function createBoard($name, $desc, $prefix, $tag):bool {
 		if ($this->prefixExists($prefix)) {
 			return false;
 		}
 			
-		$stmt = BoardCore::getDatabase()
+		$stmt = $this->getDatabase()
 			->prepare('INSERT INTO boards (name, description, prefix, tag) VALUES (:name, :desc, :prefix, :tag)');
 		
 		return $stmt->execute([':name' => $name, ':desc' => $desc, ':prefix' => $prefix, ':tag' => $tag]);
@@ -83,8 +82,8 @@ class BoardController {
 	 * @param string $prefix
 	 * @return boolean
 	 */
-	public function prefixExists($prefix) {
-		$stmt = BoardCore::getDatabase()
+	public function prefixExists($prefix):bool {
+		$stmt = $this->getDatabase()
 			->prepare('SELECT prefix FROM boards WHERE prefix = :prefix LIMIT 1');
 		
 		$stmt->execute([':prefix' => $prefix]);
@@ -101,8 +100,8 @@ class BoardController {
      * @param string $tag
      * @return boolean
      */
-	public function updateBoard($id, $name, $desc, $prefix, $tag) {
-        $stmt = BoardCore::getDatabase()
+	public function updateBoard($id, $name, $desc, $prefix, $tag):bool {
+        $stmt = $this->getDatabase()
             ->prepare('UPDATE boards SET name = :name, description = :desc, prefix = :prefix, tag = :tag WHERE id = :id');
 
         return $stmt->execute([

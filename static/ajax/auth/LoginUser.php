@@ -4,8 +4,6 @@ $request->isCorrectReferer() or die;
 
 $request->isXMLHttpRequest() or die;
 
-$request->loadPostRequest();
-
 $request->verifyToken() or die;
 
 $request->issetAndNotEmpty('POST', 'name') or die;

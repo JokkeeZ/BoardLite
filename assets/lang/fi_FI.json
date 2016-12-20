@@ -64,6 +64,10 @@
 		"Create_Boards": "Luo lautoja",
 		"Name_for_board": "Nimi laudalle",
 		"Prefix_for_board": "Tunniste laudalle",
-		"Desc_for_board": "Kuvaus laudalle"
+		"Desc_for_board": "Kuvaus laudalle",
+
+		"Delete_reply": "Poista vastaus",
+		"Delete_thread": "Poista lanka",
+		"IP": "IP-osoite"
 	}
 }

@@ -3,12 +3,10 @@
 // Is request coming from this website?
 $request->isCorrectReferer() or die;
 
-// Load dem $_GET's
-$request->loadGetRequest();
 $request->issetAndNotEmpty('GET', 'prefix') or die;
 
 $data = $thread->getThreads($request->get['prefix']);
-if ($data) {
+if (!empty($data)) {
 	echo json_encode([
 		'data' => $data,
 		'success' => true

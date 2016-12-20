@@ -64,6 +64,10 @@
 		"Create_Boards": "Create Boards",
 		"Name_for_board": "Name for board",
 		"Prefix_for_board": "Prefix for board",
-		"Desc_for_board": "Description for board"
+		"Desc_for_board": "Description for board",
+
+		"Delete_reply": "Delete reply",
+		"Delete_thread": "Delete thread",
+		"IP": "IP-Address"
 	}
 }

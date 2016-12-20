@@ -6,9 +6,6 @@ $request->isCorrectReferer() or die;
 // Is request XMLHttpRequest?
 $request->isXMLHttpRequest() or die;
 
-// Let's filter $_POST values, *sigh* script kids.
-$request->loadPostRequest();
-
 $request->verifyToken() or die;
 
 // Does $_POST contain values we need?

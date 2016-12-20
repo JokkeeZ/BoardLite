@@ -27,7 +27,8 @@
 				<div class="panel-heading" id="msg_{{startPost.msg_id}}">
 					<a href="javascript:void(0)" ng-bind-html="startPost.title"></a>
 					<p class="pull-right" ng-show="isAdmin">
-						<button class="btn btn-danger btn-xs" admin-delete-thread="{{startPost.msg_id}}">Delete thread</button>
+						<button class="btn btn-danger btn-xs">{{lang.IP}}: {{startPost.ip}}</button>
+						<button class="btn btn-danger btn-xs" admin-delete-thread="{{startPost.msg_id}}" ng-bind="lang.Delete_thread"></button>
 					</p>
 					<h6>{{lang.Id}}: <a ng-click="answer(startPost.msg_id)" style="cursor:pointer">{{ startPost.msg_id }}</a> &middot; {{lang.Posted}}: {{ startPost.posted }} &middot; {{lang.Anonymous}}</h6>
 				</div>
@@ -55,6 +56,10 @@
 		<div class="col-md-12" ng-repeat="reply in replys">
 			<div class="panel panel-default" id="msg_{{reply.msg_id}}">
 				<div class="panel-heading">
+					<p class="pull-right" ng-show="isAdmin">
+						<button class="btn btn-danger btn-xs">{{lang.IP}}: {{reply.ip}}</button>
+						<button class="btn btn-danger btn-xs" disabled ng-bind="lang.Delete_reply"></button>
+					</p>
 					<h6>{{lang.Id}}: <a ng-click="answer(reply.msg_id)" style="cursor:pointer">{{ reply.msg_id }}</a> &middot; {{lang.Posted}}: {{ reply.posted }} &middot; {{lang.Anonymous}}</h6>
 				</div>
 				<div class="panel-body">

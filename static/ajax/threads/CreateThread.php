@@ -6,12 +6,8 @@ $request->isCorrectReferer() or die;
 // Is request XMLHttpRequest?
 $request->isXMLHttpRequest() or die;
 
-// Let's filter $_POST values, *sigh* script kids.
-$request->loadPostRequest();
-
 $request->verifyToken() or die;
 
-// Title content can be empty, only newgays using titles :--D
 $request->requestIsSet('POST', 'title') or die;
 
 // Cannot be empty, we need dat message and prefix.

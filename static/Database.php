@@ -4,28 +4,23 @@
  * Simple Database class using PDO.
  * 
  * @author JokkeeZ
- * @version 1.0
+ * @version 1.1
  * @copyright Copyright © 2016 JokkeeZ
  */
 class Database extends PDO {
 	
 	/**
 	 * Initializes a new instance of Database with given values.
-	 * 
-	 * @param string $connString
-	 * @param string $host
-	 * @param string $name
-	 * @param string $user
-	 * @param string $pass
 	 */
-	public function __construct($connString, $host, $name, $user, $pass) {
+	public function __construct() {
 		try {
-			parent::__construct(sprintf($connString, $host, $name), $user, $pass);
+		    global $_CONFIG;
+			parent::__construct(sprintf($_CONFIG['db_conn_str'], $_CONFIG['db_host'], $_CONFIG['db_name']), $_CONFIG['db_user'], $_CONFIG['db_pass']);
 			$this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		}
 		catch (PDOException $e) {
-			//DO SOMETHING WITH THIS EXCEPTION, MAYBE LOG IT IN THE FILE..?
-			//echo $e->getMessage();
+		    // TODO: THIS IS ONLY USED IN DEVELOPMENT, DO NOT SHOW EXCEPTIONS ON ACTUAL APP.
+            echo $e->getMessage();
 		}
 	}
 }

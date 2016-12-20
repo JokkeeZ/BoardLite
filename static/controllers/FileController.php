@@ -4,10 +4,10 @@
  * Class used for uploading files into server, received via thread creation/reply adding request.
  *
  * @author JokkeeZ
- * @version 1.0
+ * @version 1.1
  * @copyright Copyright © 2016 JokkeeZ
  */
-class FileController {
+class FileController extends Controller {
 	
 	/**
 	 * Uploads received file into server.
@@ -15,7 +15,7 @@ class FileController {
      *
 	 * @return boolean
 	 */
-	public function upload() {
+	public function upload():bool {
 		
 		// There is no file set with request so let's skip this stuff.
 		if (empty($_FILES['file']['name'])) return false;
@@ -37,13 +37,24 @@ class FileController {
 		return move_uploaded_file($_FILES['file']['tmp_name'], $file);
 	}
 
+    /**
+     * Get's post_max_size and upload_max_filesize values and selects smallest number from them.
+     *
+     * @return mixed
+     */
 	private function getMaximumFileUploadSize() {
 		return min(
 			$this->convertSizeToBytes(ini_get('post_max_size')),
 			$this->convertSizeToBytes(ini_get('upload_max_filesize'))
 		);
 	}
-	
+
+    /**
+     * Converts given value into bytes.
+     *
+     * @param $size
+     * @return int|string
+     */
 	private function convertSizeToBytes($size) {
 		if (is_numeric($size)) {
 			return $size;
