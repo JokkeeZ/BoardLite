@@ -1,4 +1,4 @@
-<?php defined('APP') or die();
+<?php defined('APP') or die;
 
 // ADD SOME OWN RULES, THESE ARE JUST PLACEHOLDERS, ADD AS MANY AS YOU NEED.
 $_RULES = [

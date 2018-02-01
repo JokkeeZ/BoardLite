@@ -1,8 +1,9 @@
-// TODO: Incase admin changes prefix on adminpanel threads in that board are not loaded, so in future load and create threads by board id.
-app.controller('BoardController', function($scope, $routeParams, ajaxRequest, $window, extensionProvider, $sce, User) {
-	//$scope.prefix = $routeParams.prefix;
+// TODO: Incase admin changes prefix on adminpanel, threads on that board are not loaded.
+// In future load and create threads by board id.
+app.controller('BoardController', function($scope, $routeParams, Ajax, $window, extensionProvider, $sce, User) {
+
 	$scope.isAdmin = User.isAdmin();
-	ajaxRequest.getBoards().success(function(data) {
+	Ajax.getBoards().success(function(data) {
 		var exists = false;
 		angular.forEach(data, function(o) {
 			if (o.prefix == $routeParams.prefix) {
@@ -16,10 +17,8 @@ app.controller('BoardController', function($scope, $routeParams, ajaxRequest, $w
 		}
 	});
 
-	ajaxRequest.getThreads($routeParams.prefix).success(function(response) {
-		if (!response.success) {
-			return;
-		}
+	Ajax.getThreads($routeParams.prefix).success(function(response) {
+		if (!response.success) return;
 
 		angular.forEach(response.data, function(item, idx) {
 			response.data[idx].fileType = extensionProvider.getFileType(item.img_url);
@@ -43,12 +42,13 @@ app.controller('BoardController', function($scope, $routeParams, ajaxRequest, $w
 			return;
 		}
 		
-		ajaxRequest.createThread($scope.myFile, $scope.title, $scope.message, $routeParams.prefix).success(function(data) {
+		Ajax.createThread($scope.myFile, $scope.title, $scope.message, $routeParams.prefix).success(function(data) {
 			if (data.success) {
 				console.log('Thread created with id: ' + data.data);
 				$window.location.href = '#/thread/' + data.data + '/';
 				$scope.messageEmpty = false;
 			}
+
 			console.log(data);
 		});
 	};

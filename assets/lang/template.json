@@ -51,19 +51,21 @@
 		"Delete": "",
 		"Edit": "",
 		"Create": "",
-		"DeleteOrEdit": "",
+		"Delete_Or_Edit": "",
 		"Edit_Board": "",
 		"Update": "",
 		"Update_Success": "",
 		"Update_Error": "",
 		"Go_Back": "",
 		"Tag": "",
-		"Do_You_Want_Delete_Thread_Confirm": "",
+		"Delete_Thread_Confirm": "",
 
 		"Manage_Boards": "",
 		"Create_Boards": "",
 		"Name_for_board": "",
 		"Prefix_for_board": "",
-		"Desc_for_board": ""
+		"Desc_for_board": "",
+
+		"View": ""
 	}
 }

@@ -1,4 +1,4 @@
-<?php defined('APP') or die();
+<?php defined('APP') or die;
 
 $_CONFIG = [];
 
@@ -34,11 +34,6 @@ $_CONFIG['db_conn_str'] = 'mysql:host=%s;dbname=%s';
 $_CONFIG['app_name'] = 'BoardLite';
 
 /**
- * Used for verifying that request is coming from this website.
- */
-$_CONFIG['app_url'] = 'http://localhost/';
-
-/**
  * Set's language for your application, available languages so far: en_US, fi_FI
  *
  * You can always add your own language:
@@ -51,4 +46,4 @@ $_CONFIG['app_lang'] = 'en_US';
 /**
  * Set's cost for user password hash, created in registration.
  */
-$_CONFIG['app_hash_cost'] = 10; 
+$_CONFIG['app_hash_cost'] = 10;

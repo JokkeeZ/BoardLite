@@ -1,17 +1,15 @@
-app.controller('LoginController', function($scope, ajaxRequest, User, $window) {
+app.controller('LoginController', function($scope, Ajax, User, $window) {
 	$scope.loginUser = function() {
 		$scope.nameEmpty = ($scope.name === undefined);
 		$scope.passEmpty = ($scope.pass === undefined);
 		
-		if ($scope.passEmpty || $scope.nameEmpty) {
-			return;
-		}
+		if ($scope.passEmpty || $scope.nameEmpty) return;
 
-		ajaxRequest.loginUser($scope.name, $scope.pass).success(function(response) {
-			$scope.success = response.status;
+		Ajax.loginUser($scope.name, $scope.pass).success(function(result) {
+			$scope.success = result.success;
 
 			if ($scope.success) {
-				User.set(response.user);
+				User.set(result.user);
 				$window.location.href = '#/';
 				$window.location.reload(true);
 			}

@@ -51,14 +51,14 @@
 		"Delete": "Delete",
 		"Edit": "Edit",
 		"Create": "Create",
-		"DeleteOrEdit": "Delete / Edit",
+		"Delete_Or_Edit": "Delete / Edit",
 		"Edit_Board": "Edit board",
 		"Update": "Update",
 		"Update_Success": "Successfully updated!",
 		"Update_Error": "Something went wrong while updating",
 		"Go_Back": "Go back",
 		"Tag": "Tag",
-		"Do_You_Want_Delete_Thread_Confirm": "Do you really want to delete this thread?",
+		"Delete_Thread_Confirm": "Do you really want to delete this thread?",
 
 		"Manage_Boards": "Manage Boards",
 		"Create_Boards": "Create Boards",
@@ -68,6 +68,8 @@
 
 		"Delete_reply": "Delete reply",
 		"Delete_thread": "Delete thread",
-		"IP": "IP-Address"
+		"IP": "IP-Address",
+
+		"View": "View"
 	}
 }

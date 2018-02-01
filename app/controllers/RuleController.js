@@ -1,5 +1,5 @@
-app.controller('RuleController', function($scope, ajaxRequest) {
-	ajaxRequest.getAppRules().success(function(data) {
-		$scope.rules = data;
+app.controller('RuleController', function($scope, Ajax) {
+	Ajax.getAppRules().success(function(result) {
+		$scope.rules = result;
 	});
 });

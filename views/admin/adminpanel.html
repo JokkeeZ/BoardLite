@@ -11,7 +11,8 @@
 						<th ng-bind="lang.Prefix"></th>
 						<th ng-bind="lang.Description"></th>
 						<th ng-bind="lang.Tag"></th>
-						<th ng-bind="lang.DeleteOrEdit"></th>
+						<th ng-bind="lang.Delete_Or_Edit"></th>
+						<th ng-bing="lang.View"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -24,6 +25,9 @@
 						<td>
 							<button type="button" class="btn btn-danger btn-xs" ng-click="deleteBoard(board.id)" ng-bind="lang.Delete"></button>
 							<a href="#/adminpanel/edit/{{board.id}}/" class="btn btn-success btn-xs" ng-bind="lang.Edit"></a>
+						</td>
+						<td>
+							<a href="#/board/{{board.prefix}}/" class="btn btn-success btn-xs btn-block" ng-bind="lang.View"></a>
 						</td>
 					</tr>
 				</tbody>

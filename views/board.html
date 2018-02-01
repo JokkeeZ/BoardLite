@@ -3,7 +3,8 @@
 	<h4 class="text-center" ng-bind="boardData.description"></h4><hr/>
 
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-10 col-md-offset-1">
+
 			<div class="panel panel-default">
 				<div class="panel-heading" ng-bind="lang.Create_thread"></div>
 				<div class="panel-body">
@@ -26,18 +27,20 @@
 					</form>
 				</div>
 			</div>
+
 		</div>
 	</div>
 	<div class="row" ng-show="threads.length > 0">
-		<div class="col-md-12" ng-repeat="thread in threads">
+		<div class="col-md-10 col-md-offset-1" ng-repeat="thread in threads">
+
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<a href="#/thread/{{thread.msg_id}}/" ng-bind-html="thread.title"></a>
 					<p class="pull-right" ng-show="isAdmin">
-						<button class="btn btn-danger btn-xs">IP: {{thread.ip}}</button>
-						<button class="btn btn-danger btn-xs" admin-delete-thread="{{thread.msg_id}}">Delete thread</button>
+						<button class="btn btn-danger btn-xs">{{lang.IP}}: {{thread.ip}}</button>
+						<button class="btn btn-danger btn-xs" admin-delete-thread="{{thread.msg_id}}">{{lang.Delete_thread}}</button>
 					</p>
-					<h6>{{lang.Id}}: {{thread.msg_id}} &middot; {{lang.Posted}}: {{ thread.posted }} &middot; {{lang.Anonymous}}</h6>
+					<h6><text style="color:red">{{thread.locked === '1' ? '[LOCKED]' : ''}}</text> &middot; {{lang.Id}}: {{thread.msg_id}} &middot; {{lang.Posted}}: {{ thread.posted }} &middot; {{lang.Anonymous}}</h6>
 				</div>
 				<div class="panel-body">
 					<div class="row">
@@ -57,10 +60,12 @@
 					</div>
 				</div>
 			</div>
+
 		</div>
 	</div>
 	<div class="row" ng-hide="threads.length > 0">
-		<div class="col-md-12">
+		<div class="col-md-10 col-md-offset-1">
+
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<p ng-bind="lang.No_threads_on_board"></p>
@@ -69,6 +74,7 @@
 					<p ng-bind="lang.No_threads_create_maybe"></p>
 				</div>
 			</div>
+
 		</div>
 	</div>
 </div>

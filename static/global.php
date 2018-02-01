@@ -3,24 +3,58 @@
 // Used for verifying that files are accessed only via this file.
 define('APP', '1');
 
-// Start cookie session, used for saving token.
+define('FILE_PATH', dirname(__DIR__) . '\\uploads\\');
+define('LANG_PATH', dirname(__DIR__) . '\\assets\\lang\\');
+
 session_start();
 
 require 'config/Configuration.php';
+require 'config/Rules.php';
+
+require 'Logger.php';
+
 require 'Database.php';
+
 require 'controllers/Controller.php';
 require 'controllers/BoardController.php';
 require 'controllers/FileController.php';
 require 'controllers/ThreadController.php';
-require 'controllers/RequestController.php';
 require 'controllers/LanguageController.php';
 require 'controllers/AuthenticationController.php';
-require 'config/Rules.php';
 
-// Set some global variables used in /ajax/ folder on requests.
-$request = new RequestController();
-$board = new BoardController();
-$thread = new ThreadController();
-$file = new FileController();
-$lang = new LanguageController();
-$auth = new AuthenticationController();
+require 'IRequest.php';
+require 'JsonResponse.php';
+
+require 'requests/GetAppConfigRequest.php';
+require 'requests/GetLanguageRequest.php';
+require 'requests/GetRulesRequest.php';
+
+require 'requests/auth/CreateUserRequest.php';
+require 'requests/auth/LoginUserRequest.php';
+require 'requests/auth/LogoutUserRequest.php';
+
+require 'requests/boards/CreateBoardRequest.php';
+require 'requests/boards/DeleteBoardRequest.php';
+require 'requests/boards/GetBoardsRequest.php';
+require 'requests/boards/UpdateBoardRequest.php';
+
+require 'requests/threads/AddReplyRequest.php';
+require 'requests/threads/CreateThreadRequest.php';
+require 'requests/threads/DeleteThreadRequest.php';
+require 'requests/threads/GetThreadRepliesRequest.php';
+require 'requests/threads/GetThreadStartPostRequest.php';
+require 'requests/threads/GetThreadsRequest.php';
+require 'requests/threads/LockThreadRequest.php';
+
+require 'RequestHandler.php';
+
+RequestHandler::initialize();
+
+if (!empty($_POST)) {
+	RequestHandler::handle_request($_POST['request'], $_POST);
+	return;
+}
+else if (!empty($_GET)) {
+	RequestHandler::handle_request($_GET['request'], $_GET);
+	return;
+}

@@ -1,9 +1,14 @@
 .hover-text {
-    color: black;
-    background-color: black
+	color: black;
+	background-color: black;
 }
 
 .hover-text:hover {
-    background-color: black !important;
-    color: #FDFDFD !important
+	background-color: black !important;
+	color: #FDFDFD !important;
+}
+
+.big {
+	width: 30%;
+	height: 30%;
 }

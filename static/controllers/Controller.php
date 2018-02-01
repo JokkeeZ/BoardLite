@@ -1,4 +1,4 @@
-<?php
+<?php defined('APP') or die;
 
 /**
  * Simple abstract class for easy database access for controllers and other often used functionality.
@@ -9,26 +9,25 @@
  */
 abstract class Controller {
 
-    /**
-     * Get's $_CONFIG array without defining global every single time.
-     * @var array
-     */
-    protected $config = [];
+	/**
+	 * Get's $_CONFIG array without defining global every single time.
+	 */
+	protected $config = [];
 
-    /**
-     * Initializes an new instance of Controller class with default values.
-     */
-    public function __construct() {
-        global $_CONFIG;
-        $this->config = $_CONFIG;
-    }
+	/**
+	 * Initializes a new instance of the Controller class, with default values.
+	 */
+	public function __construct() {
+		global $_CONFIG;
+		$this->config = $_CONFIG;
+	}
 
-    /**
-     * Get's an new instance of database class.
-     *
-     * @return Database
-     */
-    protected function getDatabase():Database {
-        return new Database();
-    }
+	/**
+	 * Get's a new instance of the Database class.
+	 *
+	 * @return Database
+	 */
+	protected function get_database():Database {
+		return new Database();
+	}
 }

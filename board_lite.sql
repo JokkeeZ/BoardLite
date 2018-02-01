@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.7.4
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2016 at 08:09 PM
--- Server version: 10.1.19-MariaDB
--- PHP Version: 7.0.13
+-- Generation Time: Feb 01, 2018 at 06:02 PM
+-- Server version: 10.1.29-MariaDB
+-- PHP Version: 7.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -64,10 +66,10 @@ INSERT INTO `data` (`message_count`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `replys`
+-- Table structure for table `replies`
 --
 
-CREATE TABLE `replys` (
+CREATE TABLE `replies` (
   `id` int(11) UNSIGNED NOT NULL,
   `thread_id` int(11) UNSIGNED NOT NULL,
   `content` text NOT NULL,
@@ -91,7 +93,8 @@ CREATE TABLE `threads` (
   `prefix` varchar(255) NOT NULL,
   `msg_id` int(11) UNSIGNED NOT NULL,
   `img_url` varchar(255) NOT NULL,
-  `ip` varchar(255) NOT NULL
+  `ip` varchar(255) NOT NULL,
+  `locked` enum('0','1') NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -120,9 +123,9 @@ ALTER TABLE `boards`
   ADD UNIQUE KEY `name` (`name`);
 
 --
--- Indexes for table `replys`
+-- Indexes for table `replies`
 --
-ALTER TABLE `replys`
+ALTER TABLE `replies`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `msg_id` (`msg_id`);
 
@@ -148,22 +151,27 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `boards`
 --
 ALTER TABLE `boards`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
--- AUTO_INCREMENT for table `replys`
+-- AUTO_INCREMENT for table `replies`
 --
-ALTER TABLE `replys`
+ALTER TABLE `replies`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `threads`
 --
 ALTER TABLE `threads`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

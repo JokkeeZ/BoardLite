@@ -14,7 +14,7 @@
 		"Back_index": "Etusivulle",
 		"Rules": "Säännöt",
 		"Rules_desc": "Säännöt tämän nettisivun käyttämiseen.",
-		"Rules_desc_small": "Käyttämällä tätä nettisivua, hyväksyt ja ymmärrät nämä säännöt.",
+		"Rules_desc_small": "Käyttämällä tätä nettisivua (\"sivua\"), hyväksyt ja ymmärrät nämä säännöt.",
 		"Create_thread": "Luo uusi lanka",
 		"File": "Tiedosto",
 		"Title": "Otsikko",
@@ -34,8 +34,8 @@
 		"No_threads_create_maybe": "Ehkä sinun tulisi luoda uusi lanka tälle laudalle?",
 		"SFW": "Turvallinen työajalla",
 		"NSFW": "Ei turvallinen työajalla",
-		"Register": "Rekisteröinti",
-		"Login": "Kirjautuminen",
+		"Register": "Luo käyttäjätunnus",
+		"Login": "Kirjaudu",
 		"Logout": "Kirjaudu ulos",
 		"Already_have_an_account": "Onko sinulla jo käyttäjätunnus?",
 		"Register_success": "Rekisteröinti onnistui! Voit nyt kirjautua sisälle.",
@@ -51,14 +51,14 @@
 		"Delete": "Poista",
 		"Edit": "Muokkaa",
 		"Create": "Luo",
-		"DeleteOrEdit": "Poista / Muokkaa",
+		"Delete_Or_Edit": "Poista / Muokkaa",
 		"Edit_Board": "Muokkaa lautaa",
 		"Update": "Päivitä",
 		"Update_Success": "Päivitetty onnistuneesti!",
 		"Update_Error": "Jotain meni päivityksessä pieleen",
 		"Go_Back": "Palaa takaisin",
 		"Tag": "Tagi",
-		"Do_You_Want_Delete_Thread_Confirm": "Haluatko oikeasti poistaa tämän langan?",
+		"Delete_Thread_Confirm": "Haluatko oikeasti poistaa tämän langan?",
 
 		"Manage_Boards": "Hallinnoi lautoja",
 		"Create_Boards": "Luo lautoja",
@@ -68,6 +68,8 @@
 
 		"Delete_reply": "Poista vastaus",
 		"Delete_thread": "Poista lanka",
-		"IP": "IP-osoite"
+		"IP": "IP-osoite",
+
+		"View": "View"
 	}
 }

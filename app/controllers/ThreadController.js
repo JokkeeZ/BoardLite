@@ -1,75 +1,105 @@
-app.controller('ThreadController', function($scope, ajaxRequest, $routeParams, $sce, extensionProvider, $window, User) {
+app.controller('ThreadController', function($scope, Ajax, $routeParams, $sce, extensionProvider, $window, User) {
+	$scope.isAdmin = User.isAdmin();
 
-    $scope.isAdmin = User.isAdmin();
-
-	ajaxRequest.getThreadStartPost($routeParams.id).success(function(data) {
-		if (data.success) {
-			$scope.startPost = data.data;
-			$scope.startPost.content = $sce.trustAsHtml(data.data.content);
-			$scope.startPost.title = $sce.trustAsHtml(data.data.title);
-
-			if ($scope.startPost.title == 'undefined' || $scope.startPost.title == '' || $scope.startPost.title == null) {
-				$scope.startPost.title = $sce.trustAsHtml(data.data.content.toString().substring(0, 5));
-			}
-			
-			var url = $scope.startPost.img_url.toString();
-			var fileType = extensionProvider.getFileType(url);
-			$scope.startPost.fileType = fileType.type;
-			$scope.startPost.fileExtension = fileType.extension;
-			
-			console.log('Startpost loaded');
-		} else {
+	Ajax.getThreadStartPost($routeParams.id).success(function(result) {
+		if (!result.success) {
 			$window.location.href = '#/404';
-		}
-	});
-
-	ajaxRequest.getThreadReplys($routeParams.id).success(function(data) {
-		if (data.data == 'Cannot get thread replys.') {
+			$window.location.reload(true);
 			return;
 		}
 
-		for (var i = 0; i < data.data.length; i++) {
-			var matches = data.data[i].content.toString().match(/\d+/g);
-			if (matches != null) {
-				for (var x = 0; x < matches.length; x++) {
-					data.data[i].content = data.data[i].content
-						.replace('&gt;&gt;' + matches[x],
-						'<a href="#/thread/' + $routeParams.id + '/#msg_' + matches[x] +'">' + '>>' + matches[x] + '</a>')
-				}
-			}
+		$scope.startPost = result.data;
+		$scope.startPost.content = $sce.trustAsHtml(result.data.content);
+		$scope.startPost.title = $sce.trustAsHtml(result.data.title);
 
-			data.data[i].content = $sce.trustAsHtml(data.data[i].content);
+		console.log(result);
 
-			var url = data.data[i].img_url.toString();
-			var fileType = extensionProvider.getFileType(url);
-			data.data[i].fileType = fileType.type;
-			data.data[i].fileExtension = fileType.extension;
-			
-			console.log('Replies loaded: ' + data.data.length);
-		}
+		if ($scope.startPost.title == 'undefined'
+		|| $scope.startPost.title == ''
+		|| $scope.startPost.title == null)
+			$scope.startPost.title = $sce.trustAsHtml(result.data.content.toString().substring(0, 5));
 
-		$scope.replys = data.data;
+		var url = $scope.startPost.img_url.toString();
+		var fileType = extensionProvider.getFileType(url);
+		$scope.startPost.fileType = fileType.type;
+		$scope.startPost.fileExtension = fileType.extension;
+
+		console.log('Thread start post loaded.');
 	});
+
+	function getReplies() {
+		Ajax.getThreadReplies($routeParams.id).success(function(result) {
+			if (!result.success) {
+				console.log(result);
+				return;
+			}
+	
+			for (let i = 0; i < result.data.length; ++i) {
+				var matches = result.data[i].content.toString().match(/\d+/g);
+				if (matches != null) {
+					for (let j = 0; j < matches.length; ++j) {
+						result.data[i].content = result.data[i].content.replace('&gt;&gt;' + matches[j],
+							'<a href="#/thread/' + $routeParams.id + '/#msg_' + matches[j] +'">' + '>>' + matches[j] + '</a>')
+					}
+				}
+	
+				result.data[i].content = $sce.trustAsHtml(result.data[i].content);
+	
+				var url = result.data[i].img_url.toString();
+				var fileType = extensionProvider.getFileType(url);
+				result.data[i].fileType = fileType.type;
+				result.data[i].fileExtension = fileType.extension;
+				
+				console.log('Replies loaded: ' + result.data.length);
+			}
+	
+			$scope.replies = result.data;
+		});
+	}
+
+	getReplies();
 
 	$scope.postReply = function() {
 		$scope.messageEmpty = false;
+
 		if ($scope.message === undefined) {
 			$scope.messageEmpty = true;
 			angular.element(document.querySelector('#message')).focus();
+			
+			console.log('Message is undefined.');
 			return;
-		} else {
-			$scope.messageEmpty = false;
 		}
-		
-		ajaxRequest.addReply($scope.myFile, $scope.message, $routeParams.id).then(function(data) {
-			if (data.data.success) {
-				console.log('Reply sended');
-				$window.location.reload(true);
+
+		console.log('Posting reply...');
+
+		Ajax.addReply($scope.myFile, $scope.message, $routeParams.id).then(function(result) {
+			if (result.data.success) {
+				console.log('Reply posted.');
+				getReplies();
 			}
+			console.log(result);
 		});
+	};
+
+	$scope.startPostZoom = function() {
+		$scope.startPost.zoom = !$scope.startPost.zoom;
+	};
+
+	$scope.replyZoom = function(reply) {
+		reply.zoom = !reply.zoom;
 	};
 
 	$scope.answer = function(replyId) {
 		angular.element(document.querySelector('#message')).append('>>' + replyId);
+	};
+
+	$scope.setThreadLockState = function() {
+		var state = $scope.startPost.locked === '1' ? '0' : '1';
+
+		Ajax.setThreadLockState($scope.startPost.id, state).then(function(result) {
+			if (result.data.success) {
+				$scope.startPost.locked = state;
+			}
+		});
 	};
 });

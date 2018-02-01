@@ -1,15 +1,18 @@
-app.controller('BoardListController', function($scope, ajaxRequest) {
+app.controller('BoardListController', function($scope, Ajax) {
 	$scope.firstList = [];
 	$scope.secondList = [];
 
-	ajaxRequest.getBoards().success(function(data) {
-		var split = Math.ceil(data.length / 2);
-		for (var i = 0; i < split; i++) {
-			$scope.firstList.push(data[i]);
+	Ajax.getBoards().success(function(result) {
+		console.log(result);
+		var split = Math.ceil(result.length / 2);
+
+		for (let i = 0; i < split; ++i) {
+			$scope.firstList.push(result[i]);
 		}
 
-		for (var i = split; i < data.length; i++) {
-			$scope.secondList.push(data[i]);
+		for (let i = split; i < result.length; ++i) {
+			$scope.secondList.push(result[i]);
 		}
+
 	});
 });

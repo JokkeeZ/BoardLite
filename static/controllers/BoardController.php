@@ -15,8 +15,8 @@ class BoardController extends Controller {
 	 *
 	 * @return void
 	 */
-	public function updateMessageCount() {
-		$this->getDatabase()
+	public function update_message_count() {
+		$this->get_database()
 			->prepare('UPDATE data SET message_count = message_count + 1')
 			->execute();
 	}
@@ -27,8 +27,8 @@ class BoardController extends Controller {
 	 *
 	 * @return int
 	 */
-	public function getMessageCount():int {
-		return $this->getDatabase()
+	public function get_message_count():int {
+		return $this->get_database()
 			->query('SELECT message_count FROM data')
 			->fetch(PDO::FETCH_ASSOC)['message_count'];
 	}
@@ -39,9 +39,10 @@ class BoardController extends Controller {
 	 *
 	 * @return $mixed array
 	 */
-	public function getBoards():array {
-		$stmt = $this->getDatabase()->prepare('SELECT * FROM boards');
+	public function get_boards():array {
+		$stmt = $this->get_database()->prepare('SELECT * FROM boards');
 		$stmt->execute();
+
 		return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
 	
@@ -51,8 +52,8 @@ class BoardController extends Controller {
 	 * @param int $id
 	 * @return boolean
 	 */
-	public function deleteBoard($id):bool {
-		$stmt = $this->getDatabase()->prepare('DELETE FROM boards WHERE id = :id LIMIT 1');
+	public function delete_board($id):bool {
+		$stmt = $this->get_database()->prepare('DELETE FROM boards WHERE id = :id LIMIT 1');
 		return $stmt->execute([':id' => $id]);
 	}
 	
@@ -65,14 +66,13 @@ class BoardController extends Controller {
 	 * @param string $tag
 	 * @return boolean
 	 */
-	public function createBoard($name, $desc, $prefix, $tag):bool {
-		if ($this->prefixExists($prefix)) {
+	public function create_board($name, $desc, $prefix, $tag):bool {
+		if ($this->prefix_exists($prefix))
 			return false;
-		}
-			
-		$stmt = $this->getDatabase()
+
+		$stmt = $this->get_database()
 			->prepare('INSERT INTO boards (name, description, prefix, tag) VALUES (:name, :desc, :prefix, :tag)');
-		
+
 		return $stmt->execute([':name' => $name, ':desc' => $desc, ':prefix' => $prefix, ':tag' => $tag]);
 	}
 	
@@ -82,34 +82,34 @@ class BoardController extends Controller {
 	 * @param string $prefix
 	 * @return boolean
 	 */
-	public function prefixExists($prefix):bool {
-		$stmt = $this->getDatabase()
+	public function prefix_exists($prefix):bool {
+		$stmt = $this->get_database()
 			->prepare('SELECT prefix FROM boards WHERE prefix = :prefix LIMIT 1');
-		
+
 		$stmt->execute([':prefix' => $prefix]);
 		return $stmt->rowCount() > 0;
 	}
 
-    /**
-     * Updates board with specific id and given values.
-     *
-     * @param int $id
-     * @param string $name
-     * @param string $desc
-     * @param mixed $prefix
-     * @param string $tag
-     * @return boolean
-     */
-	public function updateBoard($id, $name, $desc, $prefix, $tag):bool {
-        $stmt = $this->getDatabase()
-            ->prepare('UPDATE boards SET name = :name, description = :desc, prefix = :prefix, tag = :tag WHERE id = :id');
+	/**
+	 * Updates speficic board with data.
+	 *
+	 * @param int $id
+	 * @param string $name
+	 * @param string $desc
+	 * @param mixed $prefix
+	 * @param string $tag
+	 * @return boolean
+	 */
+	public function update_board($id, $name, $desc, $prefix, $tag):bool {
+		$stmt = $this->get_database()
+			->prepare('UPDATE boards SET name = :name, description = :desc, prefix = :prefix, tag = :tag WHERE id = :id');
 
-        return $stmt->execute([
-            ':id' => $id,
-            ':name' => $name,
-            ':desc' => $desc,
-            ':prefix' => $prefix,
-            ':tag' => $tag
-        ]);
-    }
+		return $stmt->execute([
+			':id' => $id,
+			':name' => $name,
+			':desc' => $desc,
+			':prefix' => $prefix,
+			':tag' => $tag
+		]);
+	}
 }

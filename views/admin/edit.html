@@ -1,48 +1,48 @@
 <div class="container" ng-controller="BoardEditController">
-    <div class="row">
+	<div class="row">
 
-        <div class="col-md-12" ng-show="updateSuccess">
-            <div class="alert alert-dismissible alert-success">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <p ng-bind="lang.Update_Success"></p>
-            </div>
-        </div>
+		<div class="col-md-12" ng-show="updateSuccess">
+			<div class="alert alert-dismissible alert-success">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				<p ng-bind="lang.Update_Success"></p>
+			</div>
+		</div>
 
-        <div class="col-md-12" ng-show="updateSuccess != true && updateSuccess != null">
-            <div class="alert alert-dismissible alert-warning">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <p ng-bind="lang.Update_Error"></p>
-            </div>
-        </div>
+		<div class="col-md-12" ng-show="updateSuccess != true && updateSuccess != null">
+			<div class="alert alert-dismissible alert-warning">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				<p ng-bind="lang.Update_Error"></p>
+			</div>
+		</div>
 
-        <div class="col-md-12">
-            <h2 ng-bind="lang.Edit_Board"></h2><hr/>
+		<div class="col-md-12">
+			<h2 ng-bind="lang.Edit_Board"></h2><hr/>
 
-            <form>
-                <div class="form-group" ng-class="nameEmpty === true ? 'has-error' : ''">
-                    <label for="name" ng-bind="lang.Name"></label>
-                    <input type="text" class="form-control" id="name" ng-model="name" placeholder="{{ lang.Name_for_board }}">
-                </div>
-                <div class="form-group" ng-class="prefixEmpty === true ? 'has-error' : ''">
-                    <label for="prefix" ng-bind="lang.Prefix"></label>
-                    <input type="text" class="form-control" id="prefix" ng-model="prefix" placeholder="{{ lang.Prefix_for_board }}">
-                </div>
-                <div class="form-group" ng-class="descEmpty === true ? 'has-error' : ''">
-                    <label for="desc" ng-bind="lang.Description"></label>
-                    <input type="text" class="form-control" id="desc" ng-model="desc" placeholder="{{ lang.Desc_for_board }}">
-                </div>
-                <div class="form-group" ng-class="tagEmpty === true ? 'has-error' : ''">
-                    <label for="name" ng-bind="lang.Tag"></label>
-                    <select ng-model="tag" id="tag" class="form-control">
-                        <option value="NSFW" ng-bind="lang.NSFW"></option>
-                        <option value="SFW" ng-bind="lang.SFW"></option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <button type="button" class="btn btn-primary" ng-click="updateBoard()" ng-bind="lang.Update"></button>
-                    <a href="#/adminpanel" class="btn btn-primary" ng-bind="lang.Go_Back"></a>
-                </div>
-            </form>
-        </div>
-    </div>
+			<form>
+				<div class="form-group" ng-class="nameEmpty === true ? 'has-error' : ''">
+					<label for="name" ng-bind="lang.Name"></label>
+					<input type="text" class="form-control" id="name" ng-model="name" placeholder="{{ lang.Name_for_board }}">
+				</div>
+				<div class="form-group" ng-class="prefixEmpty === true ? 'has-error' : ''">
+					<label for="prefix" ng-bind="lang.Prefix"></label>
+					<input type="text" class="form-control" id="prefix" ng-model="prefix" placeholder="{{ lang.Prefix_for_board }}">
+				</div>
+				<div class="form-group" ng-class="descEmpty === true ? 'has-error' : ''">
+					<label for="desc" ng-bind="lang.Description"></label>
+					<input type="text" class="form-control" id="desc" ng-model="desc" placeholder="{{ lang.Desc_for_board }}">
+				</div>
+				<div class="form-group" ng-class="tagEmpty === true ? 'has-error' : ''">
+					<label for="name" ng-bind="lang.Tag"></label>
+					<select ng-model="tag" id="tag" class="form-control">
+						<option value="NSFW" ng-bind="lang.NSFW"></option>
+						<option value="SFW" ng-bind="lang.SFW"></option>
+					</select>
+				</div>
+				<div class="form-group">
+					<button type="button" class="btn btn-primary" ng-click="updateBoard()" ng-bind="lang.Update"></button>
+					<a href="#/adminpanel" class="btn btn-primary" ng-bind="lang.Go_Back"></a>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
