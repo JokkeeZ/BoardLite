@@ -28,7 +28,7 @@
 
 			<div class="panel panel-default">
 				<div class="panel-heading" id="msg_{{startPost.msg_id}}">
-					<a href="javascript:void(0)" ng-bind-html="startPost.title"></a>
+					<a href="javascript:void(0)" ng-bind-html="startPost.title | nl2br | bbcode"></a>
 					<p class="pull-right" ng-show="isAdmin">
 						<button class="btn btn-danger btn-xs">{{lang.IP}}: {{startPost.ip}}</button>
 						<button class="btn btn-danger btn-xs" ng-click="setThreadLockState()" ng-bind="startPost.locked === '1' ? lang.Unlock_Thread : lang.Lock_Thread"></button>

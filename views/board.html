@@ -35,7 +35,7 @@
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<a href="#/thread/{{thread.msg_id}}/" ng-bind-html="thread.title"></a>
+					<a href="#/thread/{{thread.msg_id}}/" ng-bind-html="thread.title | nl2br | bbcode"></a>
 					<p class="pull-right" ng-show="isAdmin">
 						<button class="btn btn-danger btn-xs">{{lang.IP}}: {{thread.ip}}</button>
 						<button class="btn btn-danger btn-xs" admin-delete-thread="{{thread.msg_id}}">{{lang.Delete_thread}}</button>
