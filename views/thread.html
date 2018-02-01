@@ -49,7 +49,7 @@
 							</div>
 						</div>
 						<div ng-class="startPost.fileType.type === 'no_file' ? 'col-md-12' : 'col-md-9'">
-							<p ng-bind-html="startPost.content | nl2br | bbcode"></p>
+							<p class="message" ng-bind-html="startPost.content | nl2br | bbcode"></p>
 						</div>
 					</div>
 				</div>
@@ -81,7 +81,7 @@
 							</div>
 						</div>
 						<div ng-class="reply.fileType.type === 'no_file' ? 'col-md-12' : 'col-md-9'">
-							<p ng-bind-html="reply.content | nl2br | bbcode"></p>
+							<p class="message" ng-bind-html="reply.content | nl2br | bbcode"></p>
 						</div>
 					</div>
 				</div>

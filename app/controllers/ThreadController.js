@@ -75,6 +75,8 @@ app.controller('ThreadController', function($scope, Ajax, $routeParams, $sce, ex
 		Ajax.addReply($scope.myFile, $scope.message, $routeParams.id).then(function(result) {
 			if (result.data.success) {
 				console.log('Reply posted.');
+				
+				$scope.message = '';
 				getReplies();
 			}
 			console.log(result);

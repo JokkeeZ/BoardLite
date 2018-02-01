@@ -12,3 +12,8 @@
 	width: 30%;
 	height: 30%;
 }
+
+.message {
+	width: 80%;
+	word-wrap: break-word;
+}

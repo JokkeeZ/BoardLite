@@ -26,6 +26,10 @@ app.controller('BoardController', function($scope, $routeParams, Ajax, $window, 
 			result.data[idx].title = $sce.trustAsHtml(item.title);
 			if (item.title.length <= 1 || item.title == 'undefined') {
 				result.data[idx].title = $sce.trustAsHtml(item.content.toString().substring(0, 5) + '..');
+
+				// Thread message word wrap
+				let content = result.data[idx].content.toString();
+				result.data[idx].content = content.substring(0, 50) + '..';
 			}
 		});
 

@@ -5,7 +5,7 @@
  *
  * @author JokkeeZ
  * @version 1.0
- * @copyright Copyright © 2016 JokkeeZ
+ * @copyright Copyright © 2016 - 2018 JokkeeZ
  */
 abstract class Controller {
 
@@ -33,7 +33,7 @@ abstract class Controller {
 	/**
 	 * Filters input for bad characters etc.
 	 */
-	private function filter_input($input) {
+	private function filter_input($input):string {
 		return htmlspecialchars(strip_tags($input));
 	}
 
