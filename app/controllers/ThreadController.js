@@ -16,8 +16,14 @@ app.controller('ThreadController', function($scope, Ajax, $routeParams, $sce, ex
 
 		if ($scope.startPost.title == 'undefined'
 		|| $scope.startPost.title == ''
-		|| $scope.startPost.title == null)
-			$scope.startPost.title = $sce.trustAsHtml(result.data.content.toString().substring(0, 5));
+		|| $scope.startPost.title == null) {
+			let msg = result.data.content.toString().substring(0, 50);
+			if (msg.length == 50) {
+				msg += '...';
+			}
+
+			$scope.startPost.title = $sce.trustAsHtml(msg);
+		}
 
 		var url = $scope.startPost.img_url.toString();
 		var fileType = extensionProvider.getFileType(url);
