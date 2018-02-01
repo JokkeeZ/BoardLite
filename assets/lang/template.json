@@ -66,6 +66,13 @@
 		"Prefix_for_board": "",
 		"Desc_for_board": "",
 
-		"View": ""
+		"Delete_reply": "",
+		"Delete_thread": "",
+		"IP": "",
+
+		"View": "",
+		"Locked": "",
+		"Lock_Thread": "",
+		"Unlock_Thread": ""
 	}
 }

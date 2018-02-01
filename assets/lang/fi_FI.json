@@ -70,6 +70,9 @@
 		"Delete_thread": "Poista lanka",
 		"IP": "IP-osoite",
 
-		"View": "View"
+		"View": "Katsele",
+		"Locked": "LUKITTU",
+		"Lock_Thread": "Lukitse lanka",
+		"Unlock_Thread": "Avaa lanka"
 	}
 }
