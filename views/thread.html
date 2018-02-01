@@ -31,10 +31,10 @@
 					<a href="javascript:void(0)" ng-bind-html="startPost.title"></a>
 					<p class="pull-right" ng-show="isAdmin">
 						<button class="btn btn-danger btn-xs">{{lang.IP}}: {{startPost.ip}}</button>
-						<button class="btn btn-danger btn-xs" ng-click="setThreadLockState()" ng-bind="startPost.locked === '1' ? 'Unlock thread' : 'Lock thread'"></button>
+						<button class="btn btn-danger btn-xs" ng-click="setThreadLockState()" ng-bind="startPost.locked === '1' ? lang.Unlock_Thread : lang.Lock_Thread"></button>
 						<button class="btn btn-danger btn-xs" admin-delete-thread="{{startPost.msg_id}}" ng-bind="lang.Delete_thread"></button>
 					</p>
-					<h6><text style="color:red">{{startPost.locked === '1' ? '[LOCKED] &middot; ' : ''}}</text>{{lang.Id}}: <a ng-click="answer(startPost.msg_id)" style="cursor:pointer">{{ startPost.msg_id }}</a> &middot; {{lang.Posted}}: {{ startPost.posted }} &middot; {{lang.Anonymous}}</h6>
+					<h6><text style="color:red">{{startPost.locked === '1' ? '[' + lang.Locked + ']' + ' &middot; ' : ''}}</text>{{lang.Id}}: <a ng-click="answer(startPost.msg_id)" style="cursor:pointer">{{ startPost.msg_id }}</a> &middot; {{lang.Posted}}: {{ startPost.posted }} &middot; {{lang.Anonymous}}</h6>
 				</div>
 				<div class="panel-body">
 					<div class="row">

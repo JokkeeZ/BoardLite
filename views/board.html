@@ -40,7 +40,7 @@
 						<button class="btn btn-danger btn-xs">{{lang.IP}}: {{thread.ip}}</button>
 						<button class="btn btn-danger btn-xs" admin-delete-thread="{{thread.msg_id}}">{{lang.Delete_thread}}</button>
 					</p>
-					<h6><text style="color:red">{{thread.locked === '1' ? '[LOCKED]' : ''}}</text> &middot; {{lang.Id}}: {{thread.msg_id}} &middot; {{lang.Posted}}: {{ thread.posted }} &middot; {{lang.Anonymous}}</h6>
+					<h6><text style="color:red">{{thread.locked === '1' ? '[' + lang.Locked + ']' + ' &middot; ' : ''}}</text> {{lang.Id}}: {{thread.msg_id}} &middot; {{lang.Posted}}: {{ thread.posted }} &middot; {{lang.Anonymous}}</h6>
 				</div>
 				<div class="panel-body">
 					<div class="row">
