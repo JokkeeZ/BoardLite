@@ -59,29 +59,3 @@ pre {
 tr:hover {
 	background-color: #57616b !important;
 }
-
-/**
- * FOR GRAY NAVBAR
- *
-	.navbar {
-		background-color: #57616b !important;
-	}
-	
-	.navbar-collapse {
-		border-color: #262627 !important;
-	}
-	
-	.nav > li > a:hover {
-		background-color: #262627 !important;
-	}
-	
-	.nav > li > a:active {
-		background-color: #262627 !important;
-	}
-	
-	.nav > li > a:visited {
-		background-color: #262627 !important;
-	}
- *
- *
-**/
