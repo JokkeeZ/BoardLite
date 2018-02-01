@@ -20,6 +20,21 @@ abstract class Controller {
 	public function __construct() {
 		global $_CONFIG;
 		$this->config = $_CONFIG;
+
+		foreach ($_POST as $k => $v) {
+			$_POST[$k] = $this->filter_input($v);
+		}
+
+		foreach ($_GET as $k => $v) {
+			$_GET[$k] = $this->filter_input($v);
+		}
+	}
+
+	/**
+	 * Filters input for bad characters etc.
+	 */
+	private function filter_input($input) {
+		return htmlspecialchars(strip_tags($input));
 	}
 
 	/**

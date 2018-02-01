@@ -3,9 +3,9 @@
 app.controller('BoardController', function($scope, $routeParams, Ajax, $window, extensionProvider, $sce, User) {
 
 	$scope.isAdmin = User.isAdmin();
-	Ajax.getBoards().success(function(data) {
+	Ajax.getBoards().success(function(result) {
 		var exists = false;
-		angular.forEach(data, function(o) {
+		angular.forEach(result, function(o) {
 			if (o.prefix == $routeParams.prefix) {
 				exists = true;
 				$scope.boardData = o;
@@ -17,19 +17,19 @@ app.controller('BoardController', function($scope, $routeParams, Ajax, $window, 
 		}
 	});
 
-	Ajax.getThreads($routeParams.prefix).success(function(response) {
-		if (!response.success) return;
+	Ajax.getThreads($routeParams.prefix).success(function(result) {
+		if (!result.success) return;
 
-		angular.forEach(response.data, function(item, idx) {
-			response.data[idx].fileType = extensionProvider.getFileType(item.img_url);
+		angular.forEach(result.data, function(item, idx) {
+			result.data[idx].fileType = extensionProvider.getFileType(item.img_url);
 
-			response.data[idx].title = $sce.trustAsHtml(item.title);
+			result.data[idx].title = $sce.trustAsHtml(item.title);
 			if (item.title.length <= 1 || item.title == 'undefined') {
-				response.data[idx].title = $sce.trustAsHtml(item.content.toString().substring(0, 5) + '..');
+				result.data[idx].title = $sce.trustAsHtml(item.content.toString().substring(0, 5) + '..');
 			}
 		});
 
-		$scope.threads = response.data;
+		$scope.threads = result.data;
 
 		console.log($scope.threads);
 	});
@@ -42,14 +42,14 @@ app.controller('BoardController', function($scope, $routeParams, Ajax, $window, 
 			return;
 		}
 		
-		Ajax.createThread($scope.myFile, $scope.title, $scope.message, $routeParams.prefix).success(function(data) {
-			if (data.success) {
-				console.log('Thread created with id: ' + data.data);
-				$window.location.href = '#/thread/' + data.data + '/';
+		Ajax.createThread($scope.myFile, $scope.title, $scope.message, $routeParams.prefix).success(function(result) {
+			if (result.success) {
+				console.log('Thread created with id: ' + result.data);
+				$window.location.href = '#/thread/' + result.data + '/';
 				$scope.messageEmpty = false;
 			}
 
-			console.log(data);
+			console.log(result);
 		});
 	};
 });

@@ -5,12 +5,12 @@ app.constant('PATH', 'static/global.php');
 app.run(function($rootScope, Ajax, User, $window) {
 	$rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
 		if (current.$$route.adminOnly && (!User.isLoggedIn() || !User.isAdmin())) {
-				$window.location.href = "#/";
+				$window.location.href = '#/';
 				console.log('Redirecting non-admin user back..');
 		}
 
 		// Reduces ajax calls.
-		if($rootScope.lang === undefined) {
+		if ($rootScope.lang === undefined) {
 			Ajax.getLanguage().success(function(result) {
 				$rootScope.lang = result.BoardLite_Texts;
 				console.log('Language loaded..');
@@ -43,7 +43,7 @@ app.run(function($rootScope, Ajax, User, $window) {
 
 			Ajax.logoutUser().success(function(response) {
 				if (response.success) {
-					console.debug('Session destroyed');
+					console.log('Session destroyed');
 				}
 			});
 		}
@@ -135,8 +135,8 @@ app.run(function($rootScope, Ajax, User, $window) {
 		},
 		addReply: function(file, message, threadId) {
 			var formData = new FormData();
-			formData.append("file", file);
-			formData.append("message", message);
+			formData.append('file', file);
+			formData.append('message', message);
 			formData.append("thread_id", threadId);
 			formData.append('request', 'add_reply');
 			return this.post(PATH, formData);
@@ -230,7 +230,7 @@ app.run(function($rootScope, Ajax, User, $window) {
 			var modelSetter = model.assign;
 
 			element.bind('change', function() {
-				scope.$apply(function(){
+				scope.$apply(function() {
 					modelSetter(scope, element[0].files[0]);
 				});
 			});
