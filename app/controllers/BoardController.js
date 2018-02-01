@@ -23,20 +23,27 @@ app.controller('BoardController', function($scope, $routeParams, Ajax, $window, 
 		angular.forEach(result.data, function(item, idx) {
 			result.data[idx].fileType = extensionProvider.getFileType(item.img_url);
 
-			result.data[idx].title = $sce.trustAsHtml(item.title);
 			if (item.title.length <= 1 || item.title == 'undefined') {
-				result.data[idx].title = $sce.trustAsHtml(item.content.toString().substring(0, 5) + '..');
-
-				// Thread message word wrap
-				let content = result.data[idx].content.toString();
-				result.data[idx].content = content.substring(0, 50) + '..';
+				result.data[idx].title = $sce.trustAsHtml(wrapMessage(item.content.toString()));
 			}
+
+			item.content = wrapMessage(item.content);
 		});
 
 		$scope.threads = result.data;
 
 		console.log($scope.threads);
 	});
+
+	function wrapMessage(message) {
+		let msg = message.substring(0, 50);
+
+		if (msg.length == 50) {
+			msg += '...';
+		}
+
+		return msg;
+	}
 
 	$scope.createThread = function() {
 		$scope.messageEmpty = false;
