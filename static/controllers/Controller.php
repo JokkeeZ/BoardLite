@@ -33,7 +33,7 @@ abstract class Controller {
 	/**
 	 * Filters input for bad characters etc.
 	 */
-	private function filter_input($input):string {
+	private function filter_input($input) {
 		return htmlspecialchars(strip_tags($input));
 	}
 
