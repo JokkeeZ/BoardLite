@@ -207,13 +207,13 @@ app.run(function($rootScope, Ajax, User, $window) {
 		restrict: 'A',
 		link: function(scope, element, attrs) {
 			element.bind('click', function() {
-				var threadId = attrs.adminDeleteThread;
+				let splitted = attrs.adminDeleteThread.toString().split(',');
+				let threadId = parseInt(splitted[0]);
 
 				if (confirm($rootScope.lang.Delete_Thread_Confirm)) {
 					Ajax.deleteThread(threadId).then(function(result) {
 						if (result.data.success) {
-							$window.location.href = '#/';
-							$window.location.reload(true);
+							$window.location.href = `#/board/${ splitted[1] }`;
 						}
 					});
 				}
@@ -226,8 +226,8 @@ app.run(function($rootScope, Ajax, User, $window) {
 	return {
 		restrict: 'A',
 		link: function(scope, element, attrs) {
-			var model = $parse(attrs.fileModel);
-			var modelSetter = model.assign;
+			let model = $parse(attrs.fileModel);
+			let modelSetter = model.assign;
 
 			element.bind('change', function() {
 				scope.$apply(function() {
