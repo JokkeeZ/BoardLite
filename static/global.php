@@ -50,11 +50,16 @@ require 'RequestHandler.php';
 
 RequestHandler::initialize();
 
-if (!empty($_POST)) {
-	RequestHandler::handle_request($_POST['request'], $_POST);
-	return;
+try {
+	if (!empty($_POST)) {
+		RequestHandler::handle_request($_POST['request'], $_POST);
+		return;
+	}
+	else if (!empty($_GET)) {
+		RequestHandler::handle_request($_GET['request'], $_GET);
+		return;
+	}
 }
-else if (!empty($_GET)) {
-	RequestHandler::handle_request($_GET['request'], $_GET);
-	return;
+catch (Exception $e) {
+	Logger::write_data($e->getMessage());
 }

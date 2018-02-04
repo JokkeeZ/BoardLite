@@ -1,8 +1,9 @@
 <?php defined('APP') or die;
 
-class UpdateBoardRequest extends BoardController implements IRequest {
-
-	public function handle_request($data) : string {
+class UpdateBoardRequest extends BoardController implements IRequest
+{
+	public function handle_request($data) : string
+	{
 		$success = $this->update_board(
 			$data['id'],
 			$data['name'],

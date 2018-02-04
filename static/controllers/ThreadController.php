@@ -7,16 +7,17 @@
  * @version 1.1
  * @copyright Copyright © 2016 - 2018 JokkeeZ
  */
-class ThreadController extends Controller {
-
+class ThreadController extends Controller
+{
 	/**
 	 * Creates a new thread into database with given values.
 	 */
-	public function create_thread($title, $message, $prefix, $img):int {
+	public function create_thread($title, $message, $prefix, $img) : int
+	{
 		$board = new BoardController();
 		$msgId = $board->get_message_count() + 1;
 
-		// Replace useless crap from image path, no need for saving that in db.
+		// We dont need to save useless slashes into db.
 		$img = str_replace('../../', '', $img);
 
 		$stmt = $this->get_database()->prepare('INSERT INTO threads (title, content, prefix, msg_id, img_url, ip) VALUES
@@ -42,7 +43,8 @@ class ThreadController extends Controller {
 	/**
 	 * Creates a new reply into database with given values.
 	 */
-	public function add_reply($content, $threadId, $img):int {
+	public function add_reply($content, $threadId, $img) : int
+	{
 		$board = new BoardController();
 		$msgId = $board->get_message_count() + 1;
 
@@ -72,32 +74,39 @@ class ThreadController extends Controller {
 	}
 
 	/**
-	 * Get's thread start post by given thread id.
+	 * Gets thread start post by given thread id.
 	 */
-	public function get_start_post($threadId) {
-		if (!is_numeric($threadId))
-			return false;
+	public function get_start_post($threadId) : array
+	{
+		$result = $this->query_messages('SELECT * FROM threads WHERE msg_id = :id LIMIT 1', [
+			':id' => $threadId
+		]);
 
-		$stmt = $this->get_database()
-			->prepare('SELECT * FROM threads WHERE msg_id = :id LIMIT 1');
-
-		$stmt->execute([':id' => $threadId]);
-
-		if ($stmt->rowCount() > 0)
-			return $stmt->fetch(PDO::FETCH_ASSOC);
-
-		return false;
+		return $result;
 	}
 
 	/**
-	 * Get's thread replies by given thread id.
+	 * Gets thread replies by given thread id.
 	 */
-	public function get_replies($threadId):array {
-		if (!is_numeric($threadId)) return [];
+	public function get_replies($threadId) : array
+	{
+		$result = $this->query_messages('SELECT * FROM replies WHERE thread_id = :id ORDER BY id', [
+			':id' => $threadId
+		]);
 
-		$stmt = $this->get_database()->prepare('SELECT * FROM replies WHERE thread_id = :id ORDER BY id');
+		return $result;
+	}
 
-		$stmt->execute([':id' => $threadId]);
+	/**
+	 * Queries data from the database into array.
+	 */
+	private function query_messages($query, $params = []) : array
+	{
+		if (!is_numeric($threadId))
+			return [];
+
+		$stmt = $this->get_database()->prepare($query);
+		$stmt->execute($params);
 
 		if ($stmt->rowCount() > 0)
 			return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -106,10 +115,11 @@ class ThreadController extends Controller {
 	}
 
 	/**
-	 * Get's first 25 threads as fetched array.
+	 * Gets first 25 threads as fetched array.
 	 * TODO: Pagination? Maybeh?
 	 */
-	public function get_threads($prefix):array {
+	public function get_threads($prefix) : array
+	{
 		$stmt = $this->get_database()->prepare('SELECT * FROM threads WHERE prefix = :prefix ORDER BY -id LIMIT 25;');
 		$stmt->execute([':prefix' => $prefix]);
 
@@ -122,7 +132,8 @@ class ThreadController extends Controller {
 	/**
 	 * Sets given thread new lock state.
 	 */
-	public function set_thread_lock_state($id, $state):bool {
+	public function set_thread_lock_state($id, $state) : bool
+	{
 		$stmt = $this->get_database()->prepare('UPDATE threads SET locked = :locked WHERE id = :id');
 		$stmt->execute([':locked' => $state, ':id' => $id]);
 
@@ -132,7 +143,8 @@ class ThreadController extends Controller {
 	/**
 	 * Deletes an thread with specific id.
 	 */
-	public function delete_thread($id):bool {
+	public function delete_thread($id) : bool
+	{
 		$stmt = $this->get_database()->prepare('DELETE FROM threads WHERE msg_id = :id LIMIT 1;');
 		return ($stmt->execute([':id' => $id]) && $this->delete_thread_replies($id));
 	}
@@ -140,9 +152,10 @@ class ThreadController extends Controller {
 	/**
 	 * Deletes all thread replies with specific thread id.
 	 */
-	private function delete_thread_replies($id):bool {
+	private function delete_thread_replies($id) : bool
+	{
 		return $this->get_database()
-			->prepare('DELETE FROM replies WHERE thread_id = :id;')
+			->prepare('DELETE FROM replies WHERE thread_id = :id')
 			->execute([':id' => $id]);
 	}
 }

@@ -7,13 +7,15 @@
  * @version 1.0
  * @copyright Copyright © 2018 JokkeeZ
  */
-class Logger {
+class Logger
+{
 	private static $file = 'logs.log';
 
 	/**
 	 * Writes string into log file.
 	 */
-	public static function write_data($data) {
+	public static function write_data($data)
+	{
 		file_put_contents(self::$file, $data, FILE_APPEND | LOCK_EX);
 	}
 }

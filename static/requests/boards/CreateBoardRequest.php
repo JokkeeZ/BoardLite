@@ -1,8 +1,9 @@
 <?php defined('APP') or die;
 
-class CreateBoardRequest extends BoardController implements IRequest {
-
-	public function handle_request($data) : string {
+class CreateBoardRequest extends BoardController implements IRequest
+{
+	public function handle_request($data) : string
+	{
 		$success = $this->create_board(
 			$data['name'],
 			$data['desc'],

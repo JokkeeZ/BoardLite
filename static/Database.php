@@ -7,12 +7,13 @@
  * @version 1.1
  * @copyright Copyright © 2016 - 2018 JokkeeZ
  */
-class Database extends PDO {
-	
+class Database extends PDO
+{
 	/**
 	 * Initializes a new instance of the Database class with given values.
 	 */
-	public function __construct() {
+	public function __construct()
+	{
 		global $_CONFIG;
 
 		try {

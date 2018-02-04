@@ -1,8 +1,9 @@
 <?php defined('APP') or die;
 
-class AddReplyRequest extends ThreadController implements IRequest {
-
-	public function handle_request($data) : string {
+class AddReplyRequest extends ThreadController implements IRequest
+{
+	public function handle_request($data) : string
+	{
 		$file = new FileController();
 		$uploaded = $file->upload();
 		

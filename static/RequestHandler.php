@@ -7,15 +7,16 @@
  * @version 1.0
  * @copyright Copyright © 2018 JokkeeZ
  */
-class RequestHandler {
+class RequestHandler
+{
 	private static $requests;
 
 	/**
 	 * Initializes available requests.
 	 */
-	public static function initialize() {
+	public static function initialize()
+	{
 		self::$requests = [
-
 			// App
 			'get_config' => new GetAppConfigRequest(),
 			'get_lang' => new GetLanguageRequest(),
@@ -46,7 +47,8 @@ class RequestHandler {
 	/**
 	 * Handles incoming request with given input $data.
 	 */
-	public static function handle_request($request, $data) {
+	public static function handle_request($request, $data)
+	{
 		// Check if request exits.
 		if (array_key_exists($request, self::$requests)) {
 			// Handle request.

@@ -7,8 +7,8 @@
  * @version 1.0
  * @copyright Copyright © 2018 JokkeeZ
  */
-interface IRequest {
-
+interface IRequest
+{
 	/**
 	 * Handles received request and returns output as JSON string
 	 */

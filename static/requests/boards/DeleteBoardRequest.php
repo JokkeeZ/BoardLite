@@ -1,8 +1,9 @@
 <?php defined('APP') or die;
 
-class DeleteBoardRequest extends BoardController implements IRequest {
-
-	public function handle_request($data) : string {
+class DeleteBoardRequest extends BoardController implements IRequest
+{
+	public function handle_request($data) : string
+	{
 		$success = $this->delete_board($data['id']);
 	
 		$response = new JsonResponse();
