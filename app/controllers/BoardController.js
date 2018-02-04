@@ -24,7 +24,10 @@ app.controller('BoardController', function($scope, $routeParams, Ajax, $window, 
 			result.data[idx].fileType = extensionProvider.getFileType(item.img_url);
 
 			if (item.title.length <= 1 || item.title == 'undefined') {
-				result.data[idx].title = $sce.trustAsHtml(wrapMessage(item.content));
+				item.title = wrapMessage(item.content);
+			}
+			else {
+				item.title = wrapMessage(item.title);
 			}
 
 			item.content = wrapMessage(item.content);

@@ -5,8 +5,8 @@ app.constant('PATH', 'static/global.php');
 app.run(function($rootScope, Ajax, User, $window) {
 	$rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
 		if (current.$$route.adminOnly && (!User.isLoggedIn() || !User.isAdmin())) {
-				$window.location.href = '#/';
-				console.log('Redirecting non-admin user back..');
+			$window.location.href = '#/';
+			console.log('Redirecting non-admin user back..');
 		}
 
 		// Reduces ajax calls.

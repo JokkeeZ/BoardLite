@@ -9,21 +9,10 @@ app.controller('ThreadController', function($scope, Ajax, $routeParams, $sce, ex
 		}
 
 		$scope.startPost = result.data;
+		$scope.startPost.title = $sce.trustAsHtml(wrapTitle(result.data));
 		$scope.startPost.content = $sce.trustAsHtml(result.data.content);
-		$scope.startPost.title = $sce.trustAsHtml(result.data.title);
 
 		console.log(result);
-
-		if ($scope.startPost.title == 'undefined'
-		|| $scope.startPost.title == ''
-		|| $scope.startPost.title == null) {
-			let msg = result.data.content.toString().substring(0, 50);
-			if (msg.length == 50) {
-				msg += '...';
-			}
-
-			$scope.startPost.title = $sce.trustAsHtml(msg);
-		}
 
 		var url = $scope.startPost.img_url.toString();
 		var fileType = extensionProvider.getFileType(url);
@@ -32,6 +21,23 @@ app.controller('ThreadController', function($scope, Ajax, $routeParams, $sce, ex
 
 		console.log('Thread start post loaded.');
 	});
+
+	function wrapTitle(result) {
+		let title = result.title;
+		if (title === 'undefined' || title === null || title.length <= 0) {
+			if (result.content.length > 50) {
+				return result.content.toString().substring(0, 50) + '...';
+			}
+
+			return result.content;
+		}
+
+		if (title.length > 50) {
+			return title.substring(0, 50) + '...';
+		}
+
+		return title;
+	}
 
 	function getReplies() {
 		Ajax.getThreadReplies($routeParams.id).success(function(result) {

@@ -76,42 +76,35 @@ class ThreadController extends Controller
 	/**
 	 * Gets thread start post by given thread id.
 	 */
-	public function get_start_post($threadId) : array
+	public function get_start_post($threadId)
 	{
-		$result = $this->query_messages('SELECT * FROM threads WHERE msg_id = :id LIMIT 1', [
-			':id' => $threadId
-		]);
+		if (!is_numeric($threadId))
+			return false;
 
-		return $result;
+		$stmt = $this->get_database()->prepare('SELECT * FROM threads WHERE msg_id = :id LIMIT 1');
+		$stmt->execute([':id' => $threadId]);
+
+		if ($stmt->rowCount() > 0)
+			return $stmt->fetch(PDO::FETCH_ASSOC);
+
+		return false;
 	}
 
 	/**
 	 * Gets thread replies by given thread id.
 	 */
-	public function get_replies($threadId) : array
-	{
-		$result = $this->query_messages('SELECT * FROM replies WHERE thread_id = :id ORDER BY id', [
-			':id' => $threadId
-		]);
-
-		return $result;
-	}
-
-	/**
-	 * Queries data from the database into array.
-	 */
-	private function query_messages($query, $params = []) : array
+	public function get_replies($threadId)
 	{
 		if (!is_numeric($threadId))
-			return [];
+			return false;
 
-		$stmt = $this->get_database()->prepare($query);
-		$stmt->execute($params);
+		$stmt = $this->get_database()->prepare('SELECT * FROM replies WHERE thread_id = :id ORDER BY id');
+		$stmt->execute([':id' => $threadId]);
 
 		if ($stmt->rowCount() > 0)
 			return $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-		return [];
+		return false;
 	}
 
 	/**
