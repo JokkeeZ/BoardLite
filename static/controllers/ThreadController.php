@@ -4,7 +4,7 @@
  * Provides access for inserting, updating and selecting thread content from database.
  *
  * @author JokkeeZ
- * @version 1.1
+ * @version 1.2
  * @copyright Copyright © 2016 - 2018 JokkeeZ
  */
 class ThreadController extends Controller
@@ -149,6 +149,24 @@ class ThreadController extends Controller
 	{
 		$stmt = $this->get_database()->prepare('DELETE FROM threads WHERE msg_id = :id LIMIT 1;');
 		return ($stmt->execute([':id' => $id]) && $this->delete_thread_replies($id));
+	}
+
+	/**
+	 * Deletes all threads and replies on board with prefix.
+	 */
+	public function delete_threads_with_prefix($prefix)
+	{
+		$stmt = $this->get_database()->prepare('SELECT msg_id FROM threads WHERE prefix = :prefix');
+		$stmt->execute([':prefix' => $prefix]);
+
+		if ($stmt->rowCount() > 0) {
+			$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			foreach ($rows as $rowK => $rowV) {
+				foreach ($rowV as $k => $v) {
+					$this->delete_thread($v);
+				}
+			}
+		}
 	}
 
 	/**
