@@ -53,25 +53,25 @@ app.run(function($rootScope, Ajax, User, $window) {
 .factory('Ajax', function($http, $rootScope, PATH) {
 	return {
 		getAppConfig: function() {
-			return $http.get(PATH + '?request=get_config');
+			return this.get('get_config', null);
 		},
 		getAppRules: function() {
-			return $http.get(PATH + '?request=get_rules');
+			return this.get('get_rules', null);
 		},
 		getBoards: function() {
-			return $http.get(PATH + '?request=get_boards');
+			return this.get('get_boards', null);
 		},
 		getThreads: function(prefix) {
-			return $http.get(PATH + '?request=get_threads&prefix=' + prefix);
+			return this.get('get_threads', `&prefix=${ prefix }`);
 		},
 		getThreadReplies: function(threadId) {
-			return $http.get(PATH + '?request=get_thread_replies&id=' + threadId);
+			return this.get('get_thread_replies', `&id=${ threadId }`);
 		},
 		getThreadStartPost: function(threadId) {
-			return $http.get(PATH + '?request=get_thread_start_post&id=' + threadId);
+			return this.get('get_thread_start_post', `&id=${threadId}`);
 		},
 		getLanguage: function() {
-			return $http.get(PATH + '?request=get_lang');
+			return this.get('get_lang', null);
 		},
 		deleteBoard: function(id) {
 			var formData = new FormData();
@@ -157,20 +157,24 @@ app.run(function($rootScope, Ajax, User, $window) {
 					'X-Requested-With': 'XMLHttpRequest'
 				}
 			});
+		},
+
+		get: function(request, args) {
+			return $http.get(PATH + `?request=${request}` + (args !== null ? args : ''));
 		}
 	}
 })
 
 .filter('nl2br', function($sce) {
 	return function(msg) {
-		var msg = (msg + '').replace(/(?:\\[rn]|[\r\n]+)+/g, '<br>');
+		var msg = msg.toString().replace(/(?:\\[rn]|[\r\n]+)+/g, '<br>');
 		return $sce.trustAsHtml(msg);
 	}
 })
 
 .filter('bbcode', function($sce) {
 	return function(msg) {
-		var msg = (msg + '')
+		var msg = msg.toString()
 			.replace('[code]', '<pre>')
 			.replace('[/code]', '</pre>')
 			.replace('[b]', '<b>')
