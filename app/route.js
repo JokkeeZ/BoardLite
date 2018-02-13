@@ -40,6 +40,10 @@ app.config(function($routeProvider) {
 		templateUrl: 'views/admin/edit.html',
 		controller: 'BoardEditController'
 	})
+	.when('/error', {
+		adminOnly: false,
+		templateUrl: 'views/error.html'
+	})
 	.otherwise({
 		adminOnly: false,
 		templateUrl: 'views/404.html'

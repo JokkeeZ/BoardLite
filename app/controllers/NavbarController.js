@@ -4,6 +4,10 @@ app.controller('NavbarController', function($rootScope, $scope, Ajax, User, $win
 	$scope.isAdmin = User.isAdmin();
 	
 	Ajax.getAppConfig().success(function(result) {
+		if (result.error !== undefined && result.error === 'install') {
+			$window.location.href = 'install/index.html';
+		}
+		
 		$scope.appName = result.app_name;
 	});
 
