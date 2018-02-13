@@ -1,5 +1,7 @@
 app.controller('BoardController', function($scope, $routeParams, Ajax, $window, extensionProvider, $sce, User) {
 
+	$scope.paginationIndex = 0;
+
 	$scope.isAdmin = User.isAdmin();
 	Ajax.getBoards().success(function(result) {
 		var exists = false;
@@ -15,26 +17,44 @@ app.controller('BoardController', function($scope, $routeParams, Ajax, $window, 
 		}
 	});
 
-	Ajax.getThreads($routeParams.prefix).success(function(result) {
-		if (!result.success) return;
+	$scope.threadCache = [];
+	function getThreads() {
+		Ajax.getThreads($routeParams.prefix).success(function (result) {
+			if (!result.success) return;
 
-		angular.forEach(result.data, function(item, idx) {
-			result.data[idx].fileType = extensionProvider.getFileType(item.img_url);
+			for (let i = 0; i < result.data.length; ++i) {
+				let item = result.data[i];
+				item.fileType = extensionProvider.getFileType(item.img_url);
 
-			if (item.title.length <= 1 || item.title == 'undefined') {
-				item.title = wrapMessage(item.content);
+				item.content = wrapMessage(item.content);
+				if (item.title == 'undefined' || item.title.length <= 1) {
+					item.title = item.content;
+				}
+				else {
+					item.title = wrapMessage(item.title);
+				}
 			}
-			else {
-				item.title = wrapMessage(item.title);
-			}
 
-			item.content = wrapMessage(item.content);
+			$scope.threadCache = chunkArray(result.data, 10);
+			$scope.threads = $scope.threadCache[$scope.paginationIndex];
 		});
+	}
 
-		$scope.threads = result.data;
+	getThreads();
 
-		console.log($scope.threads);
-	});
+	function chunkArray(myArray, chunk_size) {
+		var index = 0;
+		var arrayLength = myArray.length;
+		var tempArray = [];
+
+		for (index = 0; index < arrayLength; index += chunk_size) {
+			myChunk = myArray.slice(index, index + chunk_size);
+			// Do something if you want with the group
+			tempArray.push(myChunk);
+		}
+
+		return tempArray;
+	}
 
 	function wrapMessage(message) {
 		let msg = message.substring(0, 50);
@@ -45,6 +65,11 @@ app.controller('BoardController', function($scope, $routeParams, Ajax, $window, 
 
 		return msg;
 	}
+
+	$scope.updatePaginationIndex = function(idx) {
+		$scope.paginationIndex = idx;
+		getThreads();
+	};
 
 	$scope.createThread = function() {
 		$scope.messageEmpty = false;

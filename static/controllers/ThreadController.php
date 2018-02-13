@@ -117,12 +117,11 @@ class ThreadController extends Controller
 	}
 
 	/**
-	 * Gets first 25 threads as fetched array.
-	 * TODO: Pagination? Maybeh?
+	 * Gets threads from board with prefix.
 	 */
 	public function get_threads($prefix) : array
 	{
-		$stmt = $this->get_database()->prepare('SELECT * FROM threads WHERE prefix = :prefix ORDER BY -id LIMIT 25;');
+		$stmt = $this->get_database()->prepare('SELECT * FROM threads WHERE prefix = :prefix ORDER BY -id;');
 		$stmt->execute([':prefix' => $prefix]);
 
 		if ($stmt->rowCount() > 0)
