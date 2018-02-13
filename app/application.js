@@ -77,7 +77,7 @@ app.run(function($rootScope, Ajax, User, $window) {
 			var formData = new FormData();
 			formData.append('id', id);
 			formData.append('request', 'delete_board');
-			return this.post(PATH, formData);
+			return this.post(formData);
 		},
 		updateBoard: function(id, name, desc, prefix, tag) {
 			var formData = new FormData();
@@ -87,27 +87,27 @@ app.run(function($rootScope, Ajax, User, $window) {
 			formData.append('prefix', prefix);
 			formData.append('tag', tag);
 			formData.append('request', 'update_board');
-			return this.post('static/global.phpp', formData);
+			return this.post(formData);
 		},
 		createUser: function(name, pass) {
 			var formData = new FormData();
 			formData.append('name', name);
 			formData.append('pass', pass);
 			formData.append('request', 'create_user');
-			return this.post(PATH, formData);
+			return this.post(formData);
 		},
 		loginUser: function(name, pass) {
 			var formData = new FormData();
 			formData.append('name', name);
 			formData.append('pass', pass);
 			formData.append('request', 'login_user');
-			return this.post(PATH, formData);
+			return this.post(formData);
 		},
 		logoutUser: function() {
 			var formData = new FormData();
 			formData.append('session_close', true);
 			formData.append('request', 'logout_user');
-			return this.post(PATH, formData);
+			return this.post(formData);
 		},
 		createThread: function(file, title, message, prefix) {
 			var formData = new FormData();
@@ -116,13 +116,13 @@ app.run(function($rootScope, Ajax, User, $window) {
 			formData.append('message', message);
 			formData.append('prefix', prefix);
 			formData.append('request', 'create_thread');
-			return this.post(PATH, formData);
+			return this.post(formData);
 		},
 		deleteThread: function(id) {
 			var formData = new FormData();
 			formData.append('id', id);
 			formData.append('request', 'delete_thread');
-			return this.post(PATH, formData);
+			return this.post(formData);
 		},
 		createBoard: function(name, desc, prefix, tag) {
 			var formData = new FormData();
@@ -131,7 +131,7 @@ app.run(function($rootScope, Ajax, User, $window) {
 			formData.append('prefix', prefix);
 			formData.append('tag', tag);
 			formData.append('request', 'create_board');
-			return this.post(PATH, formData);
+			return this.post(formData);
 		},
 		addReply: function(file, message, threadId) {
 			var formData = new FormData();
@@ -139,17 +139,17 @@ app.run(function($rootScope, Ajax, User, $window) {
 			formData.append('message', message);
 			formData.append("thread_id", threadId);
 			formData.append('request', 'add_reply');
-			return this.post(PATH, formData);
+			return this.post(formData);
 		},
 		setThreadLockState: function(id, state) {
 			var formData = new FormData();
 			formData.append('id', id);
 			formData.append('state', state);
 			formData.append('request', 'lock_thread');
-			return this.post(PATH, formData);
+			return this.post(formData);
 		},
-		post: function(url, formData) {
-			return $http.post(url, formData, {
+		post: function(formData) {
+			return $http.post(PATH, formData, {
 				transformRequest: angular.identity,
 				headers: {
 					'Content-Type': undefined,
