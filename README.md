@@ -2,25 +2,24 @@
 BoardLite is imageboard application crafted with AngularJS and PHP 7.1.
 
 # Features
+* Application installer
 * Creating threads with image, video or just text
 * Replying to threads with image, video or just text
 * Multiple boards with different subjects
 * Fast routing and data sending/receiving with AngularJS
-* Ability to create own rules and boards (Admin only)
+* Ability to create own rules (Admin only)
 * Board creating and deleting via adminpanel (Admin only)
 * Thread removing (Admin only)
-* Login and register
-* Lock/Unlock threads
-* More in future!
+* Login and register users
+* Lock/unlock threads
+* More in future? Maybeh?
 
 # Get started
 1. Clone/Download this repository
 2. Upload files to your webhost/localhost
-3. Import board_lite.sql to phpMyAdmin or similar
-4. Fill values from static/config/Configuration.php
-  - If you are using MySQL, no need for editing ``` $_CONFIG['db_conn_str'] ``` value.
-5. Create some rules in static/config/Rules.php if you want.
-6. Done!
+3. Fill all fields on install (MySql password can be empty)
+4. Create some rules in static/config/Rules.php; If you want to!
+5. Done!
 
 # External libraries / frameworks
 * [AngularJS](https://angularjs.org/)
@@ -29,6 +28,7 @@ BoardLite is imageboard application crafted with AngularJS and PHP 7.1.
 * [Bootswatch theme](https://bootswatch.com/3/yeti/)
 
 # Issues / Development
+* THIS REPOSITORY IS NOT ACTIVELY DEVELOPED! JUST FOR FUN. SOMETHING MISSING? CONTRIBUTE!
 * This repository is under on going development and that may cause application to be broken sometimes.
 * Feel free to report any ideas, bugs, issues by creating a [new issue](https://github.com/JokkeeZ/BoardLite/issues/new).
 * Want to contribute?
