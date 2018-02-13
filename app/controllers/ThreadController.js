@@ -39,7 +39,7 @@ app.controller('ThreadController', function($scope, Ajax, $routeParams, $sce, ex
 		return title;
 	}
 
-	function getReplies() {
+	const getReplies = (function getReplies() {
 		Ajax.getThreadReplies($routeParams.id).success(function(result) {
 			if (!result.success) {
 				console.log(result);
@@ -67,9 +67,7 @@ app.controller('ThreadController', function($scope, Ajax, $routeParams, $sce, ex
 	
 			$scope.replies = result.data;
 		});
-	}
-
-	getReplies();
+	})();
 
 	$scope.postReply = function() {
 		$scope.messageEmpty = false;

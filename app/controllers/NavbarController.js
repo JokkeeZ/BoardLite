@@ -3,8 +3,8 @@ app.controller('NavbarController', function($rootScope, $scope, Ajax, User, $win
 	$scope.loggedIn = User.isLoggedIn();
 	$scope.isAdmin = User.isAdmin();
 	
-	Ajax.getAppConfig().success(function(response) {
-		$scope.appName = response.app_name;
+	Ajax.getAppConfig().success(function(result) {
+		$scope.appName = result.app_name;
 	});
 
 	$scope.logout = function() {
@@ -24,7 +24,7 @@ app.controller('NavbarController', function($rootScope, $scope, Ajax, User, $win
 });
 
 app.controller('HeadController', function($rootScope, $scope, Ajax) {
-	Ajax.getAppConfig().success(function(response) {
-		$rootScope.appName = response.app_name;
+	Ajax.getAppConfig().success(function (result) {
+		$rootScope.appName = result.app_name;
 	});
 });

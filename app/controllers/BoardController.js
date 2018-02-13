@@ -1,5 +1,3 @@
-// TODO: Incase admin changes prefix on adminpanel, threads on that board are not loaded.
-// In future load and create threads by board id.
 app.controller('BoardController', function($scope, $routeParams, Ajax, $window, extensionProvider, $sce, User) {
 
 	$scope.isAdmin = User.isAdmin();

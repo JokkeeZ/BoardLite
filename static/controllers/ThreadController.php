@@ -108,6 +108,15 @@ class ThreadController extends Controller
 	}
 
 	/**
+	 * Updates thread prefixes in to new prefix.
+	 */
+	public function update_thread_prefixes($oldPrefix, $newPrefix)
+	{
+		$stmt = $this->get_database()->prepare('UPDATE threads SET prefix = :new WHERE prefix = :old');
+		$stmt->execute([':new' => $newPrefix, ':old' => $oldPrefix]);
+	}
+
+	/**
 	 * Gets first 25 threads as fetched array.
 	 * TODO: Pagination? Maybeh?
 	 */

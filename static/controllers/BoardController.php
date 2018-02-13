@@ -79,6 +79,22 @@ class BoardController extends Controller
 	}
 
 	/**
+	 * Gets prefix with board id.
+	 */
+	public function get_prefix_with_id($boardId) : string
+	{
+		$stmt = $this->get_database()
+			->prepare('SELECT prefix FROM boards WHERE id = :id LIMIT 1');
+
+		$stmt->execute([':id' => $boardId]);
+		if ($stmt->rowCount() <= 0)
+			return null;
+
+		$row = $stmt->fetch();
+		return $row['prefix'];
+	}
+
+	/**
 	 * Updates speficic board with data.
 	 */
 	public function update_board($id, $name, $desc, $prefix, $tag) : bool

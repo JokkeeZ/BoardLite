@@ -1,14 +1,12 @@
 app.controller('BoardEditController', function($scope, $routeParams, Ajax) {
-	Ajax
-	.getBoards()
-	.success(function(response) {
-		if (response.length > 0) {
-			for (let i = 0; i < response.length; ++i) {
-				if (response[i].id === $routeParams.id) {
-					$scope.name = response[i].name;
-					$scope.prefix = response[i].prefix;
-					$scope.desc = response[i].description;
-					$scope.tag = response[i].tag;
+	Ajax.getBoards().success(function(result) {
+		if (result.length > 0) {
+			for (let i = 0; i < result.length; ++i) {
+				if (result[i].id === $routeParams.id) {
+					$scope.name = result[i].name;
+					$scope.prefix = result[i].prefix;
+					$scope.desc = result[i].description;
+					$scope.tag = result[i].tag;
 					break;
 				}
 			}
@@ -30,8 +28,8 @@ app.controller('BoardEditController', function($scope, $routeParams, Ajax) {
 
 		Ajax
 		.updateBoard($routeParams.id, $scope.name, $scope.desc, $scope.prefix, $scope.tag)
-		.success(function(response) {
-			$scope.updateSuccess = response.success;
+		.success(function(result) {
+			$scope.updateSuccess = result.success;
 		});
 	}
 });

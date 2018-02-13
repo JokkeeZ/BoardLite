@@ -13,6 +13,5 @@ app.controller('BoardListController', function($scope, Ajax) {
 		for (let i = split; i < result.length; ++i) {
 			$scope.secondList.push(result[i]);
 		}
-
 	});
 });

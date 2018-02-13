@@ -1,13 +1,11 @@
 app.controller('AdminController', function($scope, User, Ajax) {
 
-	function getBoards() {
+	const getBoards = (function getBoards() {
 		Ajax.getBoards().success(function(result) {
 			$scope.boards = result;
 		});
-	}
+	})();
 
-	getBoards();
-	
 	$scope.deleteBoard = function(id) {
 		Ajax.deleteBoard(id).success(function(result) {
 			if (result.success) {
