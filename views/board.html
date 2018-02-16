@@ -1,18 +1,19 @@
 <div class="container" ng-controller="BoardController">
-	<h1 class="text-center" ng-bind="boardData.name"></h1>
-	<h4 class="text-center" ng-bind="boardData.description"></h4>
-	<hr/>
+	<div class="text-center">
+		<a style="font-size: 200%" ng-href="#/board/{{boardData.prefix}}">{{boardData.name}}</a>
+		<h4 class="text-center" ng-bind="boardData.description"></h4>
+		<hr/>
+	</div>
 
 	<div class="row">
-		<div class="col-md-12">
-
-			<div class="panel panel-default">
-				<div class="panel-heading" ng-bind="lang.Create_thread"></div>
-				<div class="panel-body">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-header" ng-bind="lang.Create_thread"></div>
+				<div class="card-body">
 					<form>
 						<div class="form-group">
 							<label for="fil" ng-bind="lang.File"></label>
-							<input type="file" id="fil" file-model="myFile"/>
+							<input type="file" id="fil" file-model="myFile" class="form-control-file">
 						</div>
 						<div class="form-group">
 							<label for="title" ng-bind="lang.Title"></label>
@@ -28,69 +29,75 @@
 					</form>
 				</div>
 			</div>
-
 		</div>
 	</div>
-	<div class="row" ng-show="threads.length > 0">
-		<div class="col-md-12" ng-repeat="thread in threads">
 
-			<div class="panel panel-default">
-				<div class="panel-heading">
+	<div class="row" ng-repeat="thread in threads">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-header">
 					<a href="#/thread/{{thread.msg_id}}/" ng-bind-html="thread.title | nl2br | bbcode"></a>
-					<p class="pull-right" ng-show="isAdmin">
-						<button class="btn btn-danger btn-xs">{{lang.IP}}: {{thread.ip}}</button>
-						<button class="btn btn-danger btn-xs" admin-delete-thread="{{thread.msg_id}},{{thread.prefix}}">{{lang.Delete_thread}}</button>
+					<p class="float-right" ng-show="isAdmin">
+						<button class="btn btn-danger btn-sm">{{lang.IP}}: {{thread.ip}}</button>
+						<button class="btn btn-danger btn-sm" admin-delete-thread="{{thread.msg_id}},{{thread.prefix}}">{{lang.Delete_thread}}</button>
 					</p>
 					<h6>
 						<text style="color:red">{{thread.locked === '1' ? '[' + lang.Locked + ']' + ' &middot; ' : ''}}</text>
-						{{lang.Id}}: {{thread.msg_id}} &middot; {{lang.Posted}}: {{ thread.posted }} &middot; {{lang.Anonymous}}
+						{{lang.Id}}: {{thread.msg_id}} &middot; {{lang.Posted}}: {{thread.posted}} &middot; {{lang.Anonymous}}
 					</h6>
 				</div>
-				<div class="panel-body">
+
+				<div class="card-body">
 					<div class="row">
-						<div class="col-md-3" ng-show="thread.img_url != ''">
+						<div class="col-3" ng-show="thread.img_url != ''">
 							<div class="embed-responsive embed-responsive-16by9" ng-if="thread.fileType.type == 'video'">
 								<video controls>
 									<source ng-src="{{thread.img_url}}" type="video/{{thread.fileType.extension}}">
 								</video>
 							</div>
-							<div class="img-responsive embed-responsive embed-responsive-16by9" ng-if="thread.fileType.type == 'image'">
-								<img ng-src="{{((thread.img_url !== 'undefined') ? thread.img_url : 'assets/img/empty.png')}}" class="img-responsive">
+							<div ng-if="thread.fileType.type == 'image'">
+								<img fallback-src="assets/img/empty.png" ng-src="{{thread.img_url}}" class="img-fluid">
 							</div>
 						</div>
-						<div class="col-md-9">
-							<p class="message" ng-bind-html="thread.content | nl2br | bbcode"></p>
+						<div class="col-9">
+							<p class="card-text message" ng-bind-html="thread.content | nl2br | bbcode"></p>
 						</div>
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
 
 	<div class="row" ng-hide="threads.length > 0">
-		<div class="col-md-12">
+		<div class="col-12">
 
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<p ng-bind="lang.No_threads_on_board"></p>
+			<div class="card">
+				<div class="card-header">
+					<h5 ng-bind="lang.No_threads_on_board"></h5>
 				</div>
-				<div class="panel-body">
-					<p ng-bind="lang.No_threads_create_maybe"></p>
+				<div class="card-body">
+					<p class="card-text" ng-bind="lang.No_threads_create_maybe"></p>
 				</div>
 			</div>
 
 		</div>
 	</div>
 
-	<div class="row" ng-show="threads.length > 0">
-		<div class="col-md-12">
-			<ul class="pagination" ng-repeat="t in threadCache track by $index">
-				<li ng-class="paginationIndex == $index ? 'active' : ''">
-					<a href="javascript:void(0)" ng-click="updatePaginationIndex($index)">{{ $index }}</a>
-				</li>
-			</ul>
+	<div class="row" ng-show="threadCache.length > 1">
+		<div class="col-12">
+			<nav aria-label="Page navigation example">
+				<ul class="pagination justify-content-center">
+					<li class="page-item" ng-class="paginationIndex === 0 ? 'disabled' : ''">
+						<a class="page-link" href="javascript:void(0)" ng-click="updatePaginationIndex(paginationIndex - 1)">Previous</a>
+					</li>
+					<li class="page-item" ng-repeat="t in threadCache track by $index" ng-class="paginationIndex === $index ? 'active' : ''">
+						<a class="page-link" href="javascript:void(0)" ng-click="updatePaginationIndex($index)">{{$index}}</a>
+					</li>
+					<li class="page-item" ng-class="(paginationIndex === (threadCache.length - 1)) ? 'disabled' : ''">
+						<a class="page-link" href="javascript:void(0)" ng-click="updatePaginationIndex(paginationIndex + 1)">Next</a>
+					</li>
+				</ul>
+			</nav>
 		</div>
 	</div>
-
 </div>

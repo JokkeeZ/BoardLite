@@ -1,12 +1,14 @@
 <div class="container" ng-controller="RuleController">
 	<div class="row">
-		<div class="col-md-12 text-center">
+		
+		<div class="col-12 text-center">
 			<h2 ng-bind="lang.Rules"></h2>
 			<h4 ng-bind="lang.Rules_desc"></h4>
 			<h6 ng-bind="lang.Rules_desc_small"></h6>
 			<hr/>
 		</div>
-		<div class="col-md-12">
+
+		<div class="col-12">
 			<div class="list-group">
 				<li class="list-group-item" ng-repeat="rule in rules track by $index">{{$index}}. {{rule}}</li>
 			</div>

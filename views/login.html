@@ -1,41 +1,34 @@
-<div class="container" ng-controller="LoginController">
+<div class="container" ng-controller="AuthenticationController">
 	<div class="row">
 	
-		<div class="col-md-12" ng-show="success">
-			<div class="alert alert-dismissible alert-success">
-				<button type="button" class="close" data-dismiss="alert">&times;</button>
-				<p ng-bind="lang.Login_success"></p>
-			</div>
+		<div class="col-12" ng-hide="success === undefined">
+			<div class="alert alert-danger fade show" role="alert" ng-bind="lang.Login_error"></div>
 		</div>
 		
-		<div class="col-md-12" ng-show="success != true && success != null">
-			<div class="alert alert-dismissible alert-warning">
-				<button type="button" class="close" data-dismiss="alert">&times;</button>
-				<p ng-bind="lang.Login_error"></p>
-			</div>
-		</div>
-		
-		<div class="col-md-12">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-header" ng-bind="lang.Login"></div>
 
-			<div class="panel panel-default">
-				<div class="panel-heading" ng-bind="lang.Login"></div>
-				<div class="panel-body">
+				<div class="card-body">
 					<form>
 						<div class="form-group" ng-class="nameEmpty === true ? 'has-error' : ''">
 							<label for="name" ng-bind="lang.Username"></label>
-							<input type="text" id="name" name="name" ng-model="name" class="form-control" placeholder="{{lang.Username}}">
+							<input type="text" id="name" name="name" ng-model="data.name" class="form-control" placeholder="{{lang.Username}}" required>
 						</div>
+
 						<div class="form-group" ng-class="passEmpty === true ? 'has-error' : ''">
 							<label for="pass" ng-bind="lang.Password"></label>
-							<input type="password" id="pass" name="pass" ng-model="pass" class="form-control" placeholder="{{lang.Password}}">
+							<input type="password" id="pass" name="pass" ng-model="data.pass" class="form-control" placeholder="{{lang.Password}}" required>
 						</div>
+
 						<div class="form-group">
-							<button type="submit" ng-click="loginUser()" class="btn btn-primary" ng-bind="lang.Login"></button>
+							<button type="submit" ng-click="loginUser(data)" class="btn btn-primary" ng-bind="lang.Login"></button>
 						</div>
 					</form>
 				</div>
-			</div>
 
+			</div>
 		</div>
+
 	</div>
 </div>

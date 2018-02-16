@@ -69,6 +69,8 @@ app.controller('BoardController', function($scope, $routeParams, Ajax, $window, 
 	$scope.updatePaginationIndex = function(idx) {
 		$scope.paginationIndex = idx;
 		getThreads();
+
+		console.log($scope.threadCache.length + ' tc, ' + $scope.paginationIndex + ' idx');
 	};
 
 	$scope.createThread = function() {

@@ -1,14 +1,14 @@
-<div class="container-fluid" ng-controller="ThreadController">
+<div class="container" ng-controller="ThreadController">
+	
 	<div class="row">
-		<div class="col-md-10 col-md-offset-1">
-
-			<div class="panel panel-default" ng-hide="startPost.locked === '1'">
-				<div class="panel-heading" ng-bind="lang.Add_reply"></div>
-				<div class="panel-body">
+		<div class="col-12">
+			<div class="card" ng-hide="startPost.locked === '1'">
+				<div class="card-header" ng-bind="lang.Add_reply"></div>
+				<div class="card-body">
 					<form>
 						<div class="form-group">
 							<label for="fil" ng-bind="lang.File"></label>
-							<input type="file" id="fil" file-model="myFile" class="form-control-static">
+							<input type="file" id="fil" file-model="myFile" class="form-control-file">
 						</div>
 						<div class="form-group" ng-class="messageEmpty === true ? 'has-error' : ''">
 							<label for="message" ng-bind="lang.Message"></label>
@@ -20,36 +20,41 @@
 					</form>
 				</div>
 			</div>
-
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-md-10 col-md-offset-1">
 
-			<div class="panel panel-default">
-				<div class="panel-heading" id="msg_{{startPost.msg_id}}">
+	<div class="row">
+		<div class="col-12">
+
+			<div class="card">
+				<div class="card-header" id="msg_{{startPost.msg_id}}">
 					<a href="javascript:void(0)" ng-bind-html="startPost.title | nl2br | bbcode"></a>
-					<p class="pull-right" ng-show="isAdmin">
-						<button class="btn btn-danger btn-xs">{{lang.IP}}: {{startPost.ip}}</button>
-						<button class="btn btn-danger btn-xs" ng-click="setThreadLockState()" ng-bind="startPost.locked === '1' ? lang.Unlock_Thread : lang.Lock_Thread"></button>
-						<button class="btn btn-danger btn-xs" admin-delete-thread="{{startPost.msg_id}}" ng-bind="lang.Delete_thread"></button>
+					<p class="float-right" ng-show="isAdmin">
+						<button class="btn btn-danger btn-sm">{{lang.IP}}: {{startPost.ip}}</button>
+						<button class="btn btn-danger btn-sm" ng-click="setThreadLockState()" ng-bind="startPost.locked === '1' ? lang.Unlock_Thread : lang.Lock_Thread"></button>
+						<button class="btn btn-danger btn-sm" admin-delete-thread="{{startPost.msg_id}}" ng-bind="lang.Delete_thread"></button>
 					</p>
-					<h6><text style="color:red">{{startPost.locked === '1' ? '[' + lang.Locked + ']' + ' &middot; ' : ''}}</text>{{lang.Id}}: <a ng-click="answer(startPost.msg_id)" style="cursor:pointer">{{ startPost.msg_id }}</a> &middot; {{lang.Posted}}: {{ startPost.posted }} &middot; {{lang.Anonymous}}</h6>
+					<h6>
+						<text style="color:red">{{startPost.locked === '1' ? '[' + lang.Locked + ']' + ' &middot; ' : ''}}</text>{{lang.Id}}: 
+						<a ng-click="answer(startPost.msg_id)" style="cursor:pointer">{{ startPost.msg_id }}</a>
+						&middot; {{lang.Posted}}: {{ startPost.posted }} &middot; {{lang.Anonymous}}
+					</h6>
 				</div>
-				<div class="panel-body">
+
+				<div class="card-body">
 					<div class="row">
-						<div class="col-md-5" ng-hide="startPost.fileType == 'no_file'" ng-class="startPost.zoom !== true ? 'col-md-2' : ''" ng-click="startPostZoom()">
+						<div class="col-3" ng-hide="startPost.fileType == 'no_file'" ng-class="startPost.zoom !== true ? 'col-2' : ''" ng-click="startPostZoom()">
 							<div class="embed-responsive embed-responsive-16by9" ng-if="startPost.fileType == 'video'">
 								<video controls>
-									<source ng-src="{{startPost.img_url}}" type="video/mp4">
+									<source ng-src="{{startPost.img_url}}" type="video/{{thread.fileType.extension}}">
 								</video>
 							</div>
-							<div class="img-responsive" ng-if="startPost.fileType == 'image'">
-								<img ng-src="{{startPost.img_url !== 'undefined' ? startPost.img_url : 'assets/img/empty.png'}}" class="img-responsive">
+							<div class="img-fluid" ng-if="startPost.fileType == 'image'">
+								<img fallback-src="assets/img/empty.png" ng-src="{{startPost.img_url}}" class="img-fluid">
 							</div>
 						</div>
-						<div ng-class="startPost.fileType.type === 'no_file' ? 'col-md-12' : 'col-md-9'">
-							<p class="message" ng-bind-html="startPost.content | nl2br | bbcode"></p>
+						<div ng-class="startPost.fileType.type === 'no_file' ? 'col-12' : 'col-9'">
+							<p class="card-text message" ng-bind-html="startPost.content | nl2br | bbcode"></p>
 						</div>
 					</div>
 				</div>
@@ -57,31 +62,32 @@
 
 		</div>
 	</div>
-	<div class="row" ng-show="replies.length > 0">
-		<div class="col-md-10 col-md-offset-1" ng-repeat="reply in replies">
 
-			<div class="panel panel-default" id="msg_{{reply.msg_id}}">
-				<div class="panel-heading">
-					<p class="pull-right" ng-show="isAdmin">
-						<button class="btn btn-danger btn-xs">{{lang.IP}}: {{reply.ip}}</button>
-						<button class="btn btn-danger btn-xs" disabled ng-bind="lang.Delete_reply"></button>
+	<div class="row" ng-show="replies.length > 0" ng-repeat="reply in replies">
+		<div class="col-12">
+
+			<div class="card" id="msg_{{reply.msg_id}}">
+				<div class="card-header">
+					<p class="float-right" ng-show="isAdmin">
+						<button class="btn btn-danger btn-sm">{{lang.IP}}: {{reply.ip}}</button>
+						<button class="btn btn-danger btn-sm" disabled ng-bind="lang.Delete_reply"></button>
 					</p>
 					<h6>{{lang.Id}}: <a ng-click="answer(reply.msg_id)" style="cursor:pointer">{{ reply.msg_id }}</a> &middot; {{lang.Posted}}: {{ reply.posted }} &middot; {{lang.Anonymous}}</h6>
 				</div>
-				<div class="panel-body">
+				<div class="card-body">
 					<div class="row">
-						<div class="col-md-5" ng-hide="reply.fileType == 'no_file'" ng-class="reply.zoom !== true ? 'col-md-2' : ''" ng-click="replyZoom(reply)">
+						<div class="col-3" ng-hide="reply.fileType == 'no_file'" ng-class="reply.zoom !== true ? 'col-2' : ''" ng-click="replyZoom(reply)">
 							<div class="embed-responsive embed-responsive-16by9" ng-if="reply.fileType == 'video'">
 								<video controls>
 									<source ng-src="{{reply.img_url}}" type="video/mp4">
 								</video>
 							</div>
-							<div class="img-responsive" ng-if="reply.fileType == 'image'">
-								<img ng-src="{{reply.img_url !== 'undefined' ? reply.img_url : 'assets/img/empty.png'}}" class="img-responsive">
+							<div ng-if="reply.fileType == 'image'">
+								<img fallback-src="assets/img/empty.png" ng-src="{{reply.img_url !== 'undefined' ? reply.img_url : 'assets/img/empty.png'}}" class="img-fluid">
 							</div>
 						</div>
-						<div ng-class="reply.fileType.type === 'no_file' ? 'col-md-12' : 'col-md-9'">
-							<p class="message" ng-bind-html="reply.content | nl2br | bbcode"></p>
+						<div ng-class="reply.fileType.type === 'no_file' ? 'col-12' : 'col-9'">
+							<p class="card-text message" ng-bind-html="reply.content | nl2br | bbcode"></p>
 						</div>
 					</div>
 				</div>

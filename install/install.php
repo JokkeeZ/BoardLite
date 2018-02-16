@@ -1,5 +1,6 @@
 <?php
 define('APP', 1);
+define('DEBUG', true);
 
 require '../static/JsonResponse.php';
 
@@ -82,11 +83,11 @@ foreach ($_POST as $k => $v)
 
 createConfigurationFile($_POST);
 
-$sqlFile = '../board_lite.sql';
+$sqlFile = 'board_lite.sql';
 
 if (!file_exists($sqlFile))
 {
-	$response->append('error', '../board_lite.sql doesn\'t exist.');
+	$response->append('error', 'board_lite.sql doesn\'t exist.');
 	die($response->to_json());
 }
 
@@ -115,8 +116,11 @@ function delTree($dir)
 
 if ($stmt)
 {
-	// Delete install directory.
-	delTree(__DIR__);
+	if (!DEBUG)
+	{
+		// Delete install directory.
+		delTree(__DIR__);
+	}
 	
 	$response->append('error', 0);
 	die($response->to_json());

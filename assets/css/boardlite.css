@@ -12,3 +12,37 @@
 	width: 80%;
 	word-wrap: break-word;
 }
+
+.container {
+	margin-top: 5%;
+}
+
+.card {
+	background-color: #e9ecef;
+	border-radius: 0%;
+}
+
+a:hover {
+	text-decoration: unset;
+}
+
+.list-group-item {
+	border-radius: 0% !important;
+}
+
+.row {
+	padding: 5px;
+}
+
+textarea.form-control {
+	border-radius: 0%;
+	min-height: 50px;
+}
+
+input.form-control {
+	border-radius: 0%;
+}
+
+.navbar {
+	min-height: 20px;
+}

@@ -8,6 +8,9 @@ app.controller('AdminController', function($scope, User, Ajax) {
 	getBoards();
 
 	$scope.deleteBoard = function(id) {
+		var result = confirm('Selected board and its threads + replies will be deleted permanently.');
+		if (!result) return;
+
 		Ajax.deleteBoard(id).success(function(result) {
 			if (result.success) {
 				for (let i = 0; i < $scope.boards.length; ++i) {

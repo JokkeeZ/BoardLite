@@ -4,10 +4,13 @@ app.constant('PATH', 'static/global.php');
 
 app.run(function($rootScope, Ajax, User, $window) {
 	$rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
-		if (current.$$route.adminOnly && (!User.isLoggedIn() || !User.isAdmin())) {
+		if (current.$$route !== undefined && current.$$route.adminOnly && (!User.isLoggedIn() || !User.isAdmin())) {
 			$window.location.href = '#/';
 			console.log('Redirecting non-admin user back..');
 		}
+
+		let element = document.getElementById('navbarSupportedContent');
+		element.classList.remove('show');
 
 		// Reduces ajax calls.
 		if ($rootScope.lang === undefined) {
@@ -237,6 +240,16 @@ app.run(function($rootScope, Ajax, User, $window) {
 				scope.$apply(function() {
 					modelSetter(scope, element[0].files[0]);
 				});
+			});
+		}
+	}
+})
+
+.directive('fallbackSrc', function() {
+	return {
+		link: function(scope, element, attrs) {
+			element.bind('error', function() {
+				angular.element(this).attr('src', attrs.fallbackSrc);
 			});
 		}
 	}
