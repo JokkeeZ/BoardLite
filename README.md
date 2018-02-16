@@ -23,9 +23,7 @@ BoardLite is imageboard application crafted with AngularJS and PHP 7.1.
 
 # External libraries / frameworks
 * [AngularJS](https://angularjs.org/)
-* [jQuery](https://jquery.com/)
-* [Bootstrap](https://getbootstrap.com/docs/3.3/)
-* [Bootswatch theme](https://bootswatch.com/3/yeti/)
+* [Bootstrap](https://getbootstrap.com/)
 
 # Issues / Development
 * THIS REPOSITORY IS NOT ACTIVELY DEVELOPED! JUST FOR FUN. SOMETHING MISSING? CONTRIBUTE!
