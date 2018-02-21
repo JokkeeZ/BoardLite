@@ -1,0 +1,11 @@
+# Ignore PhpStorm project files.
+.idea/board_lite.iml
+.idea/misc.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/php.xml
+.idea/vcs.xml
+.idea/watcherTasks.xml
+*.xml
+*.xml___jb_old___
+*.xml___jb_tmp___

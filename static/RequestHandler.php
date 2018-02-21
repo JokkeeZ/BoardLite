@@ -1,11 +1,13 @@
-<?php defined('APP') or die;
+<?php
 
 /**
  * Class used for handling frontend -> backend requests.
  * 
  * @author JokkeeZ
  * @version 1.0
+ *
  * @copyright Copyright © 2018 JokkeeZ
+ * @license Licensed under MIT License.
  */
 class RequestHandler
 {
@@ -46,13 +48,14 @@ class RequestHandler
 
 	/**
 	 * Handles incoming request with given input $data.
+	 *
+	 * @param string $request Incoming request from frontedn. (Some of the requests defined above.)
+	 * @param array $data If GET request, $_GET array. If POST, $_POST array.
 	 */
 	public static function handle_request($request, $data)
 	{
-		// Check if request exits.
 		if (array_key_exists($request, self::$requests)) {
-			// Handle request.
-			echo self::$requests[$request]->handle_request($data);
+			exit(self::$requests[$request]->handle_request($data));
 		}
 	}
 }

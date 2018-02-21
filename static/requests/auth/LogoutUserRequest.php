@@ -1,8 +1,8 @@
-<?php defined('APP') or die;
+<?php
 
-class LogoutUserRequest extends AuthenticationController implements IRequest
+class LogoutUserRequest extends Authentication implements IRequest
 {
-	public function handle_request($data) : string
+	public function handle_request(array $data) : string
 	{
 		$success = $this->logout();
 

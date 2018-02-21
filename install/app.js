@@ -3,14 +3,21 @@ const app = angular.module('installer', []);
 app.controller('InstallController', function($scope, $http, $window) {
 
 	$scope.install = function(data) {
+		if (data.aPass !== data.aPassConfirm) {
+			alert('Passwords doesn\'t match!');
+			data.aPass = '';
+			data.aPassConfirm = '';
+			return;
+		}
+
 		if (data.dbPass === undefined)
 			data.dbPass = '';
 
 		if (data.appLang === undefined)
 			data.appLang = 'en_US';
 
-		let formData = new FormData();
-		formData.append('submit', true);
+		const formData = new FormData();
+		formData.append('submit', 'true');
 		formData.append('aName', data.aName);
 		formData.append('aPass', data.aPass);
 		formData.append('appLang', data.appLang);

@@ -1,11 +1,13 @@
-<?php defined('APP') or die;
+<?php
 
 /**
  * Simple Database class using PDO.
  * 
  * @author JokkeeZ
  * @version 1.1
+ *
  * @copyright Copyright © 2016 - 2018 JokkeeZ
+ * @license Licensed under MIT License.
  */
 class Database extends PDO
 {
@@ -17,19 +19,14 @@ class Database extends PDO
 		global $_CONFIG;
 
 		try {
-			parent::__construct(sprintf(
-				$_CONFIG['db_conn_str'],
-				$_CONFIG['db_host'],
-				$_CONFIG['db_name']),
-				$_CONFIG['db_user'],
-				$_CONFIG['db_pass']);
+			parent::__construct($_CONFIG['db_dsn'], $_CONFIG['db_user'], $_CONFIG['db_pass']);
 
 			$this->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 			$this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		}
 		catch (PDOException $e) {
 			Logger::write_data($e->getMessage());
-			die;
+			exit;
 		}
 	}
 }

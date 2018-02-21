@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteCond %{HTTP:X-Requested-With} !=XMLHttpRequest
+RewriteCond %{HTTP:X-REQUESTED-WITH} !^(XMLHttpRequest)$
+RewriteRule \.php$ - [L,F]

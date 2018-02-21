@@ -1,13 +1,13 @@
 {
 	"BoardLite_Lang":
 	{
-		"Version": 0.3,
 		"Name": "English",
 		"Author": "JokkeeZ"
 	},
 	
 	"BoardLite_Texts":
 	{
+		"Html_Lang": "en",
 		"Boards": "Boards",
 		"Threads": "Threads",
 		"Boards_desc": "Here is some boards you can start with.",
@@ -43,6 +43,7 @@
 		"Login_error": "Invalid username or password! Try again.",
 		"Username": "Username",
 		"Password": "Password",
+		"Password_Confirm": "Confirm password",
 		"Adminpanel": "Adminpanel",
 		"Name": "Name",
 		"Prefix": "Prefix",
@@ -72,6 +73,13 @@
 		"View": "View",
 		"Locked": "LOCKED",
 		"Lock_Thread": "Lock thread",
-		"Unlock_Thread": "Unlock thread"
+		"Unlock_Thread": "Unlock thread",
+
+		"Important_Files_Missing": "Important application files missing.",
+		"Backup_Files_Plz": "Please, backup your database and reinstall BoardLite from",
+		"Here": "Here",
+
+		"Next": "Next",
+		"Previous": "Previous"
 	}
 }

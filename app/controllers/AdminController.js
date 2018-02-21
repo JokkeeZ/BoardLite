@@ -4,17 +4,17 @@ app.controller('AdminController', function($scope, User, Ajax) {
 		Ajax.getBoards().success(function(result) {
 			$scope.boards = result;
 		});
-	};
+	}
 	getBoards();
 
 	$scope.deleteBoard = function(id) {
-		var result = confirm('Selected board and its threads + replies will be deleted permanently.');
+		let result = confirm('Selected board and its threads will be deleted permanently.');
 		if (!result) return;
 
 		Ajax.deleteBoard(id).success(function(result) {
 			if (result.success) {
 				for (let i = 0; i < $scope.boards.length; ++i) {
-					if ($scope.boards[i].id == id) {
+					if ($scope.boards[i].id === id) {
 						$scope.boards.splice(i);
 						break;
 					}
@@ -23,19 +23,8 @@ app.controller('AdminController', function($scope, User, Ajax) {
 		});
 	};
 	
-	$scope.createBoard = function() {
-		$scope.nameEmpty = ($scope.name === undefined);
-		$scope.prefixEmpty = ($scope.prefix === undefined);
-		$scope.descEmpty = ($scope.desc === undefined);
-		$scope.tagEmpty = ($scope.tag === undefined);
-
-		if ($scope.nameEmpty
-			|| $scope.prefixEmpty
-			|| $scope.descEmpty
-			|| $scope.tagEmpty)
-			return;
-
-		Ajax.createBoard($scope.name, $scope.desc, $scope.prefix, $scope.tag).success(function(result) {
+	$scope.createBoard = function(name, desc, prefix, tag) {
+		Ajax.createBoard(name, desc, prefix, tag).success(function(result) {
 			if (result.success) {
 				getBoards();
 			}

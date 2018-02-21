@@ -1,17 +1,17 @@
-<?php defined('APP') or die;
+<?php
 
-class AddReplyRequest extends ThreadController implements IRequest
+class AddReplyRequest extends Threads implements IRequest
 {
-	public function handle_request($data) : string
+	public function handle_request(array $data) : string
 	{
-		$file = new FileController();
+		$file = new File();
 		$uploaded = $file->upload();
 		
 		$target_file = '';
 		if ($uploaded)
-			$target_file = '../../uploads/' . $file->get_name();
+			$target_file = '../../uploads/' . $file->getName();
 
-		$replyData = $this->add_reply(
+		$replyData = $this->addReply(
 			$data['message'],
 			$data['thread_id'],
 			$target_file

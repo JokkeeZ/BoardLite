@@ -1,10 +1,10 @@
-<?php defined('APP') or die;
+<?php
 
-class CreateBoardRequest extends BoardController implements IRequest
+class CreateBoardRequest extends Boards implements IRequest
 {
-	public function handle_request($data) : string
+	public function handle_request(array $data) : string
 	{
-		$success = $this->create_board(
+		$success = $this->createBoard(
 			$data['name'],
 			$data['desc'],
 			$data['prefix'],

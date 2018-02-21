@@ -1,10 +1,10 @@
 <?php
 
-class LockThreadRequest extends ThreadController implements IRequest
+class LockThreadRequest extends Threads implements IRequest
 {
-	public function handle_request($data) : string
+	public function handle_request(array $data) : string
 	{
-		$success = $this->set_thread_lock_state($data['id'], $data['state']);
+		$success = $this->setThreadLockState($data['id'], $data['state']);
 
 		$response = new JsonResponse();
 		$response->append('success', $success);

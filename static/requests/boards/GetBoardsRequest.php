@@ -1,11 +1,11 @@
-<?php defined('APP') or die;
+<?php
 
-class GetBoardsRequest extends BoardController implements IRequest
+class GetBoardsRequest extends Boards implements IRequest
 {
-	public function handle_request($data) : string
+	public function handle_request(array $data) : string
 	{
 		$response = new JsonResponse();
-		$response->init_data($this->get_boards());
+		$response->init_data($this->getBoards());
 
 		return $response->to_json();
 	}

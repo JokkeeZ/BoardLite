@@ -1,8 +1,8 @@
-<?php defined('APP') or die;
+<?php
 
-class CreateUserRequest extends AuthenticationController implements IRequest
+class CreateUserRequest extends Authentication implements IRequest
 {
-	public function handle_request($data) : string
+	public function handle_request(array $data) : string
 	{
 		$success = $this->register($data['name'], $data['pass']);
 

@@ -1,10 +1,10 @@
-<?php defined('APP') or die;
+<?php
 
-class GetThreadStartPostRequest extends ThreadController implements IRequest
+class GetThreadStartPostRequest extends Threads implements IRequest
 {
-	public function handle_request($data) : string
+	public function handle_request(array $data) : string
 	{
-		$startPost = $this->get_start_post($data['id']);
+		$startPost = $this->getStartPost($data['id']);
 		
 		$response = new JsonResponse();
 		$response->append('data', $startPost);

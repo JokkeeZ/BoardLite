@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="boardLite">
+<html lang="{{lang.Html_Lang}}" ng-app="boardLite">
 	<head>
 		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-		<title ng-controller="TitleController" ng-bind="appName">...</title>
+		<title ng-controller="TitleController">{{appName}}</title>
 
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 			integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -14,12 +13,12 @@
 	</head>
 	<body>
 		<nav class="bl-nav navbar navbar-dark navbar-toggleable-md py-0 navbar-expand-sm bg-dark">
-			<a class="navbar-text" href="#/" ng-bind="appName"></a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+			<a class="navbar-text" href="#/">{{appName}}</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#blNav" aria-controls="blNav"
 			 aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse justify-content-md-center" id="navbarSupportedContent">
+			<div class="collapse navbar-collapse justify-content-md-center" id="blNav">
 				<ul class="navbar-nav mr-auto" ng-controller="BoardListController">
 					<li class="nav-item" ng-repeat="board in boards">
 						<a class="nav-link" href="#/board/{{board.prefix}}">/{{board.prefix}}/</a>
@@ -27,22 +26,28 @@
 				</ul>
 				<ul class="navbar-nav ml-aut" ng-controller="AuthenticationController">
 					<li class="nav-item" ng-hide="!admin">
-						<a class="nav-link" href="#/adminpanel" ng-bind="lang.Adminpanel"></a>
+						<a class="nav-link" href="#/adminpanel">{{lang.Adminpanel}}</a>
 					</li>
 					<li class="nav-item" ng-hide="loggedIn">
-						<a class="nav-link" href="#/login" ng-bind="lang.Login"></a>
+						<a class="nav-link" href="#/login">{{lang.Login}}</a>
 					</li>
 					<li class="nav-item" ng-hide="loggedIn">
-						<a class="nav-link" href="#/register" ng-bind="lang.Register"></a>
+						<a class="nav-link" href="#/register">{{lang.Register}}</a>
 					</li>
 					<li class="nav-item" ng-hide="!loggedIn">
-						<a class="nav-link" href="javascript:void(0)" ng-click="logout()" ng-bind="lang.Logout"></a>
+						<a class="nav-link" href="javascript:void(0)" ng-click="logout()">{{lang.Logout}}</a>
 					</li>
 				</ul>
 			</div>
 		</nav>
 
 		<div ng-view></div>
+
+		<footer class="footer">
+			<div class="container">
+				<h3 class="lead text-center">Powered by BoardLite. Copyright &copy; 2016 - 2018.</h3>
+			</div>
+		</footer>
 
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 		crossorigin="anonymous"></script>

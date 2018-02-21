@@ -1,12 +1,12 @@
-<?php defined('APP') or die;
+<?php
 
-class UpdateBoardRequest extends BoardController implements IRequest
+class UpdateBoardRequest extends Boards implements IRequest
 {
-	public function handle_request($data) : string
+	public function handle_request(array $data) : string
 	{
-		$oldPrefix = $this->get_prefix_with_id($data['id']);
+		$oldPrefix = $this->getPrefixWithId($data['id']);
 
-		$success = $this->update_board(
+		$success = $this->updateBoard(
 			$data['id'],
 			$data['name'],
 			$data['desc'],
@@ -14,8 +14,8 @@ class UpdateBoardRequest extends BoardController implements IRequest
 			$data['tag']
 		);
 
-		$threads = new ThreadController();
-		$threads->update_thread_prefixes($oldPrefix, $data['prefix']);
+		$threads = new Threads();
+		$threads->updateThreadPrefixes($oldPrefix, $data['prefix']);
 		
 		$response = new JsonResponse();
 		$response->append('success', $success);

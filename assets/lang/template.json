@@ -1,13 +1,13 @@
 {
 	"BoardLite_Lang":
 	{
-		"Version": 0.0,
 		"Name": "Template language",
 		"Author": "Author name"
 	},
 
 	"BoardLite_Texts":
 	{
+		"Html_Lang": "",
 		"Boards": "",
 		"Threads": "",
 		"Boards_desc": "",
@@ -43,6 +43,7 @@
 		"Login_error": "",
 		"Username": "",
 		"Password": "",
+		"Password_Confirm": "",
 		"Adminpanel": "",
 		"Name": "",
 		"Prefix": "",
@@ -72,6 +73,13 @@
 		"View": "",
 		"Locked": "",
 		"Lock_Thread": "",
-		"Unlock_Thread": ""
+		"Unlock_Thread": "",
+
+		"Important_Files_Missing": "",
+		"Backup_Files_Plz": "",
+		"Here": "",
+
+		"Next": "",
+		"Previous": ""
 	}
 }

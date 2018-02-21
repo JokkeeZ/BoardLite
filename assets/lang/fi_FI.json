@@ -1,13 +1,13 @@
 {
 	"BoardLite_Lang":
 	{
-		"Version": 0.3,
 		"Name": "Suomi",
 		"Author": "JokkeeZ"
 	},
 
 	"BoardLite_Texts":
 	{
+		"Html_Lang": "fi",
 		"Boards": "Laudat",
 		"Threads": "Langat",
 		"Boards_desc": "Tässä on lautoja, joilla pääset alkuun.",
@@ -27,7 +27,7 @@
 		"Anonymous": "Anonyymi",
 		"Add_reply": "Vastaa lankaan",
 		"Message_for_reply": "Viesti vastaukseen",
-		"Not_found_title": "Voi ei! 404, sivua ei löytynyt!",
+		"Not_found_title": "404! Sivua ei löytynyt!",
 		"Not_found_desc": "Voit palata etusivulle navigointipalkista.",
 		"No_threads_on_board": "Tässä laudassa ei ole vielä yhtään lankaa.",
 		"No_threads_create_maybe": "Ehkä sinun tulisi luoda uusi lanka tälle laudalle?",
@@ -43,6 +43,7 @@
 		"Login_error": "Väärä käyttäjänimi tai salasana! Kokeile uudelleen.",
 		"Username": "Käyttäjänimi",
 		"Password": "Salasana",
+		"Password_Confirm": "Salasanavahvistus",
 		"Adminpanel": "Hallintapaneeli",
 		"Name": "Nimi",
 		"Prefix": "Tunniste",
@@ -72,6 +73,13 @@
 		"View": "Katsele",
 		"Locked": "LUKITTU",
 		"Lock_Thread": "Lukitse lanka",
-		"Unlock_Thread": "Avaa lanka"
+		"Unlock_Thread": "Avaa lanka",
+
+		"Important_Files_Missing": "Ohjelmiston tärkeitä tiedostoja puuttuu.",
+		"Backup_Files_Plz": "Backuppaa tietokanta ja asenna BoardLite uudelleen",
+		"Here": "Täältä",
+
+		"Next": "Seuraava",
+		"Previous": "Edellinen"
 	}
 }

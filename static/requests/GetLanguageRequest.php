@@ -1,9 +1,9 @@
-<?php defined('APP') or die;
+<?php
 
-class GetLanguageRequest extends LanguageController implements IRequest
+class GetLanguageRequest extends Language implements IRequest
 {
-	public function handle_request($data) : string
+	public function handle_request(array $data) : string
 	{
-		return $this->get_language_json();
+		return $this->getLanguageJson();
 	}
 }

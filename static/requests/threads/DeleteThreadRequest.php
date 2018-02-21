@@ -1,10 +1,10 @@
-<?php defined('APP') or die;
+<?php
 
-class DeleteThreadRequest extends ThreadController implements IRequest
+class DeleteThreadRequest extends Threads implements IRequest
 {
-	public function handle_request($data) : string
+	public function handle_request(array $data) : string
 	{
-		$success = $this->delete_thread($data['id']);
+		$success = $this->deleteThread($data['id']);
 
 		$response = new JsonResponse();
 		$response->append('success', $success);

@@ -1,8 +1,8 @@
-<?php defined('APP') or die;
+<?php
 
 class GetRulesRequest implements IRequest
 {
-	public function handle_request($data) : string
+	public function handle_request(array $data) : string
 	{
 		global $_RULES;
 		

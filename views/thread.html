@@ -5,17 +5,17 @@
 			<div class="card" ng-hide="startPost.locked === '1'">
 				<div class="card-header" ng-bind="lang.Add_reply"></div>
 				<div class="card-body">
-					<form>
+					<form ng-submit="postReply(data)">
 						<div class="form-group">
 							<label for="fil" ng-bind="lang.File"></label>
-							<input type="file" id="fil" file-model="myFile" class="form-control-file">
-						</div>
-						<div class="form-group" ng-class="messageEmpty === true ? 'has-error' : ''">
-							<label for="message" ng-bind="lang.Message"></label>
-							<textarea name="message" id="message" ng-model="message" class="form-control" placeholder="{{lang.Message_for_reply}}"></textarea>
+							<input type="file" id="fil" file-model="data.file" class="form-control-file">
 						</div>
 						<div class="form-group">
-							<button type="submit" ng-click="postReply()" class="btn btn-primary" ng-bind="lang.Send"></button>
+							<label for="message" ng-bind="lang.Message"></label>
+							<textarea name="message" id="message" ng-model="data.message" class="form-control" placeholder="{{lang.Message_for_reply}}" required></textarea>
+						</div>
+						<div class="form-group">
+							<button type="submit" class="btn btn-primary" ng-bind="lang.Send"></button>
 						</div>
 					</form>
 				</div>
@@ -50,7 +50,7 @@
 								</video>
 							</div>
 							<div class="img-fluid" ng-if="startPost.fileType == 'image'">
-								<img fallback-src="assets/img/empty.png" ng-src="{{startPost.img_url}}" class="img-fluid">
+								<img ng-src="{{startPost.img_url}}" class="img-fluid" fallback-src>
 							</div>
 						</div>
 						<div ng-class="startPost.fileType.type === 'no_file' ? 'col-12' : 'col-9'">
@@ -70,7 +70,7 @@
 				<div class="card-header">
 					<p class="float-right" ng-show="isAdmin">
 						<button class="btn btn-danger btn-sm">{{lang.IP}}: {{reply.ip}}</button>
-						<button class="btn btn-danger btn-sm" disabled ng-bind="lang.Delete_reply"></button>
+						<button class="btn btn-danger btn-sm" disabled>{{lang.Delete_reply}}</button>
 					</p>
 					<h6>{{lang.Id}}: <a ng-click="answer(reply.msg_id)" style="cursor:pointer">{{ reply.msg_id }}</a> &middot; {{lang.Posted}}: {{ reply.posted }} &middot; {{lang.Anonymous}}</h6>
 				</div>
@@ -83,7 +83,7 @@
 								</video>
 							</div>
 							<div ng-if="reply.fileType == 'image'">
-								<img fallback-src="assets/img/empty.png" ng-src="{{reply.img_url !== 'undefined' ? reply.img_url : 'assets/img/empty.png'}}" class="img-fluid">
+								<img fallback-src ng-src="{{reply.img_url}}" class="img-fluid" fallback-src>
 							</div>
 						</div>
 						<div ng-class="reply.fileType.type === 'no_file' ? 'col-12' : 'col-9'">

@@ -1,18 +1,18 @@
-<?php defined('APP') or die;
+<?php
 
-class CreateThreadRequest extends ThreadController implements IRequest
+class CreateThreadRequest extends Threads implements IRequest
 {
-	public function handle_request($data) : string
+	public function handle_request(array $data) : string
 	{
-		$file = new FileController();
+		$file = new File();
 		$uploaded = $file->upload();
 		
 		$target_file = '';
 		if ($uploaded) {
-			$target_file = '../../uploads/' . $file->get_name();
+			$target_file = '../../uploads/' . $file->getName();
 		}
 
-		$thread = $this->create_thread(
+		$thread = $this->createThread(
 			((empty($data['title'])) ? '' : $data['title']),
 			$data['message'],
 			$data['prefix'],

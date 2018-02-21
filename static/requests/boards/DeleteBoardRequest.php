@@ -1,21 +1,21 @@
-<?php defined('APP') or die;
+<?php
 
-class DeleteBoardRequest extends BoardController implements IRequest
+class DeleteBoardRequest extends Boards implements IRequest
 {
-	public function handle_request($data) : string
+	public function handle_request(array $data) : string
 	{
 		$response = new JsonResponse();
 		
-		$prefix = $this->get_prefix_with_id($data['id']);
+		$prefix = $this->getPrefixWithId($data['id']);
 		if ($prefix == null) {
 			$response->append('success', false);
 			return $response->to_json();
 		}
 
-		$threads = new ThreadController();
-		$rr = $threads->delete_threads_with_prefix($prefix);
+		$threads = new Threads();
+		$rr = $threads->deleteThreadsWithPrefix($prefix);
 
-		$success = $this->delete_board($data['id']);
+		$success = $this->deleteBoard($data['id']);
 	
 		$response->append('success', $success);
 		return $response->to_json();

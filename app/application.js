@@ -9,8 +9,10 @@ app.run(function($rootScope, Ajax, User, $window) {
 			console.log('Redirecting non-admin user back..');
 		}
 
-		let element = document.getElementById('navbarSupportedContent');
-		element.classList.remove('show');
+		let element = angular.element(document.querySelector('#blNav'))
+		if (element !== null && element !== undefined) {
+			element.collapse('hide');
+		}
 
 		// Reduces ajax calls.
 		if ($rootScope.lang === undefined) {
@@ -32,13 +34,13 @@ app.run(function($rootScope, Ajax, User, $window) {
 		},
 		isAdmin: function() {
 			if (this.isLoggedIn()) {
-				var rank = this.get().rank;
-				return rank == 1 || rank == 2;
+                let rank = this.get().rank;
+				return rank === 1 || rank === 2;
 			}
 			return false;
 		},
 		isLoggedIn: function() {
-			var usr = this.get();
+			let usr = this.get();
 			return usr !== undefined;
 		},
 		destroy: function() {
@@ -53,7 +55,7 @@ app.run(function($rootScope, Ajax, User, $window) {
 	}
 })
 
-.factory('Ajax', function($http, $rootScope, PATH) {
+.factory('Ajax', function($http, PATH) {
 	return {
 		getAppConfig: function() {
 			return this.get('get_config', null);
@@ -77,43 +79,47 @@ app.run(function($rootScope, Ajax, User, $window) {
 			return this.get('get_lang', null);
 		},
 		deleteBoard: function(id) {
-			var formData = new FormData();
+			const formData = new FormData();
 			formData.append('id', id);
 			formData.append('request', 'delete_board');
+
 			return this.post(formData);
 		},
 		updateBoard: function(id, name, desc, prefix, tag) {
-			var formData = new FormData();
+            const formData = new FormData();
 			formData.append('id', id);
 			formData.append('name', name);
 			formData.append('desc', desc);
 			formData.append('prefix', prefix);
 			formData.append('tag', tag);
 			formData.append('request', 'update_board');
+
 			return this.post(formData);
 		},
 		createUser: function(name, pass) {
-			var formData = new FormData();
+            const formData = new FormData();
 			formData.append('name', name);
 			formData.append('pass', pass);
 			formData.append('request', 'create_user');
+
 			return this.post(formData);
 		},
 		loginUser: function(name, pass) {
-			var formData = new FormData();
+            const formData = new FormData();
 			formData.append('name', name);
 			formData.append('pass', pass);
 			formData.append('request', 'login_user');
+
 			return this.post(formData);
 		},
 		logoutUser: function() {
-			var formData = new FormData();
-			formData.append('session_close', true);
+            const formData = new FormData();
 			formData.append('request', 'logout_user');
+
 			return this.post(formData);
 		},
 		createThread: function(file, title, message, prefix) {
-			var formData = new FormData();
+            const formData = new FormData();
 			formData.append('file', file);
 			formData.append('title', title);
 			formData.append('message', message);
@@ -122,33 +128,37 @@ app.run(function($rootScope, Ajax, User, $window) {
 			return this.post(formData);
 		},
 		deleteThread: function(id) {
-			var formData = new FormData();
+            const formData = new FormData();
 			formData.append('id', id);
 			formData.append('request', 'delete_thread');
+
 			return this.post(formData);
 		},
 		createBoard: function(name, desc, prefix, tag) {
-			var formData = new FormData();
+            const formData = new FormData();
 			formData.append('name', name);
 			formData.append('desc', desc);
 			formData.append('prefix', prefix);
 			formData.append('tag', tag);
 			formData.append('request', 'create_board');
+
 			return this.post(formData);
 		},
 		addReply: function(file, message, threadId) {
-			var formData = new FormData();
+            const formData = new FormData();
 			formData.append('file', file);
 			formData.append('message', message);
 			formData.append("thread_id", threadId);
 			formData.append('request', 'add_reply');
+
 			return this.post(formData);
 		},
 		setThreadLockState: function(id, state) {
-			var formData = new FormData();
+            const formData = new FormData();
 			formData.append('id', id);
 			formData.append('state', state);
 			formData.append('request', 'lock_thread');
+
 			return this.post(formData);
 		},
 		post: function(formData) {
@@ -163,21 +173,24 @@ app.run(function($rootScope, Ajax, User, $window) {
 		},
 
 		get: function(request, args) {
-			return $http.get(PATH + `?request=${request}` + (args !== null ? args : ''));
+			return $http.get(PATH + `?request=${request}` + (args !== null ? args : ''), {
+                transformRequest: angular.identity,
+                headers: { 'X-Requested-With': 'XMLHttpRequest' }
+			});
 		}
 	}
 })
 
 .filter('nl2br', function($sce) {
-	return function(msg) {
-		var msg = msg.toString().replace(/(?:\\[rn]|[\r\n]+)+/g, '<br>');
+	return function(message) {
+		let msg = message.toString().replace(/(?:\\[rn]|[\r\n]+)+/g, '<br>');
 		return $sce.trustAsHtml(msg);
 	}
 })
 
 .filter('bbcode', function($sce) {
-	return function(msg) {
-		var msg = msg.toString()
+	return function(message) {
+        let msg = message.toString()
 			.replace('[code]', '<pre>')
 			.replace('[/code]', '</pre>')
 			.replace('[b]', '<b>')
@@ -194,13 +207,13 @@ app.run(function($rootScope, Ajax, User, $window) {
 .factory('extensionProvider', function() {
 	return {
 		getFileType: function(fileUrl) {
-			var splitted = fileUrl.toString().split('.');
-			var ext = splitted[splitted.length - 1];
+			let splitted = fileUrl.toString().split('.');
+            let ext = splitted[splitted.length - 1];
 			
-			if (ext == "mp4" || ext == "webm" || ext == "ogg" || ext == "mp3") {
+			if (ext === 'mp4' || ext === 'webm' || ext === 'ogg' || ext === 'mp3') {
 				return { type: 'video', extension: ext };
 			}
-			else if (ext == 'jpg' || ext == 'jpeg' || ext == 'png' || ext == 'bmp' || ext == 'gif') {
+			else if (ext === 'jpg' || ext === 'jpeg' || ext === 'png' || ext === 'bmp' || ext === 'gif') {
 				return { type: 'image', extension: ext };
 			}
 
@@ -218,6 +231,7 @@ app.run(function($rootScope, Ajax, User, $window) {
 				let threadId = parseInt(splitted[0]);
 
 				if (confirm($rootScope.lang.Delete_Thread_Confirm)) {
+
 					Ajax.deleteThread(threadId).then(function(result) {
 						if (result.data.success) {
 							$window.location.href = `#/board/${ splitted[1] }`;
@@ -249,7 +263,7 @@ app.run(function($rootScope, Ajax, User, $window) {
 	return {
 		link: function(scope, element, attrs) {
 			element.bind('error', function() {
-				angular.element(this).attr('src', attrs.fallbackSrc);
+				angular.element(this).attr('src', 'assets/img/empty.png');
 			});
 		}
 	}

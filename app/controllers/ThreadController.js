@@ -14,8 +14,8 @@ app.controller('ThreadController', function($scope, Ajax, $routeParams, $sce, ex
 
 		console.log(result);
 
-		var url = $scope.startPost.img_url.toString();
-		var fileType = extensionProvider.getFileType(url);
+		let url = $scope.startPost.img_url.toString();
+        let fileType = extensionProvider.getFileType(url);
 		$scope.startPost.fileType = fileType.type;
 		$scope.startPost.fileExtension = fileType.extension;
 
@@ -47,7 +47,7 @@ app.controller('ThreadController', function($scope, Ajax, $routeParams, $sce, ex
 			}
 	
 			for (let i = 0; i < result.data.length; ++i) {
-				var matches = result.data[i].content.toString().match(/\d+/g);
+                let matches = result.data[i].content.toString().match(/\d+/g);
 				if (matches != null) {
 					for (let j = 0; j < matches.length; ++j) {
 						result.data[i].content = result.data[i].content.replace('&gt;&gt;' + matches[j],
@@ -56,9 +56,9 @@ app.controller('ThreadController', function($scope, Ajax, $routeParams, $sce, ex
 				}
 	
 				result.data[i].content = $sce.trustAsHtml(result.data[i].content);
-	
-				var url = result.data[i].img_url.toString();
-				var fileType = extensionProvider.getFileType(url);
+
+                let url = result.data[i].img_url.toString();
+                let fileType = extensionProvider.getFileType(url);
 				result.data[i].fileType = fileType.type;
 				result.data[i].fileExtension = fileType.extension;
 				
@@ -67,39 +67,17 @@ app.controller('ThreadController', function($scope, Ajax, $routeParams, $sce, ex
 	
 			$scope.replies = result.data;
 		});
-	};
+	}
+
 	getReplies();
 
-	$scope.postReply = function() {
-		$scope.messageEmpty = false;
-
-		if ($scope.message === undefined) {
-			$scope.messageEmpty = true;
-			angular.element(document.querySelector('#message')).focus();
-			
-			console.log('Message is undefined.');
-			return;
-		}
-
-		console.log('Posting reply...');
-
-		Ajax.addReply($scope.myFile, $scope.message, $routeParams.id).then(function(result) {
+	$scope.postReply = function(data) {
+		Ajax.addReply(data.file, data.message, $routeParams.id).then(function(result) {
 			if (result.data.success) {
-				console.log('Reply posted.');
-				
-				$scope.message = '';
+				data.message = '';
 				getReplies();
 			}
-			console.log(result);
 		});
-	};
-
-	$scope.startPostZoom = function() {
-		$scope.startPost.zoom = !$scope.startPost.zoom;
-	};
-
-	$scope.replyZoom = function(reply) {
-		reply.zoom = !reply.zoom;
 	};
 
 	$scope.answer = function(replyId) {
@@ -107,7 +85,7 @@ app.controller('ThreadController', function($scope, Ajax, $routeParams, $sce, ex
 	};
 
 	$scope.setThreadLockState = function() {
-		var state = $scope.startPost.locked === '1' ? '0' : '1';
+		let state = $scope.startPost.locked === '1' ? '0' : '1';
 
 		Ajax.setThreadLockState($scope.startPost.id, state).then(function(result) {
 			if (result.data.success) {

@@ -2,25 +2,33 @@
 	<div class="row">
 
 		<div class="col-12" ng-hide="success === undefined">
-			<div class="alert alert-danger fade show" role="alert" ng-bind="lang.Register_error"></div>
+			<div class="alert alert-danger fade show" role="alert">{{lang.Register_error}}</div>
 		</div>
 		
 		<div class="col-12">
 			<div class="card">
-				<div class="card-header" ng-bind="lang.Register"></div>
+				<div class="card-header">{{lang.Register}}</div>
 
 				<div class="card-body">
-					<form>
-						<div class="form-group" ng-class="nameEmpty === true ? 'has-error' : ''">
-							<label for="name" ng-bind="lang.Username"></label>
+					<form ng-submit="createUser(data)">
+
+						<div class="form-group">
+							<label for="name">{{lang.Username}}</label>
 							<input type="text" id="name" name="name" ng-model="data.name" class="form-control" placeholder="{{lang.Username}}" required>
 						</div>
-						<div class="form-group" ng-class="passEmpty === true ? 'has-error' : ''">
-							<label for="pass" ng-bind="lang.Password"></label>
+
+						<div class="form-group">
+							<label for="pass">{{lang.Password}}</label>
 							<input type="password" id="pass" name="pass" ng-model="data.pass" class="form-control" placeholder="{{lang.Password}}" required>
 						</div>
+
 						<div class="form-group">
-							<button type="submit" ng-click="createUser(data)" class="btn btn-primary" ng-bind="lang.Register"></button>
+							<label for="passConfirm">{{lang.Password_Confirm}}</label>
+							<input type="password" id="passConfirm" name="passConfirm" ng-model="data.passConfirm" class="form-control" placeholder="{{lang.Password_Confirm}}" required>
+						</div>
+
+						<div class="form-group">
+							<button type="submit" class="btn btn-primary">{{lang.Register}}</button>
 						</div>
 					</form>
 				</div>

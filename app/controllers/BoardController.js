@@ -1,20 +1,17 @@
 app.controller('BoardController', function($scope, $routeParams, Ajax, $window, extensionProvider, $sce, User) {
-
 	$scope.paginationIndex = 0;
-
 	$scope.isAdmin = User.isAdmin();
+
 	Ajax.getBoards().success(function(result) {
-		var exists = false;
+		let exists = false;
 		angular.forEach(result, function(o) {
-			if (o.prefix == $routeParams.prefix) {
+			if (o.prefix === $routeParams.prefix) {
 				exists = true;
 				$scope.boardData = o;
 			}
 		});
 
-		if (!exists) {
-			$window.location.href = '#/404';
-		}
+		if (!exists) $window.location.href = '#/404';
 	});
 
 	$scope.threadCache = [];
@@ -27,7 +24,7 @@ app.controller('BoardController', function($scope, $routeParams, Ajax, $window, 
 				item.fileType = extensionProvider.getFileType(item.img_url);
 
 				item.content = wrapMessage(item.content);
-				if (item.title == 'undefined' || item.title.length <= 1) {
+				if (item.title === 'undefined' || item.title.length <= 1) {
 					item.title = item.content;
 				}
 				else {
@@ -42,15 +39,11 @@ app.controller('BoardController', function($scope, $routeParams, Ajax, $window, 
 
 	getThreads();
 
-	function chunkArray(myArray, chunk_size) {
-		var index = 0;
-		var arrayLength = myArray.length;
-		var tempArray = [];
-
-		for (index = 0; index < arrayLength; index += chunk_size) {
-			myChunk = myArray.slice(index, index + chunk_size);
-			// Do something if you want with the group
-			tempArray.push(myChunk);
+	function chunkArray(array, chunkSize) {
+		let tempArray = [];
+		for (let index = 0; index < array.length; index += chunkSize) {
+			let chunk = array.slice(index, index + chunkSize);
+			tempArray.push(chunk);
 		}
 
 		return tempArray;
@@ -58,12 +51,7 @@ app.controller('BoardController', function($scope, $routeParams, Ajax, $window, 
 
 	function wrapMessage(message) {
 		let msg = message.substring(0, 50);
-
-		if (msg.length == 50) {
-			msg += '...';
-		}
-
-		return msg;
+		return msg += (msg.length === 50) ? '...' : '';
 	}
 
 	$scope.updatePaginationIndex = function(idx) {
@@ -73,22 +61,12 @@ app.controller('BoardController', function($scope, $routeParams, Ajax, $window, 
 		console.log($scope.threadCache.length + ' tc, ' + $scope.paginationIndex + ' idx');
 	};
 
-	$scope.createThread = function() {
-		$scope.messageEmpty = false;
-		if ($scope.message === undefined) {
-			$scope.messageEmpty = true;
-			angular.element(document.querySelector('#message')).focus();
-			return;
-		}
-		
-		Ajax.createThread($scope.myFile, $scope.title, $scope.message, $routeParams.prefix).success(function(result) {
+	$scope.createThread = function(data) {
+		Ajax.createThread(data.file, data.title, data.message, $routeParams.prefix).success(function(result) {
 			if (result.success) {
-				console.log('Thread created with id: ' + result.data);
 				$window.location.href = '#/thread/' + result.data + '/';
 				$scope.messageEmpty = false;
 			}
-
-			console.log(result);
 		});
 	};
 });

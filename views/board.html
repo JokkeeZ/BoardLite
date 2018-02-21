@@ -1,30 +1,30 @@
 <div class="container" ng-controller="BoardController">
 	<div class="text-center">
-		<a style="font-size: 200%" ng-href="#/board/{{boardData.prefix}}">{{boardData.name}}</a>
-		<h4 class="text-center" ng-bind="boardData.description"></h4>
+		<a class="text-dark" style="font-size:200%" ng-href="#/board/{{boardData.prefix}}">{{boardData.name}}</a>
+		<h4 class="lead text-center">{{boardData.description}}</h4>
 		<hr/>
 	</div>
 
 	<div class="row">
 		<div class="col-12">
 			<div class="card">
-				<div class="card-header" ng-bind="lang.Create_thread"></div>
+				<div class="card-header">{{lang.Create_thread}}</div>
 				<div class="card-body">
-					<form>
+					<form ng-submit="createThread(data)">
 						<div class="form-group">
-							<label for="fil" ng-bind="lang.File"></label>
-							<input type="file" id="fil" file-model="myFile" class="form-control-file">
+							<label for="fil">{{lang.File}}</label>
+							<input type="file" id="fil" file-model="data.file" class="form-control-file">
 						</div>
 						<div class="form-group">
-							<label for="title" ng-bind="lang.Title"></label>
-							<input type="text" id="title" name="title" ng-model="title" class="form-control" placeholder="{{lang.Title_for_thread}}">
-						</div>
-						<div class="form-group" ng-class="messageEmpty === true ? 'has-error' : ''">
-							<label for="message" ng-bind="lang.Message"></label>
-							<textarea name="message" id="message" ng-model="message" class="form-control" placeholder="{{lang.Message_for_thread}}"></textarea>
+							<label for="title">{{lang.Title}}</label>
+							<input type="text" id="title" name="title" ng-model="data.title" class="form-control" placeholder="{{lang.Title_for_thread}}">
 						</div>
 						<div class="form-group">
-							<button type="submit" ng-click="createThread()" class="btn btn-primary" ng-bind="lang.Send"></button>
+							<label for="message">{{lang.Message}}</label>
+							<textarea name="message" id="message" ng-model="data.message" class="form-control" placeholder="{{lang.Message_for_thread}}" required></textarea>
+						</div>
+						<div class="form-group">
+							<button type="submit" class="btn btn-primary">{{lang.Send}}</button>
 						</div>
 					</form>
 				</div>
@@ -56,7 +56,7 @@
 								</video>
 							</div>
 							<div ng-if="thread.fileType.type == 'image'">
-								<img fallback-src="assets/img/empty.png" ng-src="{{thread.img_url}}" class="img-fluid">
+								<img fallback-src ng-src="{{thread.img_url}}" class="img-fluid" fallback-src>
 							</div>
 						</div>
 						<div class="col-9">
@@ -73,10 +73,10 @@
 
 			<div class="card">
 				<div class="card-header">
-					<h5 ng-bind="lang.No_threads_on_board"></h5>
+					<h5>{{lang.No_threads_on_board}}</h5>
 				</div>
 				<div class="card-body">
-					<p class="card-text" ng-bind="lang.No_threads_create_maybe"></p>
+					<p class="card-text">{{lang.No_threads_create_maybe}}</p>
 				</div>
 			</div>
 
@@ -88,13 +88,13 @@
 			<nav aria-label="Page navigation example">
 				<ul class="pagination justify-content-center">
 					<li class="page-item" ng-class="paginationIndex === 0 ? 'disabled' : ''">
-						<a class="page-link" href="javascript:void(0)" ng-click="updatePaginationIndex(paginationIndex - 1)">Previous</a>
+						<a class="page-link" href="javascript:void(0)" ng-click="updatePaginationIndex(paginationIndex - 1)">{{lang.Previous}}</a>
 					</li>
 					<li class="page-item" ng-repeat="t in threadCache track by $index" ng-class="paginationIndex === $index ? 'active' : ''">
 						<a class="page-link" href="javascript:void(0)" ng-click="updatePaginationIndex($index)">{{$index}}</a>
 					</li>
 					<li class="page-item" ng-class="(paginationIndex === (threadCache.length - 1)) ? 'disabled' : ''">
-						<a class="page-link" href="javascript:void(0)" ng-click="updatePaginationIndex(paginationIndex + 1)">Next</a>
+						<a class="page-link" href="javascript:void(0)" ng-click="updatePaginationIndex(paginationIndex + 1)">{{lang.Next}}</a>
 					</li>
 				</ul>
 			</nav>
