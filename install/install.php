@@ -28,6 +28,8 @@ if (file_exists($configurationFile)) {
 	exit($response->to_json());
 }
 
+require_once 'Installer.php';
+
 // Validate post request.
 if (!Installer::validatePostRequest()) {
 	$response->append('error', 'POST entries cannot be empty.');

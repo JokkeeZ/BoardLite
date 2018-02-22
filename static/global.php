@@ -6,13 +6,13 @@ define('LANG_PATH', dirname(__DIR__) . '\\assets\\lang\\');
 $error = json_encode(['error' => 'install']);
 
 if (!file_exists('config/Configuration.php')) {
-	exit('1' . $error);
+	exit($error);
 }
 
 require_once 'config/Configuration.php';
 
 if (file_exists('../install/index.html') && (empty($_CONFIG['app_installed']) || !$_CONFIG['app_installed'])) {
-	exit('2' . $error);
+	exit($error);
 }
 
 session_start();
