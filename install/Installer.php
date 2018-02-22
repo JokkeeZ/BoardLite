@@ -23,6 +23,8 @@ class Installer
 	 *
 	 * @param array Configuration
 	 * @param bool $databaseCreated Determines if database tables have been created.
+	 *
+	 * @return bool|array If success, returns true; otherwise array containing error message.
 	 */
 	public static function setupDatabase(array $config, bool $databaseCreated)
 	{
@@ -32,16 +34,21 @@ class Installer
 			$dsn = $values[0];
 		}
 
-		self::$databaseInstance = new PDO($dsn,
-			$config['db_user'],
-			$config['db_pass']
-		);
+		try {
+			self::$databaseInstance = new PDO($dsn,
+				$config['db_user'],
+				$config['db_pass']
+			);
 
-		self::$databaseInstance->setAttribute(
-			PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION
-		);
+			self::$databaseInstance->setAttribute(
+				PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION
+			);
 
-		Logger::write_data('DSN true:' . $dsn);
+			return true;
+		}
+		catch (PDOException $e) {
+			Logger::write_data($e->getMessage());
+		}
 	}
 
 	/**

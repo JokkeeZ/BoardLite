@@ -3,7 +3,7 @@ define('DEV_MODE', true);
 
 require_once '../static/JsonResponse.php';
 require_once '../static/Logger.php';
-
+require_once 'Installer.php';
 // Template for configuration file.
 $configTemplate = [
 	"<?php",
@@ -20,15 +20,6 @@ $configTemplate = [
 
 // Setup object for response.
 $response = new JsonResponse();
-
-// Check if configuration file already exists.
-$configurationFile = '../static/config/Configuration.php';
-if (file_exists($configurationFile)) {
-	$response->append('error', 'App already installed.');
-	exit($response->to_json());
-}
-
-require_once 'Installer.php';
 
 // Validate post request.
 if (!Installer::validatePostRequest()) {

@@ -1,4 +1,13 @@
+# Allow XMLHttpRequest only
 RewriteEngine On
 RewriteCond %{HTTP:X-Requested-With} !=XMLHttpRequest
 RewriteCond %{HTTP:X-REQUESTED-WITH} !^(XMLHttpRequest)$
 RewriteRule \.php$ - [L,F]
+
+# Only localhost can access logs.
+<Files "logs.log">
+	order deny,allow
+    deny from all
+
+    allow from ::1
+</Files>

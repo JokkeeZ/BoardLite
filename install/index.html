@@ -11,7 +11,7 @@
 
 		<link rel="stylesheet" href="../assets/css/boardlite.css">
 	</head>
-	<body>
+	<body ng-controller="InstallController">
 		<div class="install-header jumbotron">
 			<div class="container text-center">
 				<h1>BoardLite installer</h1>
@@ -22,8 +22,22 @@
 
 		<div class="container">
 			<div class="row">
+
+				<div class="col-12" ng-if="info != null">
+					<div class="alert alert-info fade show" role="alert">{{info}}</div>
+				</div>
+
+				<div class="col-12" ng-if="error != null">
+					<div class="alert alert-danger fade show" role="alert">{{error}}</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="row">
 				<div class="col-12">
-					<form ng-controller="InstallController" ng-submit="install(data)" novalidate>
+					<form ng-submit="install(data)" novalidate>
 						<div class="form-group">
 							<label for="appName">Application name</label>
 							<input type="text" ng-model="data.appName" id="appName" name="appName" class="form-control" required>

@@ -2,6 +2,9 @@ const app = angular.module('installer', []);
 
 app.controller('InstallController', function($scope, $http, $window) {
 
+	$scope.error = null;
+	$scope.length = null;
+
 	$scope.install = function(data) {
 		if (data.aPass !== data.aPassConfirm) {
 			alert('Passwords doesn\'t match!');
@@ -27,6 +30,8 @@ app.controller('InstallController', function($scope, $http, $window) {
 		formData.append('dbPass', data.dbPass);
 		formData.append('dbUser', data.dbUser);
 
+		$scope.info = 'Installing... Please wait.';
+
 		$http.post('install.php', formData, {
 			transformRequest: angular.identity,
 			headers: {
@@ -39,7 +44,8 @@ app.controller('InstallController', function($scope, $http, $window) {
 			if (result.error === 0) {
 				$window.location.href = '../';
 			} else {
-				console.log(result);
+				$scope.info = null;
+				$scope.error = result.error;
 			}
 		});
 	};
