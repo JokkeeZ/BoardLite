@@ -1,7 +1,7 @@
 <?php
 
-define('FILE_PATH', dirname(__DIR__) . '\\uploads\\');
-define('LANG_PATH', dirname(__DIR__) . '\\assets\\lang\\');
+define('FILE_PATH', dirname(__DIR__) . '/uploads/');
+define('LANG_PATH', dirname(__DIR__) . '/assets/lang/');
 
 $error = json_encode(['error' => 'install']);
 

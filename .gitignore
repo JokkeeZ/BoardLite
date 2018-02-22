@@ -9,3 +9,6 @@
 *.xml
 *.xml___jb_old___
 *.xml___jb_tmp___
+static/config/Configuration.php
+install/logs.log
+uploads/*
