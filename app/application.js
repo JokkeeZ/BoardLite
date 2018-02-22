@@ -34,7 +34,7 @@ app.run(function($rootScope, Ajax, User, $window) {
 		},
 		isAdmin: function() {
 			if (this.isLoggedIn()) {
-                let rank = this.get().rank;
+				let rank = this.get().rank;
 				return rank === 1 || rank === 2;
 			}
 			return false;
@@ -86,7 +86,7 @@ app.run(function($rootScope, Ajax, User, $window) {
 			return this.post(formData);
 		},
 		updateBoard: function(id, name, desc, prefix, tag) {
-            const formData = new FormData();
+			const formData = new FormData();
 			formData.append('id', id);
 			formData.append('name', name);
 			formData.append('desc', desc);
@@ -97,7 +97,7 @@ app.run(function($rootScope, Ajax, User, $window) {
 			return this.post(formData);
 		},
 		createUser: function(name, pass) {
-            const formData = new FormData();
+			const formData = new FormData();
 			formData.append('name', name);
 			formData.append('pass', pass);
 			formData.append('request', 'create_user');
@@ -105,7 +105,7 @@ app.run(function($rootScope, Ajax, User, $window) {
 			return this.post(formData);
 		},
 		loginUser: function(name, pass) {
-            const formData = new FormData();
+			const formData = new FormData();
 			formData.append('name', name);
 			formData.append('pass', pass);
 			formData.append('request', 'login_user');
@@ -113,13 +113,13 @@ app.run(function($rootScope, Ajax, User, $window) {
 			return this.post(formData);
 		},
 		logoutUser: function() {
-            const formData = new FormData();
+			const formData = new FormData();
 			formData.append('request', 'logout_user');
 
 			return this.post(formData);
 		},
 		createThread: function(file, title, message, prefix) {
-            const formData = new FormData();
+			const formData = new FormData();
 			formData.append('file', file);
 			formData.append('title', title);
 			formData.append('message', message);
@@ -128,14 +128,14 @@ app.run(function($rootScope, Ajax, User, $window) {
 			return this.post(formData);
 		},
 		deleteThread: function(id) {
-            const formData = new FormData();
+			const formData = new FormData();
 			formData.append('id', id);
 			formData.append('request', 'delete_thread');
 
 			return this.post(formData);
 		},
 		createBoard: function(name, desc, prefix, tag) {
-            const formData = new FormData();
+			const formData = new FormData();
 			formData.append('name', name);
 			formData.append('desc', desc);
 			formData.append('prefix', prefix);
@@ -145,7 +145,7 @@ app.run(function($rootScope, Ajax, User, $window) {
 			return this.post(formData);
 		},
 		addReply: function(file, message, threadId) {
-            const formData = new FormData();
+			const formData = new FormData();
 			formData.append('file', file);
 			formData.append('message', message);
 			formData.append("thread_id", threadId);
@@ -154,7 +154,7 @@ app.run(function($rootScope, Ajax, User, $window) {
 			return this.post(formData);
 		},
 		setThreadLockState: function(id, state) {
-            const formData = new FormData();
+			const formData = new FormData();
 			formData.append('id', id);
 			formData.append('state', state);
 			formData.append('request', 'lock_thread');
@@ -174,8 +174,8 @@ app.run(function($rootScope, Ajax, User, $window) {
 
 		get: function(request, args) {
 			return $http.get(PATH + `?request=${request}` + (args !== null ? args : ''), {
-                transformRequest: angular.identity,
-                headers: { 'X-Requested-With': 'XMLHttpRequest' }
+				transformRequest: angular.identity,
+				headers: { 'X-Requested-With': 'XMLHttpRequest' }
 			});
 		}
 	}
@@ -190,7 +190,7 @@ app.run(function($rootScope, Ajax, User, $window) {
 
 .filter('bbcode', function($sce) {
 	return function(message) {
-        let msg = message.toString()
+		let msg = message.toString()
 			.replace('[code]', '<pre>')
 			.replace('[/code]', '</pre>')
 			.replace('[b]', '<b>')
@@ -208,7 +208,7 @@ app.run(function($rootScope, Ajax, User, $window) {
 	return {
 		getFileType: function(fileUrl) {
 			let splitted = fileUrl.toString().split('.');
-            let ext = splitted[splitted.length - 1];
+			let ext = splitted[splitted.length - 1];
 			
 			if (ext === 'mp4' || ext === 'webm' || ext === 'ogg' || ext === 'mp3') {
 				return { type: 'video', extension: ext };

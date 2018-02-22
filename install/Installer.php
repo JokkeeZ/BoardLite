@@ -27,8 +27,7 @@ class Installer
 	public static function setupDatabase(array $config, bool $databaseCreated)
 	{
 		$dsn = $config['db_dsn'];
-		if (!$databaseCreated)
-		{
+		if (!$databaseCreated) {
 			$values = explode(';', $dsn);
 			$dsn = $values[0];
 		}
