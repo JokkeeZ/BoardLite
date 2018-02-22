@@ -126,6 +126,7 @@ class Installer
 			$_POST['dbUser'],
 			$_POST['dbPass'],
 			$_POST['dbHost'],
+			$_POST['dbName'],
 			$_POST['appName'],
 			$_POST['appLang']
 		));

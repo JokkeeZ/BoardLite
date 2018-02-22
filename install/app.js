@@ -23,6 +23,7 @@ app.controller('InstallController', function($scope, $http, $window) {
 		formData.append('appLang', data.appLang);
 		formData.append('appName', data.appName);
 		formData.append('dbHost', data.dbHost);
+		formData.append('dbName', data.dbName);
 		formData.append('dbPass', data.dbPass);
 		formData.append('dbUser', data.dbUser);
 

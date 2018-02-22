@@ -10,7 +10,7 @@ $configTemplate = [
 	"%s = [",
 	"	'db_user' => '%s',",
 	"	'db_pass' => '%s',",
-	"	'db_dsn' => 'mysql:host=%s;dbname=board_lite;charset=utf8mb4',",
+	"	'db_dsn' => 'mysql:host=%s;dbname=%s;charset=utf8mb4',",
 	"	'app_name' => '%s',",
 	"	'app_lang' => '%s',",
 	"	'app_hash_cost' => 10,",
@@ -57,7 +57,7 @@ require_once '../static/config/Configuration.php';
 Installer::setupDatabase($_CONFIG, false);
 
 // Create database
-Installer::getDatabase()->exec('CREATE DATABASE board_lite;');
+Installer::getDatabase()->exec('CREATE DATABASE ' . $_POST['dbName'] . ';');
 
 // Setup database instance for table queries.
 Installer::setupDatabase($_CONFIG, true);
